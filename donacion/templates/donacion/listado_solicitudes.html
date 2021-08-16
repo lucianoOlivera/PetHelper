@@ -1,0 +1,171 @@
+{% extends 'base/base.html' %} {% block page_content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Listado de donaciones para realizar</h1>
+
+    <!--Page content-->
+
+    <div class="container" id="container-button">
+        <div class="text-center">
+            <button class="btn btn-primary btn-user bg-gradient-primary text-gray-100" style="float: right;margin-bottom: 5px;" data-toggle="modal" data-target="#nuevaSolicitudModal">Crear nueva solicitud de donación</button>
+            <br>
+        </div>
+    </div><br> {% if soliitudes_insumos%}
+    <div class="card-deck">
+        {% for solicitud_insumo in solicitudes_insumos %}
+        <div class="card shadow mb-4 col-sm-6">
+            <div class="card-header py-3">
+                <h5 class="m-0 font-weight-bold text-gray-800">{{solicitud_insumo.titulo}}</h5>
+                <h6 class="card-subtitle">{{solicitud_insumo.tipo_donacion}}</h6>
+            </div>
+            <div class="card-body">
+                <h6>Cantidad recaudada</h6>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Fecha pulicación: {{solicitud_insumo.fecha}}</small>
+                <button class="btn btn-primary btn-user bg-gradient-primary text-gray-100" style="float: right;">Donar</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="card-deck">
+        {% for solicitud_monetaria in solicitudes_monetarias %}
+        <div class="card shadow mb-4 col-sm-6">
+            <div class="card-header py-3">
+                <h5 class="m-0 font-weight-bold text-gray-800">{{solicitud_monetaria.titulo}}</h5>
+                <h6 class="card-subtitle">{{solicitud_monetaria.tipo_donacion}}</h6>
+            </div>
+            <div class="card-body">
+                <h6>Cantidad recaudada</h6>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Fecha pulicación: {{solicitud_monetaria.fecha}}</small>
+                <button class="btn btn-primary btn-user bg-gradient-primary text-gray-100" style="float: right;">Donar</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        No hay solicitudes para mostrar
+    </div>
+    {% endif %}
+
+
+</div>
+<!-- /.container-fluid -->
+
+
+<!-- Modal nueva solicitud-->
+<div class="modal fade" id="nuevaSolicitudModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-gray-900">Nueva solicitud de donación</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <h5 class="text-gray-800">Seleccione el tipo de donación que quiere recibir</h5>
+                <div class="form-check form-check-inline text-gray-800">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Donación Monetaria
+                    </label>
+                </div>
+                <div class="form-check form-check-inline text-gray-800">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Donación Insumos
+                    </label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" onclick="myFunction()" data-toggle="modal" data-target="#solicitudMonetariaModal" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Modal solicitud monetaria-->
+<div class="modal fade" id="solicitudMonetariaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-gray-900">Nueva Solicitud de Donación</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <h6 class="text-gray-700 text-center">Formulario de solicitud de donación monetaria</h6>
+                <div>
+                    <h6 class="text-gray-900"><strong>Datos del destinatario de donación</strong></h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!-- Modal solicitud insumos-->
+<div class="modal fade" id="solicitudMonetariaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-gray-900">Nueva Solicitud de Donación</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <h6 class="text-gray-700 text-center">Formulario de solicitud de donación de insumos</h6>
+                <div>
+                    <h6 class="text-gray-900"><strong>Datos del destinatario de donación</strong></h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+
+<script>
+    //  function myFunction() {
+    //    if ($('#flexRadioDefault1').prop('checked')) {
+    //      alert('seleccionado')
+    //} else {
+    //  alert('no seleccionado')
+    // }
+
+    // }
+</script>
