@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'petHelper.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'PetHelperDB',
+        'NAME': 'pethelperdb',
         'HOST': 'localhost',
-        'USER': 'AdminPetHelper',
+        'USER': 'adminpethelper',
         'PASSWORD': 'A2538LO',
         'PORT': 5432
     }
