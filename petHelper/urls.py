@@ -19,6 +19,7 @@ from donacion.views import listarSolicitudes
 
 urlpatterns = [
     path('', include(('bases.urls', 'bases'), namespace='bases')),
+    path('', include(('usuario.urls', 'usuario'), namespace='usuario')),
     path('admin/', admin.site.urls),
     path('listado_solicitudes/', listarSolicitudes)
 ]
