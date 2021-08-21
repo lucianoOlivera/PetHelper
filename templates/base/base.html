@@ -30,7 +30,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'bases:home' %}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -42,7 +42,7 @@
 
             <!-- Nav Item - Index -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{% url 'bases:home' %}">
                     <i class="fas fa-home"></i>
                     <span>Inicio</span></a>
             </li>
@@ -57,7 +57,7 @@
 
             <!-- Nav Item - Donations -->
             <li class="nav-item">
-                <a class="nav-link" href="listar_solicitudes.html">
+                <a class="nav-link" href="listado_solicitudes">
                     <i class="fas fa-hand-holding-usd"></i>
                     <span>Donaciones</span>
                 </a>
@@ -270,10 +270,8 @@
                 </div>
                 <div class="modal-body">Seleccione "cerrar sesión" si está listo para abandonar la página.</div>
                 <div class="modal-footer">
-                    <<<<<<< HEAD <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="{% url 'bases:logout' %}">Salir</a> =======
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                        <a class="btn btn-primary" href="login.html">Cerrar Sesión</a> >>>>>>> adapta plantilla base
+                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="{% url 'bases:logout' %}">Salir</a>
                 </div>
             </div>
         </div>
