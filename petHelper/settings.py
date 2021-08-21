@@ -39,11 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bases',
-<<<<<<< HEAD
     'donacion',
-=======
     'usuario',
->>>>>>> Creacion del modelo usuario y registrar usuario
 ]
 
 MIDDLEWARE = [
