@@ -1,11 +1,27 @@
 from django import forms
-from .models import Organizacion
+from django.db.models import fields
+from .models import Organizacion, Clinica, Veterinario
 
 class OrganizacionForm(forms.ModelForm):
     class Meta:
         model = Organizacion
         fields = ['nombre', 'cuit', 'email', 'logo']
         labels = {'descripcion': 'Descripcion de la organizacion'}
+        widget = {'descripcion': forms.TextInput}
+
+    def __init__(self, *arg, **kwargs):
+        super().__init__(*arg, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+            })
+
+
+class ClinicaForm(forms.ModelForm):
+    class Meta:
+        model = Clinica
+        fields = ['nombre', 'cuit', 'email', 'logo', 'telefono' , 'whatsapp']
+        labels = {'descripcion': 'Descripcion de clinica'}
         widget = {'descripcion': forms.TextInput}
 
     def __init__(self, *arg, **kwargs):
