@@ -37,8 +37,10 @@ class Veterinario(ClaseModelo):
     descripcion = models.CharField(max_length=100, help_text='Descripcion de Veterinario')
     logo = models.ImageField(blank=True, null=True)
     nombre = models.CharField(max_length=100, null=False, default="",unique=True)
+    apellido = models.CharField(max_length=100, null=False, default="",unique=True)
     email = models.EmailField('Email', unique=True)
     matricula = models.CharField(max_length=100, null=False, default="", unique=True)
+    whatsapp = models.CharField( max_length=17, blank=True)
 
     def save(self):
         self.descripcion = self.descripcion.upper()
