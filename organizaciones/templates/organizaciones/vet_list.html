@@ -2,14 +2,14 @@
 <div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Listado de organizaciones</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Listado de veterinarios</h6>
         <div class="dropdown no-arrow">
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                 <div class="dropdown-header">Acciones</div>
-                <button class="dropdown-item" onclick="abrir_modal_crear('{% url 'organizaciones:organizaciones_new' %}')" data-toggle="modal" data-target="#crear"><i class="far fa-calendar-plus"></i> Nuevo</button>
+                <button class="dropdown-item" onclick="abrir_modal_crear('{% url 'organizaciones:veterinarios_new' %}')" data-toggle="modal" data-target="#crear"><i class="far fa-calendar-plus"></i> Nuevo</button>
                 <a class="dropdown-item" href="#">Another action</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
@@ -19,17 +19,19 @@
     <!-- Card Body -->
     <div class="card-body">
         {% if not obj %}
-        <div class="alert alert-warning" role="alert">No hay organizaciones</div>
+        <div class="alert alert-warning" role="alert">No hay veterinarios</div>
         {% else %}
         <table class="table table-striped table-hover">
             <thead>
                 <th>Id</th>
                 <th>Nombre</th>
+                <th>Apellido</th>
                 <th>Descripción</th>
                 <th>F. Creado</th>
                 <th>F. Modif.</th>
-                <th>Cuit</th>
+                <th>Matricula</th>
                 <th>Email</th>
+                <th>Whatsapp</th>
                 <th class="all">Acciones</th>
             </thead>
             <tbody>
@@ -37,14 +39,16 @@
                 <tr>
                     <td>{{ item.id }}</td>
                     <td>{{ item.nombre }}</td>
+                    <td>{{ item.apellido }}</td>
                     <td>{{ item.descripcion }}</td>
                     <td>{{ item.fc|date:"d/m/Y H:i:s" }}</td>
                     <td>{{ item.fm|date:"d/m/Y H:i:s" }}</td>
-                    <td>{{ item.cuit }}</td>
+                    <td>{{ item.matricula }}</td>
                     <td>{{ item.email }}</td>
+                    <td>{{ item.whatsapp}}</td>
                     <td>
-                        <button onclick="abrir_modal_edicion('{% url 'organizaciones:organizaciones_edit' item.id %}')" class="btn btn-warning btn-circle" role="button" data-toggle="modal" data-target="#edicion"><i class="far fa-edit"></i></button>
-                        <button onclick="abrir_modal_eliminar('{% url 'organizaciones:organizaciones_del' item.id %}')" class="btn btn-danger btn-circle" role="button" data-toggle="modal" data-target="#eliminar"><i class="far fa-trash-alt"></i></button>
+                        <button onclick="abrir_modal_edicion('{% url 'organizaciones:veterinarios_edit' item.id %}')" class="btn btn-warning btn-circle" role="button" data-toggle="modal" data-target="#edicion"><i class="far fa-edit"></i></button>
+                        <button onclick="abrir_modal_eliminar('{% url 'organizaciones:veterinarios_del' item.id %}')" class="btn btn-danger btn-circle" role="button" data-toggle="modal" data-target="#eliminar"><i class="far fa-trash-alt"></i></button>
                     </td>
                 </tr>
                 {% endfor %}
@@ -53,8 +57,6 @@
         {% endif %}
     </div>
 </div>
-
-
 
 <!-- Modal editar -->
 <div class="modal fade" id="edicion" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
@@ -70,6 +72,7 @@
 <div class="modal fade" id="crear" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
    
 </div> 
+
 {% endblock %}
 
 {% block js_page %} 
@@ -95,3 +98,4 @@
 
 </script>
 {% endblock %}
+

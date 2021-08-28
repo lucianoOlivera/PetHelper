@@ -1,0 +1,23 @@
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="card border-left-warning shadow h-100 py-2"> 
+            <div class="modal-header">
+                <h4 class="modal-title text-gray-900">Edición de veterinario</h4>
+                <a href="{{ request.META.HTTP_REFERER }}" class="close" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <form action="{% url 'organizaciones:veterinarios_edit' object.id %}" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    {{ form.as_p }}
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span> Cancelar</a>
+                    <button class="btn btn-warning" type="submit"><i class="fas fa-check"></i>Aceptar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
