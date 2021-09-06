@@ -1,4 +1,18 @@
 {% extends 'base/base.html' %} {% block page_content %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="text-center alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <i class="fas fa-check"></i>
+        <strong> {{ message|safe }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>    
+    </div>
+    {% endfor %}
+{% endif %}
+
+
 <div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
