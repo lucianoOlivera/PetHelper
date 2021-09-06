@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
@@ -26,13 +27,15 @@ class OrganizacionNew(SuccessMessageMixin, generic.CreateView):
         form.instance.uc = self.request.user
         return super().form_valid(form)
 
-class OrganizacionDel(generic.DeleteView):
+class OrganizacionDel(SuccessMessageMixin, generic.DeleteView):
     model = Organizacion
     template_name = 'organizaciones/org_del.html'
     context_object_name = 'obj'
     success_url = reverse_lazy('organizaciones:organizaciones_list')
+    success_message = "Organizacion eliminada sastifactoriamente"
 
-class OrganizacionEdit(generic.UpdateView):
+
+class OrganizacionEdit(SuccessMessageMixin,generic.UpdateView):
     model = Organizacion
     template_name = 'organizaciones/org_modal_editar.html'
     context_object_name = "obj"
@@ -50,7 +53,7 @@ class ClinicaView(generic.ListView):
     context_object_name = "obj"
     login_url = 'bases/login.html'
 
-class ClinicaNew(SuccessMessageMixin,generic.CreateView):
+class ClinicaNew(SuccessMessageMixin, generic.CreateView):
     model = Clinica
     template_name = 'organizaciones/cli_form.html'
     context_object_name = "obj"
@@ -63,14 +66,15 @@ class ClinicaNew(SuccessMessageMixin,generic.CreateView):
         return super().form_valid(form)
 
 
-class ClinicaDel(generic.DeleteView):
+class ClinicaDel(SuccessMessageMixin, generic.DeleteView):
     model = Clinica
     template_name = 'organizaciones/cli_del.html'
     context_object_name = 'obj'
     success_url = reverse_lazy('organizaciones:clinicas_list')
+    success_message = "Clínica eliminada sastifactoriamente"
 
 
-class ClinicaEdit(generic.UpdateView):
+class ClinicaEdit(SuccessMessageMixin, generic.UpdateView):
     model = Clinica
     template_name = 'organizaciones/cli_modal_editar.html'
     context_object_name = "obj"
@@ -89,7 +93,7 @@ class VeterinarioView(generic.ListView):
     login_url = 'bases/login.html'
 
 
-class VeterinarioNew(SuccessMessageMixin,generic.CreateView):
+class VeterinarioNew(SuccessMessageMixin, generic.CreateView):
     model = Veterinario
     template_name = 'organizaciones/vet_form.html'
     context_object_name = "obj"
@@ -101,13 +105,16 @@ class VeterinarioNew(SuccessMessageMixin,generic.CreateView):
         form.instance.uc = self.request.user
         return super().form_valid(form)
 
-class VeterinarioDel(generic.DeleteView):
+
+
+class VeterinarioDel(SuccessMessageMixin, generic.DeleteView):
     model = Veterinario
     template_name = 'organizaciones/vet_del.html'
     context_object_name = 'obj'
     success_url = reverse_lazy('organizaciones:veterinarios_list')
+    success_message = "Veterinario eliminado sastifactoriamente"
 
-class VeterinarioEdit(generic.UpdateView):
+class VeterinarioEdit(SuccessMessageMixin, generic.UpdateView):
     model = Veterinario
     template_name = 'organizaciones/vet_modal_editar.html'
     context_object_name = "obj"

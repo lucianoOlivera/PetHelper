@@ -4,29 +4,30 @@ from bases.models import ClaseModelo
 
 # Create your models here.
 
+phone_regex = RegexValidator(regex=r"(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}", message="Debe ingresar un número válido para Argentina")
+
+
 class Organizacion(ClaseModelo):
-    descripcion = models.CharField(max_length=100, help_text='Descripcion de organizacion')
+    descripcion = models.CharField(max_length=100, null=False)
     logo = models.ImageField(blank=True, null=True)
-    nombre = models.CharField(max_length=100, null=False, default="", unique=True)
-    email = models.EmailField('Email', unique=True)
-    cuit = models.CharField(max_length=100, null=False, default="", unique=True)
-    telefono = models.CharField(max_length=7, null=False, default="")
+    nombre = models.CharField(max_length=100, null=False, default="")
+    email = models.EmailField('Email', unique=True, null=False)
+    cuit = models.CharField(max_length=4, null=False, default="", unique=True)
+    telefono = models.CharField(max_length=11, null=False, default="", unique=True, validators=[phone_regex])
     
     class Meta:
         verbose_name_plural = 'organizaciones'
 
 class Clinica(ClaseModelo):
-    descripcion = models.CharField(max_length=100, help_text='Descripcion de clinica')
+    descripcion = models.CharField(max_length=100, null=False)
     logo = models.ImageField(blank=True, null=True)
-    nombre = models.CharField(max_length=100, null=False, default="",unique=True)
-    email = models.EmailField('Email', unique=True)
-    cuit = models.CharField(max_length=100, null=False, default="")
-    #phone_regex = RegexValidator(regex=r'/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/', message="Debe ingresar un número de celular válido para Argentina")
-    whatsapp = models.CharField( max_length=17, blank=True)
-    telefono = models.CharField(max_length=7, null=False, default="")
+    nombre = models.CharField(max_length=100, null=False, default="")
+    email = models.EmailField('Email', unique=True, null=False)
+    cuit = models.CharField(max_length=4, null=False, default="",unique=True)
+    whatsapp = models.CharField(max_length=17, blank=False, unique=True, validators=[phone_regex])
+    telefono = models.CharField(max_length=10, null=False, default="",unique=True, validators=[phone_regex])
 
     def save(self):
-        self.descripcion = self.descripcion.upper()
         super(Clinica, self).save()
 
     class Meta:
@@ -34,16 +35,15 @@ class Clinica(ClaseModelo):
 
 
 class Veterinario(ClaseModelo):
-    descripcion = models.CharField(max_length=100, help_text='Descripcion de Veterinario')
+    descripcion = models.CharField(max_length=100, null=False)
     logo = models.ImageField(blank=True, null=True)
-    nombre = models.CharField(max_length=100, null=False, default="",unique=True)
-    apellido = models.CharField(max_length=100, null=False, default="",unique=True)
-    email = models.EmailField('Email', unique=True)
-    matricula = models.CharField(max_length=100, null=False, default="", unique=True)
-    whatsapp = models.CharField( max_length=17, blank=True)
+    nombre = models.CharField(max_length=100, null=False, default="")
+    apellido = models.CharField(max_length=100, null=False, default="")
+    email = models.EmailField('Email', unique=True, null=False)
+    matricula = models.CharField(max_length=4, null=False, default="", unique=True)
+    whatsapp = models.CharField( max_length=17, null=False, unique=True, validators=[phone_regex])
 
     def save(self):
-        self.descripcion = self.descripcion.upper()
         super(Veterinario, self).save()
 
     class Meta:

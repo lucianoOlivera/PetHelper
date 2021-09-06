@@ -1,1 +1,87 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base.html' %} {% block page_content %}
+{% load static %}
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-4 text-gray-800">Inicio</h1>
+
+        <!--Page content-->
+
+        <div class="container" id="container-buttons">
+            <div class="row">
+              <div class="col">
+                <div class="text-center">
+                    <i class="fas fa-heart fa-lg" style="color:red"></i><br>
+                    <a href="listado_solicitudes" class= "btn btn-primary btn-user bg-gradient-primary text-gray-100" >Donar</a>
+                </div>
+              </div>
+              <div class="col">
+                <div class="text-center">
+                    <i class="fas fa-map-marker-alt fa-lg" style="color: red;size: 10px;"></i><br>
+                    <button class= "btn btn-primary btn-user bg-gradient-primary text-gray-100">Mapa</button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="text-center">
+                    <i class="fas fa-chart-line fa-lg" style="color: red; size: 5mm;"></i><br>
+                    <button class= "btn btn-primary btn-user bg-gradient-primary text-gray-100">Reportes</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <br><h4 class="text-gray-900 text-center"><strong>Profesionales</strong></h4>
+            <!-- carrusel -->
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col">
+                                <img class="d-block w-100" style="height: 120px;" src="{% static 'base/img/undraw_profile.svg' %}" alt="First slide">
+                            </div>
+                            <div class="col">
+                                <img class="d-block w-100" style="height: 120px;" src="{% static 'base/img/undraw_profile_1.svg' %}" alt="Second slide">
+                            </div>
+                            <div class="col">
+                                <img class="d-block w-100" style="height: 120px;" src="{% static 'base/img/undraw_profile_2.svg' %}" alt="Third slide">
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                    </a>
+            </div>    
+        </div>
+
+        <div>
+           <br><h4 class="text-gray-900 text-center"><strong>Organizaciones</strong></h4>
+           <!-- <div class="panel-body">Fotos de todas las organizaciones registradas</div> -->
+
+        </div>
+
+       
+    </div>
+    <!-- /.container-fluid -->
+
+{% endblock %}
+
+{% block js_page %} 
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    $('.carousel').carousel(); 
+
+</script>
+{% endblock %}
+
+
+
+
