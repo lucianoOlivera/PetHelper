@@ -13,8 +13,6 @@ class OrganizacionView(generic.ListView):
     context_object_name = "obj"
     login_url = 'bases/login.html'
 
-
-
 class OrganizacionNew(SuccessMessageMixin,generic.CreateView):
     model = Organizacion
     template_name = 'organizaciones/org_form.html'

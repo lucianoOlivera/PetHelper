@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'bases',
     'donacion',
     'usuario',
-    'organizaciones'
+    'organizaciones',
+    'widget_tweaks',
+    'smart_selects',
+
 ]
 
 MIDDLEWARE = [

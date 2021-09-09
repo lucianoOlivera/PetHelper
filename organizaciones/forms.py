@@ -4,7 +4,7 @@ from .models import Organizacion
 class OrganizacionForm(forms.ModelForm):
     class Meta:
         model = Organizacion
-        fields = ['nombre', 'cuit', 'email', 'logo']
+        fields = ['nombre', 'cuit', 'email', 'pais', 'departamento', 'ciudad']
         labels = {'descripcion': 'Descripcion de la organizacion'}
         widget = {'descripcion': forms.TextInput}
 

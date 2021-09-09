@@ -7,5 +7,4 @@ urlpatterns = [
     path('organizaciones/new', OrganizacionNew.as_view(), name='organizaciones_new'),
     path('organizaciones/delete/<int:pk>', OrganizacionDel.as_view(), name='organizaciones_del'),
     path('organizaciones/edit/<int:pk>', OrganizacionEdit.as_view(), name='organizaciones_edit'),
-
 ]

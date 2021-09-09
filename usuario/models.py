@@ -25,12 +25,14 @@ class UserManager(BaseUserManager):
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('Email', unique=True)
-    username = models.CharField(max_length=25, unique=True)
-    apellido = models.CharField(max_length=25, unique=True)
+    username = models.CharField(max_length=25)
+    apellido = models.CharField(max_length=25)
     date_joined = models.DateTimeField(default=timezone.now)
     telefono = models.CharField(max_length=20, help_text="ingrese su telefono")
     dni = models.CharField(max_length=20, help_text="ingrese su dni")
     objects = UserManager()
+    is_active = models.BooleanField('active', default=True)
+    is_staff = models.BooleanField(default=True)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
 
