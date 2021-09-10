@@ -28,7 +28,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     """ tiene que ser nombre no username """
     apellido = models.CharField(max_length=25, unique=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    DNI = models.CharField(max_length=8)
+    DNI = models.CharField(max_length=8, default="")
     objects = UserManager()
     is_active = models.BooleanField('active', default=True)
     is_staff = models.BooleanField(default=True)
