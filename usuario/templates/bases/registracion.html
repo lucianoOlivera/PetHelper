@@ -16,21 +16,94 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="content-section">
-                                <form method="POST">
-                                    {% csrf_token %}
-                                    <div class="container">
-                                        <form method="post">{% csrf_token %}
-                                            {{ form.as_p }}
-                                            <button class="btn btn-outline-info" type="submit">registrar</button>
+                            <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                            <div class="col-lg-7">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4"><strong>¡Crea una cuenta!</strong></h1>
+                                    </div>
+                                    
+                                    <div class="content-section">
+                                        <form class="user" method="POST" action=".">
+                                            {% csrf_token %}
+                                                    <small class="text-danger">
+                                                        {{form.DNI.errors}}
+                                                    </small>
+                                                    <div class="form-group">
+                                                        <input pattern="^[\d]{1,3}\.?[\d]{3,3}\.?[\d]{3,3}$" title="El formato de DNI debe tener 8 caracteres numericos" class="form-control form-control-user" placeholder="DNI" name="DNI" >    
+                                                    </div>
+                                            
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                                            <small class="text-danger">
+                                                                {{form.username.errors}}
+                                                            </small>
+                                                            <input type="text" class="form-control form-control-user" 
+                                                                placeholder="Nombre" name="username" >
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <small class="text-danger">
+                                                                {{form.apellido.errors}}
+                                                            </small>
+                                                            <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                                                placeholder="Apellido" name="apellido">
+                                                        </div>
+                                                    </div>
+                                                    <small class="text-danger">
+                                                        {{form.email.errors}}
+                                                    </small>
+                                                    <div class="form-group">
+                                                        <input class="form-control form-control-user" placeholder="Email" name="email" >   
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                                            <small class="text-danger">
+                                                                {{form.password1.errors}}
+                                                            </small>
+                                                            <input type="password" class="form-control form-control-user" 
+                                                                placeholder="Contraseña" name="password1">
+                                                        </div>
+                                                        
+                                                        <div class="col-sm-6">
+                                                            <small class="text-danger">
+                                                                {{ form.password2.errors}}
+                                                            </small>
+                                                            <input type="password" class="form-control form-control-user" id="exampleLastName"
+                                                                placeholder="Repita la contraseña" name="password2">
+                                                        </div>
+                                                        
+                                                    </div>  
+                                                    
+                                                    <div class="pt-3">
+                                                        <small class="text-danger">
+                                                            <ul>
+                                                                <li>Su contraseña no puede ser similar a otros componentes de su información personal.</li>
+                                                                <li>Su contraseña debe contener por lo menos 8 caracteres.</li>
+                                                                <li>Su contraseña no puede ser una contraseña usada muy comúnmente.</li>
+                                                                <li>Su contraseña no puede estar formada exclusivamente por números.</li>
+                                                            </ul>
+                                                        </small>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <button class="btn btn-primary btn-user btn-block" type="submit">Registrar</button>
+                                                    </div>                      
+                                                </form>
+                                            </div>    
                                         </form>
-                                </form>
-                                <div class="border-top pt-3">
-                                    <small class="text-muted">
-                                        ¿Ya tiene una cuenta? <a class="ml-2" href="">Sign In</a>
-                                    </small>
-                                </div>
-                            </div>
+                                    
+                                        <div class="border-top pt-3">
+                                            <small class="text-muted">
+                                                <div class="text-center">
+                                                    ¿Ya tiene una cuenta? <a class="ml-2" href="{% url 'bases:login' %}">Inicie Sesión</a>
+                                                </div>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>    
+                            </div>    
                         </div>
                     </div>
                 </div>
@@ -43,3 +116,4 @@
 
 {% endblock %}
 {% block footer %} {% endblock %}
+</html>
