@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'organizaciones',
     'widget_tweaks',
     'smart_selects',
+    'social_django',
 
 ]
 
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'petHelper.urls'
@@ -70,10 +72,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'petHelper.wsgi.application'
 
@@ -134,8 +146,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
 
 LOGOUT_REDIRECT_URL = '/login/'
 
 AUTH_USER_MODEL = "usuario.Usuario"
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '603112644018191'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '59bff6660482a1f84b71bcdb051d1606'  # App Secret
+SOCIAL_AUTH_URL_NAMESPACE = 'bases:social'
