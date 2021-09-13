@@ -8,6 +8,7 @@ from .models import Organizacion, Clinica, Veterinario
 from .forms import OrganizacionForm, ClinicaForm, VeterinarioForm
 # Create your views here.
 
+
 class OrganizacionView(generic.ListView):
     model = Organizacion
     template_name = "organizaciones/org_list.html"
@@ -23,9 +24,10 @@ class OrganizacionNew(SuccessMessageMixin, generic.CreateView):
     success_url = reverse_lazy('organizaciones:organizaciones_list')
     success_message = "Organizacion creada sastifactoriamente"
 
-    def form_valid (self, form):
+    def form_valid(self, form):
         form.instance.uc = self.request.user
         return super().form_valid(form)
+
 
 class OrganizacionDel(SuccessMessageMixin, generic.DeleteView):
     model = Organizacion
@@ -35,7 +37,7 @@ class OrganizacionDel(SuccessMessageMixin, generic.DeleteView):
     success_message = "Organizacion eliminada sastifactoriamente"
 
 
-class OrganizacionEdit(SuccessMessageMixin,generic.UpdateView):
+class OrganizacionEdit(SuccessMessageMixin, generic.UpdateView):
     model = Organizacion
     template_name = 'organizaciones/org_modal_editar.html'
     context_object_name = "obj"
@@ -43,15 +45,17 @@ class OrganizacionEdit(SuccessMessageMixin,generic.UpdateView):
     success_url = reverse_lazy('organizaciones:organizaciones_list')
     success_message = "Organizacion editada sastifactoriamente"
 
-    def form_valid (self, form):
+    def form_valid(self, form):
         form.instance.um = self.request.user.id
         return super().form_valid(form)
+
 
 class ClinicaView(generic.ListView):
     model = Clinica
     template_name = "organizaciones/cli_list.html"
     context_object_name = "obj"
     login_url = 'bases/login.html'
+
 
 class ClinicaNew(SuccessMessageMixin, generic.CreateView):
     model = Clinica
@@ -61,7 +65,7 @@ class ClinicaNew(SuccessMessageMixin, generic.CreateView):
     success_url = reverse_lazy('organizaciones:clinicas_list')
     success_message = "Clinica creada sastifactoriamente"
 
-    def form_valid (self, form):
+    def form_valid(self, form):
         form.instance.uc = self.request.user
         return super().form_valid(form)
 
@@ -82,9 +86,10 @@ class ClinicaEdit(SuccessMessageMixin, generic.UpdateView):
     success_url = reverse_lazy('organizaciones:clinicas_list')
     success_message = "Clinica editada sastifactoriamente"
 
-    def form_valid (self, form):
+    def form_valid(self, form):
         form.instance.um = self.request.user.id
         return super().form_valid(form)
+
 
 class VeterinarioView(generic.ListView):
     model = Veterinario
@@ -101,7 +106,7 @@ class VeterinarioNew(SuccessMessageMixin, generic.CreateView):
     success_url = reverse_lazy('organizaciones:veterinarios_list')
     success_message = "Veterinario creado sastifactoriamente"
 
-    def form_valid (self, form):
+    def form_valid(self, form):
         form.instance.uc = self.request.user
         return super().form_valid(form)
 

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'smart_selects',
     'social_django',
+    "django_extensions",
 
 ]
 
@@ -152,8 +153,7 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 AUTH_USER_MODEL = "usuario.Usuario"
 
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+LOGOUT_URL = '/logout/'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '603112644018191'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '59bff6660482a1f84b71bcdb051d1606'  # App Secret
