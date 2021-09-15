@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include(('reportes.urls', 'reportes'), namespace='reportes')),
     path('chaining/', include('smart_selects.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:

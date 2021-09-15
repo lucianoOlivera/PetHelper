@@ -14,4 +14,5 @@ urlpatterns = [
      name='logout'),
     path('oauth/', include(('social_django.urls', 'social'), namespace='social')),
     path('sin_privilegios/', HomeSinPrivilegios.as_view(), name='sin_privilegios'),
+    path('accounts/', include('allauth.urls')),
 ]

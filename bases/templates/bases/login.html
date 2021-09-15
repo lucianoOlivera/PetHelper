@@ -1,4 +1,7 @@
-{% extends 'base/base.html' %} {% block side_bar %} {% endblock %} {% block top_bar %} {% endblock %} {% block page_content %} {% endblock %} {% block footer %} {% endblock %} {% block login %} {% load static%}
+{% extends 'base/base.html' %} {% block side_bar %} {% endblock %} {% block top_bar %} {% endblock %} {% block page_content %} {% endblock %} {% block footer %} {% endblock %} {% block login %}
+{% load static%}
+{% load socialaccount %}
+{% providers_media_js %}
 <html lang="en">
 
 <body class="bg-gradient-primary">
@@ -54,7 +57,7 @@
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">Ingresar</button>
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
+                                        <a href="{% provider_login_url 'google' %}" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Iniciar sesión con Google
                                         </a>
                                         <a href="{% url 'bases:social:begin' 'facebook' %}" class="btn btn-facebook btn-user btn-block">
