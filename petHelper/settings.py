@@ -152,7 +152,7 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 AUTH_USER_MODEL = "usuario.Usuario"
 
-LOGIN_URL = 'login'
+LOGIN_URL = '/login'
 LOGOUT_URL = 'logout'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '603112644018191'  # App ID
