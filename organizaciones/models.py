@@ -29,8 +29,8 @@ class Organizacion(ClaseModelo):
     logo = models.ImageField(blank=True, null=True)
     nombre = models.CharField(max_length=100, null=False, default="")
     email = models.EmailField('Email', unique=True, null=False)
-    cuit = models.CharField(max_length=4, null=False, default="", unique=True)
-    telefono = models.CharField(max_length=11, null=False, default="", unique=True, validators=[phone_regex])
+    cuit = models.CharField(max_length=11, null=False, default="", unique=True)
+    telefono = models.CharField(max_length=11, null=False, default="", unique=True, validators=[phone_regex], help_text="Ejemplo: 2614247398")
     
     class Meta:
         verbose_name_plural = 'organizaciones'
@@ -40,9 +40,9 @@ class Clinica(ClaseModelo):
     logo = models.ImageField(blank=True, null=True)
     nombre = models.CharField(max_length=100, null=False, default="")
     email = models.EmailField('Email', unique=True, null=False)
-    cuit = models.CharField(max_length=4, null=False, default="",unique=True)
-    whatsapp = models.CharField(max_length=17, blank=False, unique=True, validators=[phone_regex])
-    telefono = models.CharField(max_length=10, null=False, default="",unique=True, validators=[phone_regex])
+    cuit = models.CharField(max_length=11, null=False, default="",unique=True)
+    whatsapp = models.CharField(max_length=17, blank=False, unique=True, validators=[phone_regex], help_text="Ejemplo: 26127483945")
+    telefono = models.CharField(max_length=10, null=False, default="",unique=True, validators=[phone_regex], help_text="Ejemplo: 2614247398")
 
     def save(self):
         super(Clinica, self).save()
@@ -58,7 +58,7 @@ class Veterinario(ClaseModelo):
     apellido = models.CharField(max_length=100, null=False, default="")
     email = models.EmailField('Email', unique=True, null=False)
     matricula = models.CharField(max_length=4, null=False, default="", unique=True)
-    whatsapp = models.CharField( max_length=17, null=False, unique=True, validators=[phone_regex])
+    whatsapp = models.CharField( max_length=17, null=False, unique=True, validators=[phone_regex], help_text="Ejemplo: 2614247398")
 
     def save(self):
         super(Veterinario, self).save()
