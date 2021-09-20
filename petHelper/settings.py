@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'smart_selects',
     'social_django',
+    'django_extensions',
 
 ]
 
@@ -148,28 +150,13 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 LOGIN_URL = '/login/'
 
-LOGOUT_REDIRECT_URL = '/login/'
-
 AUTH_USER_MODEL = "usuario.Usuario"
 
-LOGIN_URL = '/login'
-LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL=reverse_lazy('bases:home')
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/' 
+
 
 SOCIAL_AUTH_FACEBOOK_KEY = '603112644018191'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '59bff6660482a1f84b71bcdb051d1606'  # App Secret
 SOCIAL_AUTH_URL_NAMESPACE = 'bases:social'
-CORS_REPLACE_HTTPS_REFERER = False
-HOST_SCHEME  = "http://"
-SECURE_PROXY_SSL_HEADER = None
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-SECURE_HSTS_SECONDS = 32312312312312
-SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
-SECURE_HSTS_PRELOAD = True
-SECURE_FRAME_DENY = False
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
