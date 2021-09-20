@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from donacion.views import listarSolicitudes
 
 urlpatterns = [
     path('', include(('bases.urls', 'bases'), namespace='bases')),
     path('', include(('usuario.urls', 'usuario'), namespace='usuario')),
     path('', include(('organizaciones.urls', 'organizaciones'), namespace='organizaciones')),
-    path('', include(('donacion.urls', 'donacion'), namespace='donacion')),
     path('chaining/', include('smart_selects.urls')),
     path('admin/', admin.site.urls),
+    path('listado_solicitudes/', listarSolicitudes)
 ]
