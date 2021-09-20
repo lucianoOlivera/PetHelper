@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.views.generic.base import TemplateView
 
 from .models import Organizacion, Clinica, Veterinario 
 from .forms import OrganizacionForm, ClinicaForm, VeterinarioForm
@@ -126,3 +127,16 @@ class VeterinarioEdit(SuccessMessageMixin, generic.UpdateView):
         form.instance.um = self.request.user.id
         return super().form_valid(form)
 
+
+class VeterinarioClinicaView(TemplateView):
+    template_name = 'organizaciones/profesionales_list.html'
+    context_object_name = 'profesionales'
+    login_url = 'bases/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['veterinarios'] = Veterinario.objects.all()
+        context['clinicas'] = Clinica.objects.all()
+        context['total_veterinarios'] = Veterinario.objects.all().count
+        context['total_veterinarios'] = Clinica.objects.all().count
+        return context
