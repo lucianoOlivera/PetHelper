@@ -140,3 +140,16 @@ class VeterinarioClinicaView(TemplateView):
         context['total_veterinarios'] = Veterinario.objects.all().count
         context['total_veterinarios'] = Clinica.objects.all().count
         return context
+
+
+class OrganizacionListView(TemplateView):
+    model = Organizacion
+    template_name = "organizaciones/organizaciones_list.html"
+    context_object_name = 'organizaciones'
+    login_url = 'bases/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['organizaciones'] = Organizacion.objects.all()
+        context['total_organizaciones'] = Organizacion.objects.all().count
+        return context
