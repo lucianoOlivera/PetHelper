@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %} {% block page_content %}
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Organizaciones</h1>
+</div>
+
+<div class="text-gray-900" style="margin-bottom: 15px;margin-right: 10px;">
+    <h6 style="float: right;margin-bottom: 8px;"> Se encontraron {{ total_organizaciones }} organizaciones</h6>
+    <div class="container">
+        <h6> Filtrar por: </h6>
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Organizaciones</h6>
+    </div>
+
+    <!-- Card Body -->
+    <div class="card-body">
+        {% if not organizaciones %}
+        <div class="alert alert-warning" role="alert">No hay organizaciones</div>
+        {% else %}
+        <table class="table table-striped table-hover">
+            <thead>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>CUIT</th>
+                <th>Email</th>
+                <th>Telefono</th> 
+            </thead>
+            <tbody>
+                {% for organizacion in organizaciones %}
+                <tr>
+                    <td>{{ organizacion.id }}</td>
+                    <td>{{ organizacion.nombre }}</td>
+                    <td>{{ organizacion.descripcion }}</td>
+                    <td>{{ organizacion.cuit }}</td>
+                    <td>{{ organizacion.email }}</td>
+                    <td>{{ organizacion.telefono }}</td>
+                </tr>   
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

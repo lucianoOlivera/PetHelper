@@ -2,7 +2,7 @@ from organizaciones.models import Veterinario
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 
-from .views import OrganizacionView, OrganizacionNew, OrganizacionDel, OrganizacionEdit, ClinicaView, ClinicaNew, ClinicaDel, ClinicaEdit, VeterinarioView, VeterinarioNew, VeterinarioDel, VeterinarioEdit, VeterinarioClinicaView
+from .views import OrganizacionView, OrganizacionNew, OrganizacionDel, OrganizacionEdit, ClinicaView, ClinicaNew, ClinicaDel, ClinicaEdit, VeterinarioView, VeterinarioNew, VeterinarioDel, VeterinarioEdit, VeterinarioClinicaView, OrganizacionListView
 
 urlpatterns = [
     path('organizaciones/', login_required(OrganizacionView.as_view()), name='organizaciones_list'),
@@ -18,4 +18,5 @@ urlpatterns = [
     path('veterinarios/delete/<int:pk>', login_required(VeterinarioDel.as_view()), name='veterinarios_del'),
     path('veterinarios/edit/<int:pk>', login_required(VeterinarioEdit.as_view()), name='veterinarios_edit'),
     path('profesionales/', login_required(VeterinarioClinicaView.as_view()), name='profesionales_list'),
+    path('listar_organizaciones/', login_required(OrganizacionListView.as_view()), name='organizaciones_list'),
 ]
