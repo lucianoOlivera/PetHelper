@@ -163,7 +163,7 @@ class VeterinarioClinicaView(TemplateView):
         context['veterinarios'] = Veterinario.objects.all()
         context['clinicas'] = Clinica.objects.all()
         context['total_veterinarios'] = Veterinario.objects.all().count
-        context['total_veterinarios'] = Clinica.objects.all().count
+        context['total_clinicas'] = Clinica.objects.all().count
         return context
 
 

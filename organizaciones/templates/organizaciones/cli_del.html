@@ -7,7 +7,7 @@
                         <span aria-hidden="true">&times;</span>
                     </a>  
             </div>
-            <form method="POST" action="{% url 'organizaciones:veterinarios_del' object.id %}" class="forms-inline">
+            <form method="POST" action="{% url 'organizaciones:clinicas_del' object.id %}" class="forms-inline">
                 {% csrf_token %}
                 <div class="modal-body">
                     <div>

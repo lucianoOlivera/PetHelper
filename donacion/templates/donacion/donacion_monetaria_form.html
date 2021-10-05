@@ -1,0 +1,146 @@
+{% extends 'base/base.html' %} {% block page_content %}
+
+
+<!-- {% if messages %}
+    {% for message in messages %}
+    <div class="text-center alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <i class="fas fa-check"></i>
+        <strong> {{ message|safe }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>    
+    </div>
+    {% endfor %}
+{% endif %} -->
+
+<div class="container">
+    <div class="col-xl-10 col-lg-12 col-md-9 items-align-center">
+        <h4 class="h3 mb-4 text-gray-900">Realizar Donación</h4>
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="p-5">
+                <form method="POST" class="user" >
+                    {% csrf_token %}
+                    <h6 class="text-gray-700 text-center">Donación Monetaria</h6>
+    
+                        
+                    <!-- <h6 class="text-gray-900"><strong>Datos del destinatario de donación</strong></h6> -->
+                    <!-- <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <small class="text-danger">
+                                {{form.username.errors}}
+                            </small>
+                            <input type="text" class="form-control form-control-user" 
+                                placeholder="Nombre" name="" >
+                        </div>
+                        <div class="col-sm-6">
+                            <small class="text-danger">
+                                {{form.apellido.errors}}
+                            </small>
+                            <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                placeholder="Apellido" name="">
+                        </div>
+                    </div>
+
+                    <small class="text-danger">
+                        {{form.email.errors}}
+                    </small>
+                    <div class="form-group">
+                        <input class="form-control form-control-user" placeholder="Email*" name="" >   
+                    </div>
+
+                    <small class="text-danger">
+                        {{form.telefono.errors}}
+                    </small>
+                    <div class="form-group">
+                        <input class="form-control form-control-user" placeholder="Telefono*" name="" >   
+                    </div>
+                    
+                    <h6 class="text-gray-900"><strong>Dirección de recepción de la donación</strong></h6>
+
+                    <h6 class="text-gray-900"><strong>Datos de la donación</strong></h6>
+                    <small class="text-danger">
+                        {{form.titulo.errors}}
+                    </small>
+                    <div class="form-group">
+                        <input id= "titulo" class="form-control form-control-user" placeholder="Titulo de la donacion*" name="titulo" >    
+                    </div>
+                    
+                    <small class="text-danger">
+                        {{form.fecha.errors}}
+                    </small>
+                    <div class="form-group">
+                        <label for="fecha"> Fecha*: </label>
+                        <input type="date" id= "fecha" class="form-control form-control-user" placeholder="Fecha*" name="fecha" >    
+                    </div> -->
+                    
+                    <!-- <small class="text-danger">
+                        {{form.monto.errors}}
+                    </small> -->
+                 <!--    <div class="form-group">
+                        <label for="fecha"> Insumos: </label> 
+                          
+                    </div>
+    
+                    <h6 class="text-gray-900"><strong>Datos del archivo</strong></h6>
+                    <div class="form-group">
+                        <label for="pedido"> Seleccione el tipo de archivo que subirá </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                            <label class="form-check-label" for="flexCheckChecked">
+                              Pedido médico
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" >
+                            <label class="form-check-label" for="flexCheckChecked2">
+                              Factura
+                            </label>
+                        </div>
+                    </div>
+                    {{ form.pedido }} 
+    
+    
+                    <br><h6 class="text-gray-900"><strong>Datos del profesional</strong></h6>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0"> -->
+                            <!-- <small class="text-danger">
+                                {{form.username.errors}}
+                            </small> -->
+                            <!-- <input type="text" class="form-control form-control-user" 
+                                placeholder="Nombre del profesional*" name="" >
+                        </div>
+                        <div class="col-sm-6"> -->
+                            <!-- <small class="text-danger">
+                                {{form.apellido.errors}}
+                            </small> -->
+                          <!--   <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                placeholder="Apellido del profesional*" name="">
+                        </div>
+                    </div> -->
+
+                       <!--<small class="text-danger">
+                        {{form.email.errors}}
+                    </small> -->
+                   <!--  <div class="form-group">
+                        <input class="form-control form-control-user" placeholder="Número de matricula*" name="" >   
+                    </div> -->
+                
+    
+                    <div class="border-top pt-3 text-right">
+                        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>
+                            Cancelar</a>   
+                        <button type="submit" class="btn btn-primary">
+                            <span class="fa fa-save"></span> 
+                            Aceptar
+                    </div>
+                </form>
+
+            </div>
+            
+        </div>
+            
+
+    </div>   
+</div>
+
+{% endblock %}

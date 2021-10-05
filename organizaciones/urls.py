@@ -21,5 +21,5 @@ urlpatterns = [
     path('veterinarios/edit/<int:pk>', login_required(VeterinarioEdit.as_view()), name='veterinarios_edit'),
     path('veterinarios/profile/<int:pk>', login_required(VeterinarioDetail.as_view()), name='veterinarios_profile'),
     path('profesionales/', login_required(VeterinarioClinicaView.as_view()), name='profesionales_list'),
-    path('listar_organizaciones/', login_required(OrganizacionListView.as_view()), name='organizaciones_list'),
+    path('listar_organizaciones/', login_required(OrganizacionListView.as_view()), name='listar_organizaciones'),
 ]
