@@ -21,39 +21,6 @@
                     {% csrf_token %}
                     <h6 class="text-gray-700 text-center">Formulario de solicitud de donación monetaria</h6>
     
-                        
-                    <h6 class="text-gray-900"><strong>Datos del destinatario de donación</strong></h6>
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <small class="text-danger">
-                                {{form.username.errors}}
-                            </small>
-                            <input type="text" class="form-control form-control-user" 
-                                placeholder="Nombre" name="" >
-                        </div>
-                        <div class="col-sm-6">
-                            <small class="text-danger">
-                                {{form.apellido.errors}}
-                            </small>
-                            <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                placeholder="Apellido" name="">
-                        </div>
-                    </div>
-
-                    <small class="text-danger">
-                        {{form.email.errors}}
-                    </small>
-                    <div class="form-group">
-                        <input class="form-control form-control-user" placeholder="Email*" name="" value="{{ usuario.email }}">   
-                    </div>
-
-                    <small class="text-danger">
-                        {{form.telefono.errors}}
-                    </small>
-                    <div class="form-group">
-                        <input class="form-control form-control-user" placeholder="Telefono*" name="" >   
-                    </div>
-    
                     <h6 class="text-gray-900"><strong>Datos de la donación</strong></h6>
                     <small class="text-danger">
                         {{form.titulo.errors}}
@@ -89,28 +56,15 @@
     
     
                     <br><h6 class="text-gray-900"><strong>Datos del profesional</strong></h6>
+                    <label > Seleccione el profesional con el que fue atendido </label>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <!-- <small class="text-danger">
-                                {{form.username.errors}}
-                            </small> -->
-                            <input type="text" class="form-control form-control-user" 
-                                placeholder="Nombre del profesional*" name="" >
+                            <small class="text-danger">
+                                {{form.veterinario.errors}}
+                            </small>
+                            {{ form.veterinario }}
                         </div>
-                        <div class="col-sm-6">
-                            <!-- <small class="text-danger">
-                                {{form.apellido.errors}}
-                            </small> -->
-                            <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                placeholder="Apellido del profesional*" name="">
-                        </div>
-                    </div>
-
-                       <!--<small class="text-danger">
-                        {{form.email.errors}}
-                    </small> -->
-                    <div class="form-group">
-                        <input class="form-control form-control-user" placeholder="Número de matricula*" name="" >   
+                
                     </div>
                 
     

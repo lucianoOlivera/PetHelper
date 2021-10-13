@@ -5,7 +5,7 @@ class ClaseModelo(models.Model):
     estado = models.BooleanField(default=False)
     fc = models.DateTimeField(auto_now_add=True)
     fm = models.DateTimeField(auto_now=True)
-    uc = models.ForeignKey("usuario.Usuario", on_delete=models.CASCADE)
+    uc = models.ForeignKey("usuario.Usuario", on_delete=models.CASCADE, default=None)
     um = models.IntegerField(blank=True, null=True)
 
     class Meta:

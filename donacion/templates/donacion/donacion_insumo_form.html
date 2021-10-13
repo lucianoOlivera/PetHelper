@@ -1,17 +1,5 @@
 {% extends 'base/base.html' %} {% block page_content %}
 
-<!-- {% if messages %}
-    {% for message in messages %}
-    <div class="text-center alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-        <i class="fas fa-check"></i>
-        <strong> {{ message|safe }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>    
-    </div>
-    {% endfor %}
-{% endif %} -->
-
 <div class="container">
     <div class="col-xl-10 col-lg-12 col-md-9 items-align-center">
         <h4 class="h3 mb-4 text-gray-900">Realizar Donación</h4>
@@ -19,11 +7,32 @@
             <div class="p-5">
                 <form method="POST" class="user" >
                     {% csrf_token %}
-                    <h6 class="text-gray-700 text-center">Donación de Insumos</h6>
+                    <h6 class="text-gray-700 text-center">Donación de Insumos</h6>  
+
+                    <div class="row" id="donacion">
+                        <div clas="column">
+                            <!-- tendria que mostrar los insumos que selecciono en la solicitud -->
+                            <h6 class="text-gray-900"><strong>Elementos a donar</strong></h6>
+                                {{ solicitud.titulo }}
+                                <br><label class="text-gray-900" for="cantidad_insumo"> {{form2.insumo.label}} </label>
+                                {{form2.insumo}}
+                                {{form2.cantidad}}
+                        </div>    
+                        <div class="column text-left">
+                            <h6 class="text-gray-900"><strong>Cantidad</strong></h6>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h6 class="text-gray-900"><strong>Total a donar</strong></h6>
+                    </div>
+                    
+                    <div class="alert alert-info" role="alert"> Tienes 10 días para concretar la donación, caso contrario no se agregará
+                        a la cantidad recaudada.
+                    </div>
                     <div class="border-top pt-3 text-right">
                         <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>
                             Cancelar</a>   
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exitoModal" data-dismiss="modal">
                             <span class="fa fa-save"></span> 
                             Aceptar
                     </div>
@@ -35,6 +44,33 @@
             
 
     </div>   
+</div>
+
+
+
+
+<!-- Modal exito-->
+<div class="modal fade" id="exitoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="far fa-check-circle" style="font-size: 35px; color: green;"></i>
+                    <h6 class="text-gray-900"><strong>¡Tu donación ha sido procesada con éxito!</strong></h6>
+                    <h6 class="text-gray-700">Recibirás una notificación cuando el destinatario confirme el recibo de la donación</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'donacion:solicitudes_list' %}" type="button" class="btn btn-primary">Aceptar</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 

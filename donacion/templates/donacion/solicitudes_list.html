@@ -40,13 +40,18 @@
                     </div>
                     <div id="Destinatario">
                         <label class="text-gray-900"> Destinatario:  </label>
-                        {% if usuario.username and usuario.apellido %}
-                        <label >{{ usuario.username}} {{ usuario.apellido }} </label>
+                        {% if solicitud_insumo.uc.username and solicitud_insumo.uc.apellido %}
+                        <label >{{ solicitud_insumo.uc.username}} {{ solicitud_insumo.uc.apellido }} </label>
                         {% else %}
-                        <label >{{ usuario.username}}</label>
+                        <label >{{ solicitud_insumo.uc.username}}</label>
                         {% endif %}
+                        {% if solicitud_insumo.uc.telefono %}
                         <br><label class="text-gray-900"> Telefono:  </label>
-                        <label >{{ usuario.telefono }}</label>
+                        <label >{{ solicitud_insumo.uc.telefono }}</label>
+                        {% else %}
+                        <br><label class="text-gray-900"> Email:  </label>
+                        <label >{{ solicitud_insumo.uc.email }}</label>
+                        {% endif %}
                     </div> 
                     <div id= "cantidad_recaudada">
                         <label class="text-gray-900"> Cantidad a recaudar:  </label>
@@ -57,10 +62,10 @@
                         {% endfor %}
                     </div>
                     
-                    <h6>Cantidad recaudada</h6>
+                    <!-- <h6>Cantidad recaudada</h6>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Fecha pulicación: {{solicitud_insumo.fc|date:"d/m/Y"}}</small>
@@ -84,23 +89,28 @@
 
                     <div id="Destinatario">
                         <label class="text-gray-900"> Destinatario:  </label>
-                        {% if usuario.username and usuario.apellido %}
-                        <label >{{ usuario.username}} {{ usuario.apellido }} </label>
+                        {% if solicitud_monetaria.uc.username and solicitud_monetaria.uc.apellido %}
+                        <label >{{ solicitud_monetaria.uc.username}} {{ solicitud_monetaria.uc.apellido }} </label>
                         {% else %}
-                        <label >{{ usuario.username}}</label>
+                        <label >{{ solicitud_monetaria.uc.username}}</label>
                         {% endif %}
+                        {% if solicitud_monetaria.uc.telefono %}
                         <br><label class="text-gray-900"> Telefono:  </label>
-                        <label >{{ usuario.telefono }}</label>
+                        <label >{{ solicitud_monetaria.uc.telefono }}</label>
+                        {% else %}
+                        <br><label class="text-gray-900"> Email:  </label>
+                        <label >{{ solicitud_monetaria.uc.email }}</label>
+                        {% endif %}
                     </div> 
                     <div id= "cantidad_recaudada">
                         <label class="text-gray-900"> Cantidad a recaudar:  </label>
                         <label >{{ solicitud_monetaria.monto }}</label>
                     </div>
 
-                    <h6>Cantidad recaudada</h6>
+                    <!-- <h6>Cantidad recaudada</h6>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Fecha pulicación: {{ solicitud_monetaria.fc|date:"d/m/Y" }}</small>

@@ -21,109 +21,31 @@
                 <form method="POST" class="user" >
                     {% csrf_token %}
                     <h6 class="text-gray-700 text-center">Donación Monetaria</h6>
-    
-                        
-                    <!-- <h6 class="text-gray-900"><strong>Datos del destinatario de donación</strong></h6> -->
-                    <!-- <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <small class="text-danger">
-                                {{form.username.errors}}
-                            </small>
-                            <input type="text" class="form-control form-control-user" 
-                                placeholder="Nombre" name="" >
-                        </div>
-                        <div class="col-sm-6">
-                            <small class="text-danger">
-                                {{form.apellido.errors}}
-                            </small>
-                            <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                placeholder="Apellido" name="">
+                    <div id="donacion">
+                        <div>
+                            <h6 class="text-gray-900"><strong>Cantidad a donar</strong></h6>
+                            <label class="text-gray-900">$</label>
+                            <input type="number" id= "monto" class="" placeholder="Especifique el monto" name=""><br>
                         </div>
                     </div>
 
-                    <small class="text-danger">
-                        {{form.email.errors}}
-                    </small>
-                    <div class="form-group">
-                        <input class="form-control form-control-user" placeholder="Email*" name="" >   
-                    </div>
-
-                    <small class="text-danger">
-                        {{form.telefono.errors}}
-                    </small>
-                    <div class="form-group">
-                        <input class="form-control form-control-user" placeholder="Telefono*" name="" >   
+                    <div id="pago">
+                        <h6 class="text-gray-900"><strong>Seleccione el método de pago</strong></h6>
+                        <div>
+                            <input type="radio" id="mp"> 
+                            <strong> <label class="text-gray-900" for="mp">Mercado Pago</label> </strong>
+                            <img src="https://img.icons8.com/color/50/000000/mercado-pago.png"/>
+                        </div>
+                        <div>
+                            <input type="radio" id="transferencia"> 
+                            <strong> <label class="text-gray-900" for="transferencia">Transferencia Bancaria</label> </strong>
+                            <img src="https://img.icons8.com/color/50/000000/initiate-money-transfer.png"/>
+                        </div>
                     </div>
                     
-                    <h6 class="text-gray-900"><strong>Dirección de recepción de la donación</strong></h6>
-
-                    <h6 class="text-gray-900"><strong>Datos de la donación</strong></h6>
-                    <small class="text-danger">
-                        {{form.titulo.errors}}
-                    </small>
-                    <div class="form-group">
-                        <input id= "titulo" class="form-control form-control-user" placeholder="Titulo de la donacion*" name="titulo" >    
+                    <div class="alert alert-info" role="alert"> Tienes 2 hs para concretar la donación, caso contrario no se agregará
+                        a la cantidad recaudada.
                     </div>
-                    
-                    <small class="text-danger">
-                        {{form.fecha.errors}}
-                    </small>
-                    <div class="form-group">
-                        <label for="fecha"> Fecha*: </label>
-                        <input type="date" id= "fecha" class="form-control form-control-user" placeholder="Fecha*" name="fecha" >    
-                    </div> -->
-                    
-                    <!-- <small class="text-danger">
-                        {{form.monto.errors}}
-                    </small> -->
-                 <!--    <div class="form-group">
-                        <label for="fecha"> Insumos: </label> 
-                          
-                    </div>
-    
-                    <h6 class="text-gray-900"><strong>Datos del archivo</strong></h6>
-                    <div class="form-group">
-                        <label for="pedido"> Seleccione el tipo de archivo que subirá </label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Pedido médico
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" >
-                            <label class="form-check-label" for="flexCheckChecked2">
-                              Factura
-                            </label>
-                        </div>
-                    </div>
-                    {{ form.pedido }} 
-    
-    
-                    <br><h6 class="text-gray-900"><strong>Datos del profesional</strong></h6>
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0"> -->
-                            <!-- <small class="text-danger">
-                                {{form.username.errors}}
-                            </small> -->
-                            <!-- <input type="text" class="form-control form-control-user" 
-                                placeholder="Nombre del profesional*" name="" >
-                        </div>
-                        <div class="col-sm-6"> -->
-                            <!-- <small class="text-danger">
-                                {{form.apellido.errors}}
-                            </small> -->
-                          <!--   <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                placeholder="Apellido del profesional*" name="">
-                        </div>
-                    </div> -->
-
-                       <!--<small class="text-danger">
-                        {{form.email.errors}}
-                    </small> -->
-                   <!--  <div class="form-group">
-                        <input class="form-control form-control-user" placeholder="Número de matricula*" name="" >   
-                    </div> -->
                 
     
                     <div class="border-top pt-3 text-right">

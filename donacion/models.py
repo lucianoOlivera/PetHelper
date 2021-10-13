@@ -9,7 +9,7 @@ class Solicitud_Donacion_Monetaria(ClaseModelo):
     monto = models.FloatField(max_length=100, null=False, blank=False)
     """ en realidad la descripcion es la relacion con el modelo de usuario y con un veterinario o clinica """
     pedido = models.ImageField(blank=True, null=True)
-    """ profesional = models.ForeignKey() """
+    veterinario = models.ForeignKey(Veterinario, on_delete=models.CASCADE, null=True)
 
     def save(self):
         super(Solicitud_Donacion_Monetaria, self).save()
@@ -26,31 +26,22 @@ class Insumo(ClaseModelo):
                 
     class Meta:
         verbose_name_plural = 'insumos'
+    
+    def __str__(self):
+        return '%s' % (self.nombre)
 
 
 class Solicitud_Donacion_Insumo(ClaseModelo):
     titulo = models.TextField(max_length=100, null=False, blank=False)
     pedido = models.ImageField(blank=True, null=True)
-    """ cant_insumo = models.ForeignKey(Cantidad_Insumo, on_delete=models.CASCADE, null=True)  """
-    
-
+    veterinario = models.ForeignKey(Veterinario, on_delete=models.CASCADE, null=True)
+     
     def save(self):
         super(Solicitud_Donacion_Insumo, self).save()
          
     class Meta:
         verbose_name_plural = 'solicitudes_insumos'
 
-
-class Cantidad_Insumo(ClaseModelo):
-    solicitud_insumo = models.ForeignKey(Solicitud_Donacion_Insumo, on_delete=models.CASCADE, null=True)
-    cantidad = models.IntegerField()
-    insumo = models.ForeignKey(Insumo, on_delete=models.CASCADE, null=True) 
-
-    def save(self):
-        super(Cantidad_Insumo, self).save()
-                
-    class Meta:
-        verbose_name_plural = 'cantidad_insumos'
 
 
 class Estado_Solicitud_Monetaria(ClaseModelo):
@@ -85,7 +76,8 @@ class Medio_Pago(ClaseModelo):
     
 class Donacion_Monetaria(ClaseModelo):
     monto = models.FloatField(max_length=100, null=False, blank=False)
-    fechaCreacion = models.DateField(null=False)
+    fechaCreacion = models.DateField(auto_now_add=True)
+    solicitud_monetaria = models.ForeignKey(Solicitud_Donacion_Monetaria, on_delete=models.CASCADE, null=True)
 
     def save(self):
         super(Donacion_Monetaria, self).save()
@@ -95,11 +87,26 @@ class Donacion_Monetaria(ClaseModelo):
 
 
 class Donacion_Insumo(ClaseModelo):
-    monto = models.FloatField(max_length=100, null=False, blank=False)
-    fechaCreacion = models.DateField(null=False)
+    monto = models.FloatField(max_length=100, null=True, blank=True)
+    fechaCreacion = models.DateField(auto_now_add=True)
+    solicitud_insumo = models.ForeignKey(Solicitud_Donacion_Insumo, on_delete=models.CASCADE, null=True)
+
 
     def save(self):
         super(Donacion_Insumo, self).save()
          
     class Meta:
         verbose_name_plural = 'donaciones_insumos'
+
+
+class Cantidad_Insumo(ClaseModelo):
+    solicitud_insumo = models.ForeignKey(Solicitud_Donacion_Insumo, on_delete=models.CASCADE, null=True)
+    cantidad = models.PositiveIntegerField()
+    insumo = models.ForeignKey(Insumo, on_delete=models.CASCADE, null=True)
+    donacion_insumo = models.ForeignKey(Donacion_Insumo, on_delete=models.CASCADE, null=True) 
+
+    def save(self):
+        super(Cantidad_Insumo, self).save()
+                
+    class Meta:
+        verbose_name_plural = 'cantidad_insumos'

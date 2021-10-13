@@ -21,38 +21,6 @@
                     {% csrf_token %}
                     <h6 class="text-gray-700 text-center">Formulario de solicitud de donación de insumos</h6>
     
-                        
-                    <h6 class="text-gray-900"><strong>Datos del destinatario de donación</strong></h6>
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <small class="text-danger">
-                                {{ form.username.errors}}
-                            </small>
-                            <input type="text" class="form-control form-control-user" 
-                                placeholder="Nombre" name="uc_id.username" value="{{ usuario.username }}" >
-                        </div>
-                        <div class="col-sm-6">
-                            <small class="text-danger">
-                                {{ form.apellido.errors}}
-                            </small>
-                            <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                placeholder="Apellido" name="uc_id.apellido" value="{{ usuario.apellido }}">
-                        </div>
-                    </div>
-
-                    <small class="text-danger">
-                        {{form.email.errors}}
-                    </small>
-                    <div class="form-group">
-                        <input class="form-control form-control-user" placeholder="Email*" name=""  value="{{ usuario.email }}">   
-                    </div>
-
-                    <small class="text-danger">
-                        {{form.telefono.errors}}
-                    </small>
-                    <div class="form-group">
-                        <input class="form-control form-control-user" placeholder="Telefono*" name="" >   
-                    </div>
                     
                     <h6 class="text-gray-900"><strong>Dirección de recepción de la donación</strong></h6>
                     <!-- <small class="text-danger">
@@ -77,17 +45,25 @@
                         <input id= "titulo" class="form-control form-control-user" placeholder="Titulo de la donacion*" name="titulo" >    
                     </div>
                     
-                    <!-- <small class="text-danger">
-                        {{form.monto.errors}}
-                    </small> -->
                     <div class="form-group">
                         <label class="text-gray-900" for=""> Insumos: </label> 
                         <br><label  for=""> Ingrese la cantidad de cada insumo </label> 
                         {% for insumo in insumos %}
-                            <br><label class="text-gray-900" for="cantidad_insumo"> {{insumo.nombre}} </label>
+                            <!-- <br><label class="text-gray-900" for="cantidad_insumo"> {{insumo.nombre}} </label> -->
                             <!-- hay que hacer la relacion entre la solicitud ,la cantidad  y el insumo con el form de la solicitud 
                             seteandole los valores, por cada insumo crear una clase cantidad insumo y setearle los valores -->
-                            <input type="number" id="cantidad_insumo" name="cantidad_insumo.cantidad" min="0" max="10">
+                            <!-- <input type="number" id="cantidad_insumo" name="form2.cantidad" min="0" max="10"> -->
+                            <small class="text-danger">
+                                {{form2.cantidad.errors}}
+                            </small>
+                            {{form2.cantidad.label}}
+                            {{form2.cantidad}}
+
+                            <small class="text-danger">
+                                {{form2.insumo.errors}}
+                            </small>
+                            {{form2.insumo.label}}
+                            {{form2.insumo}}
                         {% endfor %}
                           
                     </div>
@@ -110,33 +86,17 @@
                     </div>
                     {{ form.pedido }} 
     
-    
                     <br><h6 class="text-gray-900"><strong>Datos del profesional</strong></h6>
+                    <label > Seleccione el profesional con el que fue atendido </label>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <!-- <small class="text-danger">
-                                {{form.username.errors}}
-                            </small> -->
-                            <input type="text" class="form-control form-control-user" 
-                                placeholder="Nombre del profesional*" name="" >
+                            <small class="text-danger">
+                                {{form.veterinario.errors}}
+                            </small>
+                            {{ form.veterinario }}
                         </div>
-                        <div class="col-sm-6">
-                            <!-- <small class="text-danger">
-                                {{form.apellido.errors}}
-                            </small> -->
-                            <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                placeholder="Apellido del profesional*" name="">
-                        </div>
-                    </div>
-
-                       <!--<small class="text-danger">
-                        {{form.email.errors}}
-                    </small> -->
-                    <div class="form-group">
-                        <input class="form-control form-control-user" placeholder="Número de matricula*" name="" >   
-                    </div>
                 
-    
+                    </div>
                     <div class="border-top pt-3 text-right">
                         <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>
                             Cancelar</a>   

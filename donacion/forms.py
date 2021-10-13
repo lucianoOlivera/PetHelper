@@ -5,7 +5,7 @@ from .models import Solicitud_Donacion_Monetaria, Solicitud_Donacion_Insumo, Don
 class SolicitudDonacionMonetariaForm(forms.ModelForm):
     class Meta:
         model = Solicitud_Donacion_Monetaria
-        fields = ['titulo', 'monto', 'pedido']
+        fields = ['titulo', 'monto', 'pedido', 'veterinario']
 
         def __init__(self, *arg, **kwargs):
             super().__init__(*arg, **kwargs)
@@ -18,7 +18,7 @@ class SolicitudDonacionMonetariaForm(forms.ModelForm):
 class SolicitudDonacionInsumoForm(forms.ModelForm):
     class Meta:
         model = Solicitud_Donacion_Insumo
-        fields = ['titulo', 'pedido']
+        fields = ['titulo', 'pedido', 'veterinario']
 
         def __init__(self, *arg, **kwargs):
             super().__init__(*arg, **kwargs)
@@ -31,7 +31,7 @@ class SolicitudDonacionInsumoForm(forms.ModelForm):
 class CantidadInsumoForm(forms.ModelForm):
     class Meta:
         model = Cantidad_Insumo
-        fields = ['solicitud_insumo', 'cantidad', 'insumo']
+        fields = ['cantidad', 'insumo']
 
         def __init__(self, *arg, **kwargs):
             super().__init__(*arg, **kwargs)
@@ -44,7 +44,7 @@ class CantidadInsumoForm(forms.ModelForm):
 class DonacionMonetariaForm(forms.ModelForm):
     class Meta:
         model = Donacion_Monetaria
-        fields = ['monto', 'fechaCreacion']
+        fields = ['monto']
 
         def __init__(self, *arg, **kwargs):
             super().__init__(*arg, **kwargs)
@@ -57,7 +57,7 @@ class DonacionMonetariaForm(forms.ModelForm):
 class DonacionInsumoForm(forms.ModelForm):
     class Meta:
         model = Donacion_Insumo
-        fields = ['monto', 'fechaCreacion']
+        fields = ['monto']
 
         def __init__(self, *arg, **kwargs):
             super().__init__(*arg, **kwargs)
