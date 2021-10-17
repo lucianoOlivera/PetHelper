@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %} {% block page_content %}
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Configuración general de la cuenta</h1>
+
+    <form action="{% url 'usuario:usuario_edit' obj.id %}" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <div class="border-top pt-3 text-right">
+            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span> Cancelar</a>
+            <button class="btn btn-warning" type="submit"><i class="fas fa-check"></i>Aceptar</button>
+        </div>
+    </form>
+
+    
+</div>
+
+
+
+{% endblock %}

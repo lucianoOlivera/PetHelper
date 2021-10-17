@@ -28,7 +28,8 @@
                 <th>Descripción</th>
                 <th>CUIT</th>
                 <th>Email</th>
-                <th>Telefono</th> 
+                <th>Telefono</th>
+                <th class="all">Acciones</th> 
             </thead>
             <tbody>
                 {% for organizacion in organizaciones %}
@@ -39,6 +40,9 @@
                     <td>{{ organizacion.cuit }}</td>
                     <td>{{ organizacion.email }}</td>
                     <td>{{ organizacion.telefono }}</td>
+                    <td>
+                        <a href="{% url 'organizaciones:organizaciones_profile' organizacion.id %}" type="button"><i class="fas fa-eye"></i> Ver perfil</a>
+                    </td>
                 </tr>   
                 {% endfor %}
             </tbody>

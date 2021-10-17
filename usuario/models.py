@@ -29,6 +29,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     apellido = models.CharField(max_length=25, unique=True)
     date_joined = models.DateTimeField(default=timezone.now)
     DNI = models.CharField(max_length=8, default="")
+    foto = models.ImageField(blank=True, null=True)
     objects = UserManager()
     is_active = models.BooleanField('active', default=True)
     is_staff = models.BooleanField(default=True)

@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %} {% block page_content %}
+{% load static %}
+<div class="container" style="text-align: center;margin-bottom: 20px;">
+    <div class="row">
+        <div class="col-sm">
+            {% if obj.logo %}
+            {{ obj.logo }}
+            {% else %}
+            <img class="img-profile rounded-circle" src="{% static 'base/img/undraw_profile.svg' %}" style="width:100px">
+            {% endif %}
+        </div>
+        <div class="col-sm">
+            <h1 class="h3 text-gray-900">{{ obj.nombre }}</h1>
+        </div>
+        <div class="col-sm btn-whatsapp">
+            <a href="https://api.whatsapp.com/send?phone={{obj.whatsapp}}" target="_blank" style="float: left">
+                <img src="http://s2.accesoperu.com/logos/btn_whatsapp.png" alt="" style="width:50px;">
+            </a>
+        </div>
+    </div>
+    <h5>{{obj.descripcion}}</h5>
+    <h6 class="m-0 font-weight-bold text-primary">Clínica</h6>
+</div>
+
+
+<div class="card border-dark mb-3" style="max-width: 50rem;text-align: center;margin-left: 130px;">
+    <div class="card-body text-gray-900">
+      <p class="card-text"><i class="fas fa-envelope-open-text"></i> Email: {{ obj.email }} </p>
+    </div>
+</div>
+
+<div class="card border-dark mb-3" style="max-width: 50rem;text-align: center;margin-left: 130px;">
+    <div class="card-body text-gray-900">
+      <p class="card-text"><i class="fas fa-phone"></i> Telefono fijo: {{ obj.telefono }} </p>
+    </div>
+</div>
+
+<div class="card border-dark mb-3" style="max-width: 50rem;text-align: center;margin-left: 130px;">
+    <div class="card-body text-gray-900">
+      <p class="card-text"><i class="far fa-clock"></i> Horario de atención: </p>
+    </div>
+</div>
+
+<div class="card border-dark mb-3" style="max-width: 50rem;text-align: center;margin-left: 130px;">
+    <div class="card-body text-gray-900">
+      <p class="card-text"><i class="fas fa-map-marker-alt"></i> Dirección: </p>
+    </div>
+</div>
+
+{% endblock %}

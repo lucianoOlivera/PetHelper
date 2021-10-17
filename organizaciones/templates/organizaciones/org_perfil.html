@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %} {% block page_content %}
+{% load static %}
+<div class="container-fluid" style="text-align: center;margin-bottom: 20px;">
+    {% if obj.logo %}
+            {{ obj.logo }}
+            {% else %}
+            <img class="img-profile rounded-circle" src="{% static 'base/img/undraw_profile.svg' %}" style="width:100px">
+            {% endif %}
+    <h1 class="h3 text-gray-900">{{ obj.nombre }}</h1>
+    <h5>{{obj.descripcion}}</h5>
+    <h6 class="m-0 font-weight-bold text-primary">Organización</h6>
+</div>
+
+<div class="card border-dark mb-3" style="max-width: 50rem;text-align: center;margin-left: 130px;">
+    <div class="card-body text-gray-900">
+      <p class="card-text"><i class="fas fa-envelope-open-text"></i> Email: {{ obj.email }} </p>
+    </div>
+</div>
+
+<div class="card border-dark mb-3" style="max-width: 50rem;text-align: center;margin-left: 130px;">
+    <div class="card-body text-gray-900">
+      <p class="card-text"><i class="fas fa-phone"></i> Telefono: {{ obj.telefono }} </p>
+    </div>
+</div>
+
+<div class="card border-dark mb-3" style="max-width: 50rem;text-align: center;margin-left: 130px;">
+    <div class="card-body text-gray-900">
+      <p class="card-text"><i class="far fa-clock"></i> Horario de atención: </p>
+    </div>
+</div>
+
+<div class="card border-dark mb-3" style="max-width: 50rem;text-align: center;margin-left: 130px;">
+    <div class="card-body text-gray-900">
+      <p class="card-text"><i class="fas fa-map-marker-alt"></i> Dirección: </p>
+    </div>
+</div>
+
+{% endblock %}
