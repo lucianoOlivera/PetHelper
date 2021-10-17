@@ -9,9 +9,17 @@ from .models import Organizacion, Clinica, Veterinario
 from .forms import OrganizacionForm, ClinicaForm, VeterinarioForm
 # Create your views here.
 
+
 class OrganizacionView(generic.ListView):
     model = Organizacion
     template_name = "organizaciones/org_list.html"
+    context_object_name = "obj"
+    login_url = 'bases/login.html'
+
+
+class OrganizacionDetail(generic.DetailView):
+    model = Organizacion
+    template_name = "organizaciones/org_perfil.html"
     context_object_name = "obj"
     login_url = 'bases/login.html'
 
@@ -48,11 +56,20 @@ class OrganizacionEdit(SuccessMessageMixin,generic.UpdateView):
         form.instance.um = self.request.user.id
         return super().form_valid(form)
 
+
 class ClinicaView(generic.ListView):
     model = Clinica
     template_name = "organizaciones/cli_list.html"
     context_object_name = "obj"
     login_url = 'bases/login.html'
+
+
+class ClinicaDetail(generic.DetailView):
+    model = Clinica
+    template_name = "organizaciones/cli_perfil.html"
+    context_object_name = "obj"
+    login_url = 'bases/login.html'
+
 
 class ClinicaNew(SuccessMessageMixin, generic.CreateView):
     model = Clinica
@@ -87,9 +104,17 @@ class ClinicaEdit(SuccessMessageMixin, generic.UpdateView):
         form.instance.um = self.request.user.id
         return super().form_valid(form)
 
+
 class VeterinarioView(generic.ListView):
     model = Veterinario
     template_name = "organizaciones/vet_list.html"
+    context_object_name = "obj"
+    login_url = 'bases/login.html'
+
+
+class VeterinarioDetail(generic.DetailView):
+    model = Veterinario
+    template_name = "organizaciones/vet_perfil.html"
     context_object_name = "obj"
     login_url = 'bases/login.html'
 
