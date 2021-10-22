@@ -57,7 +57,7 @@
 
             <!-- Nav Item - Donations -->
             <li class="nav-item">
-                <a class="nav-link" href="listado_solicitudes">
+                <a class="nav-link" href="{% url 'donacion:solicitudes_list' %}">
                     <i class="fas fa-hand-holding-usd"></i>
                     <span>Donaciones</span>
                 </a>
@@ -78,7 +78,7 @@
 
             <!-- Nav Item - Organizations -->
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'organizaciones:organizaciones_list' %}">
+                <a class="nav-link" href="{% url 'organizaciones:listar_organizaciones' %}">
                     <i class="fas fa-users"></i>
                     <span>Organizaciones</span></a>
             </li>

@@ -1,0 +1,68 @@
+{% extends 'base/base.html' %} {% block page_content %}
+
+
+<!-- {% if messages %}
+    {% for message in messages %}
+    <div class="text-center alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <i class="fas fa-check"></i>
+        <strong> {{ message|safe }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>    
+    </div>
+    {% endfor %}
+{% endif %} -->
+
+<div class="container">
+    <div class="col-xl-10 col-lg-12 col-md-9 items-align-center">
+        <h4 class="h3 mb-4 text-gray-900">Realizar Donación</h4>
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="p-5">
+                <form method="POST" class="user" >
+                    {% csrf_token %}
+                    <h6 class="text-gray-700 text-center">Donación Monetaria</h6>
+                    <div id="donacion">
+                        <div>
+                            <h6 class="text-gray-900"><strong>Cantidad a donar</strong></h6>
+                            <label class="text-gray-900">$</label>
+                            <input type="number" id= "monto" class="" placeholder="Especifique el monto" name=""><br>
+                        </div>
+                    </div>
+
+                    <div id="pago">
+                        <h6 class="text-gray-900"><strong>Seleccione el método de pago</strong></h6>
+                        <div>
+                            <input type="radio" id="mp"> 
+                            <strong> <label class="text-gray-900" for="mp">Mercado Pago</label> </strong>
+                            <img src="https://img.icons8.com/color/50/000000/mercado-pago.png"/>
+                        </div>
+                        <div>
+                            <input type="radio" id="transferencia"> 
+                            <strong> <label class="text-gray-900" for="transferencia">Transferencia Bancaria</label> </strong>
+                            <img src="https://img.icons8.com/color/50/000000/initiate-money-transfer.png"/>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info" role="alert"> Tienes 2 hs para concretar la donación, caso contrario no se agregará
+                        a la cantidad recaudada.
+                    </div>
+                
+    
+                    <div class="border-top pt-3 text-right">
+                        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>
+                            Cancelar</a>   
+                        <button type="submit" class="btn btn-primary">
+                            <span class="fa fa-save"></span> 
+                            Aceptar
+                    </div>
+                </form>
+
+            </div>
+            
+        </div>
+            
+
+    </div>   
+</div>
+
+{% endblock %}

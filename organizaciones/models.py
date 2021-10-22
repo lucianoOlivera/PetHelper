@@ -65,4 +65,8 @@ class Veterinario(ClaseModelo):
 
     class Meta:
         verbose_name_plural = 'veterinarios'
+    
+
+    def __str__(self):
+        return '%s %s %s' % (self.nombre, self.apellido, self.matricula)
 
