@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bases',
     'donacion',
     'usuario',
+    'insumo',
     'organizaciones',
     'widget_tweaks',
     'smart_selects',
