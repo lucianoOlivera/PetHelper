@@ -21,6 +21,7 @@ urlpatterns = [
     path('', include(('usuario.urls', 'usuario'), namespace='usuario')),
     path('', include(('donacion.urls', 'donacion'), namespace='donacion')),
     path('', include(('organizaciones.urls', 'organizaciones'), namespace='organizaciones')),
+    path('', include(('insumo.urls', 'insumo'), namespace='insumo')),
     path('chaining/', include('smart_selects.urls')),
     path('admin/', admin.site.urls),
 ]
