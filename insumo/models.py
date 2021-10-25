@@ -1,8 +1,12 @@
 from django.db import models
 from django.forms import forms
 from bases.models import ClaseModelo
+<<<<<<< HEAD
 from solicitud.models import Solicitud_Donacion_Insumo
 from django.core.exceptions import ValidationError
+=======
+from donacion.models import Donacion_Insumo
+>>>>>>> 5e90ae5 (primero iteracion de solicitud)
 from solicitud.models import Solicitud_Donacion_Insumo
 # Create your models here.
 
