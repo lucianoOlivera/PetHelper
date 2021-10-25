@@ -11,9 +11,9 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'apellido', 'email',  'password1', 'password2']
 
 
-class UserEditForm(UserCreationForm):
+class UserEditForm(forms.ModelForm):
     email = forms.EmailField()
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'apellido','DNI','email','foto']
+        fields = ['username', 'apellido','DNI','email','telefono','foto']
