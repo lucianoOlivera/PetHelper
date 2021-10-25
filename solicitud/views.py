@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 from django.forms import forms
 from django.forms.formsets import formset_factory
 from django.shortcuts import render
+=======
+from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.http.response import HttpResponseRedirect
+>>>>>>> 5e90ae5 (primero iteracion de solicitud)
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from .models import Solicitud_Donacion_Insumo
+<<<<<<< HEAD
 from insumo.forms import CantidadDeInsumo
 from .forms import SolicitudDonacionInsumoForm
 from insumo.models import Cantidad_Insumo, Insumo
@@ -30,13 +37,38 @@ class SolicitudesListView(TemplateView):
         context['insumos'] = Insumo.objects.all()
         return context
 
+=======
+from .forms import SolicitudDonacionInsumoForm
+from insumo.models import Cantidad_Insumo
+from usuario.models import Usuario
+from organizaciones.models import Veterinario
+from django.forms.models import inlineformset_factory
+#  fields=('titulo', 'pedido', 'veterinario',)
+InsumoFormset = inlineformset_factory(
+   Solicitud_Donacion_Insumo, Cantidad_Insumo, fields=('insumo', 'cantidad', 'solicitud_insumo',)
+)
+
+class SolicitudDonacionInsumoView(generic.ListView):
+    model = Solicitud_Donacion_Insumo
+    template_name = "solicitud/solicitud_insumo_list.html"
+    context_object_name = 'solicitud'
+    login_url = 'bases/login.html'
+
+>>>>>>> 5e90ae5 (primero iteracion de solicitud)
 
 class SolicitudDonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
     model = Solicitud_Donacion_Insumo
     template_name = 'solicitud/solicitud_insumo_form.html'
     context_object_name = 'solicitud'
+<<<<<<< HEAD
     fields = ['titulo', 'pedido', 'veterinario']
     success_url = reverse_lazy('solicitud:solicitud_list')
+=======
+    fields = '__all__'
+    # form_class = SolicitudDonacionInsumoForm
+    # second_form_class = CantidadDeInsumo
+    success_url = reverse_lazy('donacion:solicitudes_list')
+>>>>>>> 5e90ae5 (primero iteracion de solicitud)
     success_message = "Solicitud creada sastifactoriamente"
     
     def get_context_data(self, **kwargs):

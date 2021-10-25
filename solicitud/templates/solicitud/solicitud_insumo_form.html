@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base/base.html' %} {% block page_content %}
 
 
@@ -11,6 +12,28 @@
                 <h6 class="text-gray-700 text-center">Formulario de solicitud de donación de insumos</h6>
                     <div class="col-xl-6 col-md-6 mb-6">
                         <div class="row no-gutters align-items-center">
+=======
+
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="modal-header">
+                <h4 class="modal-title text-gray-900">Creación de Solicitud de insumo</h4>
+                <a href="{{ request.META.HTTP_REFERER }}" class="close" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <form method="POST" action="{% url 'solicitud:solicitud_insumo_new' %}"class="forms-inline">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="col-xl-6 col-md-6 mb-6">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Nueva
+                                    Solicitud</div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+>>>>>>> 5e90ae5 (primero iteracion de solicitud)
                             <div class="row">
                                 {{ form.as_p }}
                             </div>
@@ -19,14 +42,26 @@
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
                 <div class="border-top pt-3 text-right">
                     <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>
                             Cancelar</a>   
                     <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Aceptar </button>
+=======
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>
+                        Cancelar</a>
+                    <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
+>>>>>>> 5e90ae5 (primero iteracion de solicitud)
                 </div>
             </form>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
 
 {% endblock %}
+=======
+</div>
+>>>>>>> 5e90ae5 (primero iteracion de solicitud)
