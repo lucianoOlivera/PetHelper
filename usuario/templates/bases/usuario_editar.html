@@ -1,18 +1,72 @@
 {% extends 'base/base.html' %} {% block page_content %}
 <div class="container-fluid">
-    <h1 class="h3 mb-4 text-gray-800">Configuración general de la cuenta</h1>
-
-    <form action="{% url 'usuario:usuario_edit' obj.id %}" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-
-        <div class="border-top pt-3 text-right">
-            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span> Cancelar</a>
-            <button class="btn btn-warning" type="submit"><i class="fas fa-check"></i>Aceptar</button>
+    <div class="col-xl-10 col-lg-10 col-md-9 items-align-center">
+        <h1 class="h3 mb-4 text-gray-800">Configuración general de la cuenta</h1>
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="p-5">
+                <div class="alert alert-info text-center" role="alert"> Pulse sobre los campos para editar sus datos.
+                </div>
+                <form action="{% url 'usuario:usuario_edit' obj.id %}" method="POST">
+                    {% csrf_token %}
+        
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <small class="text-danger">
+                            {{form.username.errors}}
+                        </small>
+                        <label class="text-gray-900">{{form.username.label}}</label>
+                        {{form.username}}
+                    </div><br>
+        
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <small class="text-danger">
+                            {{form.apellido.errors}}
+                        </small>
+                        <label class="text-gray-900">{{form.apellido.label}}</label>
+                        {{form.apellido}}
+                    </div><br>
+        
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <small class="text-danger">
+                            {{form.DNI.errors}}
+                        </small>
+                        <label class="text-gray-900">{{form.DNI.label}}</label><br>
+                        {{form.DNI}}
+                    </div><br>
+        
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <small class="text-danger">
+                            {{form.email.errors}}
+                        </small>
+                        <label class="text-gray-900">{{form.email.label}}</label>
+                        {{form.email}}
+                    </div><br>
+        
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <small class="text-danger">
+                            {{form.telefono.errors}}
+                        </small>
+                        <label class="text-gray-900">{{form.telefono.label}}</label>
+                        {{form.telefono}}<br>
+                        {{form.telefono.help_text}}
+                    </div><br>
+        
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <small class="text-danger">
+                            {{form.foto.errors}}
+                        </small>
+                        <label class="text-gray-900">{{form.foto.label}}</label>
+                        {{form.foto}}
+                    </div><br>
+                    
+        
+                    <div class="border-top pt-3 text-right">
+                        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span> Cancelar</a>
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-check"></i>Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
-
-    
+    </div>
 </div>
 
 
