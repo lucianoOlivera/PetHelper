@@ -1,10 +1,11 @@
 from django.db import models
 from bases.models import ClaseModelo
-from donacion.models import Solicitud_Donacion_Insumo, Donacion_Insumo
+from donacion.models import Donacion_Insumo
+from solicitud.models import Solicitud_Donacion_Insumo
 # Create your models here.
 
 
-class Insumo(ClaseModelo):
+class Insumo(models.Model):
     nombre = models.CharField(max_length=100)
 
     def save(self):
@@ -17,7 +18,7 @@ class Insumo(ClaseModelo):
         return '%s' % (self.nombre)
 
 
-class Cantidad_Insumo(ClaseModelo):
+class Cantidad_Insumo(models.Model):
     solicitud_insumo = models.ForeignKey(Solicitud_Donacion_Insumo, on_delete=models.CASCADE, null=True)
     cantidad = models.PositiveIntegerField()
     insumo = models.ForeignKey(Insumo, on_delete=models.CASCADE, null=True)

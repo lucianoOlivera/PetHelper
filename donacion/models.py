@@ -30,10 +30,10 @@ class Insumo(models.Model):
         return '%s' % (self.nombre)
 
 
-class Solicitud_Donacion_Insumo(ClaseModelo):
+class Solicitud_Donacion_Insumo(models.Model):
     titulo = models.TextField(max_length=100, null=False, blank=False)
     pedido = models.ImageField(blank=True, null=True)
-    veterinario = models.ForeignKey(Veterinario, on_delete=models.CASCADE, null=True)
+    veterinario = models.TextField(max_length=100, null=False, blank=False)
      
     def save(self):
         super(Solicitud_Donacion_Insumo, self).save()
