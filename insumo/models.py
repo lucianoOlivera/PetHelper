@@ -1,5 +1,9 @@
 from django.db import models
 from bases.models import ClaseModelo
+<<<<<<< HEAD
+=======
+from donacion.models import Donacion_Insumo
+>>>>>>> 5e90ae5 (primero iteracion de solicitud)
 from solicitud.models import Solicitud_Donacion_Insumo
 # Create your models here.
 
