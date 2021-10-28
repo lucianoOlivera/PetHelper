@@ -19,6 +19,11 @@
     <!-- Custom styles for this template-->
     <link href="{% static 'base/css/sb-admin-2.min.css' %}" rel="stylesheet">
 
+    <!-- mapbox -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css' rel='stylesheet' />
+
+
 </head>
 
 <body id="page-top" class="bg-gradient-primary">
@@ -46,7 +51,7 @@
 
             <!-- Nav Item - Mapa Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="{% url 'mapa:mapa_new' %}">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>Mapa</span>
                 </a>
