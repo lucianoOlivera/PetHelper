@@ -6,28 +6,25 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Mapa</h1>
 
-    <div>
-        <h6> Realice su búsqueda: </h6>
-        <div class="container" id="container-button">
-            <div class="text-center">
-                <div class="dropdown">
-                    <button class="btn btn-secondary text-gray-100 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       Profesionales
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-width: 100%">
-                        <a class="dropdown-item" href="{% url 'organizaciones:profesionales_list' %}?order=independientes">Independientes</a>
-                        <a class="dropdown-item" href="{% url 'organizaciones:profesionales_list' %}?order=clinicas">Clínicas</a>
-                    </div>
-                </div>
-                <br>
-
-                <button class="btn btn-secondary text-gray-100" type="button">
-                    Organizaciones
-                 </button>
-                <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h6> Filtre su búsqueda: </h6>
             </div>
-        </div><br> 
-    </div>
+            <div class="col-lg-6 form-group" multiple="multiple">
+                <select lass="form-select" style="width: 75%">
+                    <option value="OR">
+                        Organizaciones</option>
+                    <option value="CLI">
+                        <a class="button" href="{% url 'organizaciones:profesionales_list' %}?order=independientes">Clinicas</a>
+                    </option>
+                    <option value="VET">
+                        <a type="button" href="{% url 'organizaciones:profesionales_list' %}?order=clinicas">Veterinarios</a>
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div><br> 
     <div id='map' style='width: 100%; height: 400px;'></div>
     <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFyaWFsdXoiLCJhIjoiY2t2OG9jZmlhOXdtYjJvcWprYjhqOTFpaSJ9.vYDuCmCvJtO_hA6gYRUa5A';
@@ -37,15 +34,31 @@
         center: [-68.8472, -32.8903], // starting position [lng, lat]
         zoom: 12 // starting zoom
     });
-    // Create a new marker.
-    {% for direccion in direcciones %}
-    const marker = new mapboxgl.Marker()
-        .setLngLat([{{ direccion.longitud }}, {{ direccion.latitud }}])
-        .addTo(map);
-    {% endfor %}
     </script>
+    {% for direccion in direcciones %}
+    <script>
+    // Create a new marker.
+    var direccion = new mapboxgl.Marker()
+        .setLngLat(['{{ direccion.longitud }}', '{{ direccion.latitud }}'])
+        .setPopup(new mapboxgl.Popup().setHTML("<p>{{obj.nombre}}<p><br> <p>{{direccion.direccion}}</p> </p>"))
+        .addTo(map);
+    </script>
+    {% endfor %}
 
 </div>
 
 {% endblock %}
+
+<script type="text/javascript">
+    $(function() {
+    $('#filtros').select2(
+        {
+            tags: true,
+            width: 'resolve',
+            placeholder: "Seleccione una opcion",
+            allowClear: true
+        }
+    );
+    });
+</script>
 

@@ -6,7 +6,7 @@ from .models import Organizacion, Clinica, Veterinario
 class OrganizacionForm(forms.ModelForm):
     class Meta:
         model = Organizacion
-        fields = ['descripcion', 'nombre', 'cuit', 'telefono', 'email', 'logo']
+        fields = ['descripcion', 'nombre', 'direccion','cuit', 'telefono', 'email', 'logo']
         labels = {'descripcion': 'Descripcion de la organizacion'}
         widget = {'descripcion': forms.TextInput}
 
@@ -21,7 +21,7 @@ class OrganizacionForm(forms.ModelForm):
 class ClinicaForm(forms.ModelForm):
     class Meta:
         model = Clinica
-        fields = ['descripcion','nombre', 'cuit', 'email', 'logo', 'telefono' , 'whatsapp']
+        fields = ['descripcion','nombre', 'direccion','cuit', 'email', 'logo', 'telefono' , 'whatsapp']
         labels = {'descripcion': 'Descripcion de clinica'}
         widget = {'descripcion': forms.TextInput}
 
@@ -36,7 +36,7 @@ class ClinicaForm(forms.ModelForm):
 class VeterinarioForm(forms.ModelForm):
     class Meta:
         model = Veterinario
-        fields = ['descripcion','nombre', 'apellido','matricula', 'email', 'logo', 'whatsapp']
+        fields = ['descripcion','nombre', 'direccion','apellido','matricula', 'email', 'logo', 'whatsapp']
         labels = {'descripcion': 'Descripcion de veterinario'}
         widget = {'descripcion': forms.TextInput}
 
