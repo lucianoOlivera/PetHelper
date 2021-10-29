@@ -13,31 +13,29 @@
 {% endif %}
 
 
-<div class="card shadow mb-4">
+<div class="card shadow mb-4 my-5 text-center">
     <!-- Card Header - Dropdown -->
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Listado de insumo</h6>
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" >
+        <h6 class="m-0 font-weight-bold text-primary">Listado de insumos</h6>
         <div class="dropdown no-arrow">
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                 <div class="dropdown-header">Acciones</div>
-                <button class="dropdown-item" onclick="abrir_modal_crear('{% url 'insumo:insumo_new' %}')" data-toggle="modal" data-target="#crear"><i class="far fa-calendar-plus"></i> Nuevo</button>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a type="button" class="dropdown-item" href="{% url 'insumo:insumo_new' %}" ><i class="far fa-calendar-plus"></i> Nuevo</a>
             </div>
         </div>
     </div>
     <!-- Card Body -->
     <div class="card-body">
         {% if not obj %}
-        <div class="alert alert-warning" role="alert">No hay insumo</div>
+        <div class="alert alert-warning" role="alert">No hay insumos</div>
         {% else %}
         <table class="table table-striped table-hover">
             <thead>
                 <th>Nombre</th>
+                <th>Acciones</th>
             </thead>
             <tbody>
                 {% for item in obj %}
@@ -55,7 +53,7 @@
 </div>
 
 
-<!-- Modal editar -->
+<!-- Modal editar BORRARLO SI NO LO USAMOS -->
 <div class="modal fade" id="edicion" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
    
 </div> 
@@ -64,11 +62,7 @@
 <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
    
 </div> 
-
-<!-- Modal crear-->
-<div class="modal fade" id="crear" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
    
-</div> 
 
 {% endblock %}
 
@@ -83,12 +77,6 @@
 
     function abrir_modal_eliminar(url){
         $('#eliminar').load(url, function(){
-            $(this).modal('show');
-        });
-    }
-
-    function abrir_modal_crear(url){
-        $('#crear').load(url, function(){
             $(this).modal('show');
         });
     }    
