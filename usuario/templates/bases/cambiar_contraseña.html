@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %} {% block page_content %}
+<div class="container-fluid">
+    <div class="col-xl-10 col-lg-10 col-md-9 items-align-center">
+        <h1 class="h3 mb-4 text-gray-800">Cambiar contraseña</h1>
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="p-5">
+                <form action="{% url 'usuario:usuario_cambiar_contraseña' %}" method="POST">
+                    {% csrf_token %}
+
+                    {{form.as_p}}
+                
+                    <div class="border-top pt-3 text-right">
+                        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span> Cancelar</a>
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-check"></i>Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
