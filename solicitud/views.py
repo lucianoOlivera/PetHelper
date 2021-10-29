@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from .models import Solicitud_Donacion_Insumo
 from .forms import SolicitudDonacionInsumoForm
-from insumo.models import Cantidad_Insumo
+from insumo.models import Cantidad_Insumo, Insumo
 from usuario.models import Usuario
 from organizaciones.models import Veterinario
 from django.forms.models import inlineformset_factory
@@ -16,21 +16,28 @@ InsumoFormset = inlineformset_factory(
    Solicitud_Donacion_Insumo, Cantidad_Insumo, fields=('insumo', 'cantidad', 'solicitud_insumo',)
 )
 
-class SolicitudDonacionInsumoView(generic.ListView):
-    model = Solicitud_Donacion_Insumo
-    template_name = "solicitud/solicitud_insumo_list.html"
-    context_object_name = 'solicitud'
+class SolicitudesListView(TemplateView):
+    template_name = "solicitud/solicitud_list.html"
     login_url = 'bases/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['solicitudes_insumos'] = Solicitud_Donacion_Insumo.objects.all()
+        # context['solicitudes_monetarias'] = Solicitud_Donacion_Monetaria.objects.all()
+        context['usuario'] = Usuario.objects.get(pk=1) 
+        context['cantidades_insumos'] = Cantidad_Insumo.objects.select_related('solicitud_insumo')
+        context['insumos'] = Insumo.objects.all()
+        return context
 
 
 class SolicitudDonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
     model = Solicitud_Donacion_Insumo
     template_name = 'solicitud/solicitud_insumo_form.html'
     context_object_name = 'solicitud'
-    fields = '__all__'
+    fields = ['titulo', 'pedido', 'veterinario']
     # form_class = SolicitudDonacionInsumoForm
     # second_form_class = CantidadDeInsumo
-    success_url = reverse_lazy('donacion:solicitudes_list')
+    success_url = reverse_lazy('solicitud:solicitudes_list')
     success_message = "Solicitud creada sastifactoriamente"
     
     def get_context_data(self, **kwargs):

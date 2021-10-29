@@ -25,7 +25,7 @@ class InsumoNew(SuccessMessageMixin, generic.CreateView):
     context_object_name = "obj"
     form_class = InsumoForm
     success_url = reverse_lazy('insumo:insumo_list')
-    success_message = "insumo creada sastifactoriamente"
+    success_message = "Insumo creado sastifactoriamente"
 
     def form_valid(self, form):
         form.instance.uc = self.request.user
@@ -37,7 +37,7 @@ class InsumoDel(SuccessMessageMixin, generic.DeleteView):
     template_name = 'insumo/insumo_del.html'
     context_object_name = 'obj'
     success_url = reverse_lazy('insumo:insumo_list')
-    success_message = "Insumo eliminada sastifactoriamente"
+    success_message = "Insumo eliminado sastifactoriamente"
 
 
 class CantidadInsumoNew(SuccessMessageMixin, generic.CreateView):
@@ -46,7 +46,7 @@ class CantidadInsumoNew(SuccessMessageMixin, generic.CreateView):
     context_object_name = "obj"
     form_class = CantidadDeInsumo
     success_url = reverse_lazy('insumo:cantidad_insumo_list')
-    success_message = "cantidad insumo creada sastifactoriamente"
+    success_message = "Cantidad insumo creada sastifactoriamente"
 
     def form_valid(self, form):
         form.instance.uc = self.request.user
