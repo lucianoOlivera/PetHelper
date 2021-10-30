@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar solicitudes</title>
+</head>
+<body>
+    <h1>Agregar solicitudes</h1>
+    <form id="form1" method="POST">{% csrf_token %}
+        <div id="formAlumnoContent">
+            {{ form.management_form }}
+            {% for f in form %}
+            {{ f }}
+            <p></p>
+            {% endfor %}
+        </div>
+        <button type="submit">Guardar</button>
+    </form>
+    <p></p>
+    <button onclick="addInput()">Add</button>
+    <p></p>
+    <button onclick="deleteInput()">Delete</button>
+
+
+    <script>
+        function addInput() {
+            var forms = document.querySelector('#id_form-TOTAL_FORMS')
+            var newinput = document.querySelector('#id_form-0-full_name').cloneNode( true );
+            newinput.name = 'form-'+forms.value+'-full_name';
+            newinput.id = 'id_form-'+forms.value+'-full_name';
+            var newselect= document.querySelector('#id_form-0-gender').cloneNode( true );
+            newselect.name = 'form-'+forms.value+'-gender';
+            newselect.id = 'id_form-'+forms.value+'-gender';
+            document.querySelector('#formAlumnoContent').appendChild(newinput);
+            document.querySelector('#formAlumnoContent').appendChild(newselect);
+            //
+            var p = document.createElement("p");
+            document.querySelector('#formAlumnoContent').appendChild(p);
+            //
+            forms.value = parseInt(forms.value) + 1;
+        }
+        function deleteInput() {
+            var forms = document.querySelector('#id_form-TOTAL_FORMS');
+            forms.value = parseInt(forms.value) - 1;
+            //
+            removeInput = '#id_form-'+forms.value+'-full_name';
+            removeSelect = '#id_form-'+forms.value+'-gender';
+            document.querySelector(removeInput).remove();
+            document.querySelector(removeSelect).remove();
+        }
+    </script>
+</body>
+</html>

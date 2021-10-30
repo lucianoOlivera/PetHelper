@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>solicitud insumo</title>
+</head>
+<body>
+    <h1>solicitud insumo</h1>
+    <form method="POST">{% csrf_token %}
+        <div id="formAsistenciaContent">
+            {{ form.management_form }}
+            {% for f in form %}
+                {{ f }}
+                <p></p>
+            {% endfor %}
+        </div>
+        <p>.</p>
+        <button type="submit">Guardar</button>
+    </form>
+    <br>
+    <button onclick="addElement()">Agregar Nuevo</button>
+
+    <script>
+        function addElement() {
+            var fomrs = document.querySelector('#id_form-TOTAL_FORMS');
+            var newinput = document.querySelector('#id_form-0-alumno').cloneNode( true );
+            newinput.name = 'form-'+fomrs.value+'-alumno';
+            newinput.id = 'id_form-'+fomrs.value+'-alumno';
+            document.querySelector('#formAsistenciaContent').appendChild(newinput);
+            //
+            var p = document.createElement("p");
+            document.querySelector('#formAsistenciaContent').appendChild(p);
+            //
+
+            fomrs.value = parseInt(fomrs.value) + 1;
+            console.log(fomrs.value);
+        }
+    </script>
+</body>
+</html>

@@ -1,16 +1,18 @@
+from django.forms import forms
+from django.forms.formsets import formset_factory
 from django.shortcuts import render
-from django.contrib.auth.models import User
-from django.http.response import HttpResponseRedirect
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from .models import Solicitud_Donacion_Insumo
+from insumo.forms import CantidadDeInsumo
 from .forms import SolicitudDonacionInsumoForm
 from insumo.models import Cantidad_Insumo, Insumo
 from usuario.models import Usuario
 from organizaciones.models import Veterinario
-from django.forms.models import inlineformset_factory
+from django.forms.models import inlineformset_factory, modelformset_factory
+from django.views.generic.edit import FormView, UpdateView
 #  fields=('titulo', 'pedido', 'veterinario',)
 InsumoFormset = inlineformset_factory(
    Solicitud_Donacion_Insumo, Cantidad_Insumo, fields=('insumo', 'cantidad', 'solicitud_insumo',)
@@ -57,6 +59,36 @@ class SolicitudDonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
             Insumo.instance = self.object
             Insumo.save()
         return super().form_valid(form)
+
+
+class AddSolicitud(FormView):
+    template_name = 'solicitud/add.html'
+    form_class = formset_factory(Solicitud_Donacion_Insumo, extra=3)
+    success_url = '.'
+    
+    def form_valid(self, form): 
+
+        for f in form:
+            print(f.cleaned_data['full_name'])
+            f.save()
+
+        return super(AddSolicitud, self).form_valid(form)
+
+
+class AddAsistencia(FormView):
+    template_name = 'solicitud/asistencia.html'
+    form_class = inlineformset_factory(Solicitud_Donacion_Insumo, Cantidad_Insumo, fields=('insumo', 'cantidad', 'solicitud_insumo',))
+    success_url = '/'
+    context_object_name = 'solicitud'
+    fields = ['titulo', 'pedido', 'veterinario']
+
+    def form_valid(self, form):
+        # cuando se trabaja con model formset no es necesario hacer la iteracion
+        # este puede guardar de golpe todo el conjunto de formularios
+        #
+        form.save() 
+        return super(AddAsistencia, self).form_valid(form)
+
 
 
 # class SolicitudDonacionInsumoDel(SuccessMessageMixin, generic.DeleteView):
