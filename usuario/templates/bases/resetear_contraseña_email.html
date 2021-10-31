@@ -1,0 +1,11 @@
+
+Hola {{user.username}},
+
+Hemos recibido una petición para restablecer la contraseña asociada a este email {{ email }}. Para proceder igue el siguiente link:
+{{ protocol}}://{{ domain }}{% url 'usuario:password_reset_confirm' uidb64=uid token=token %}
+Este link puede ser usado una sola vez.
+
+Si no solicito esta petición, simplemente ignore este email.
+
+Muchas gracias, 
+PetHelper.

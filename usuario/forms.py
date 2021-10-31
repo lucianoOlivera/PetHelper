@@ -17,3 +17,4 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ['username', 'apellido','DNI','email','telefono','foto']
+

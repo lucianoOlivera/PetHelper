@@ -1,9 +1,11 @@
+from django.contrib.auth.views import PasswordChangeView, PasswordResetCompleteView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetView
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from .models import Usuario
 from django.views.generic.edit import FormView
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-from .forms import UserRegisterForm, UserEditForm
+from .forms import  UserRegisterForm, UserEditForm
 
 
 class RegistroUsuario(FormView):
@@ -35,3 +37,33 @@ class UsuarioEdit(SuccessMessageMixin, generic.UpdateView):
     def form_valid(self, form):
         form.instance.um = self.request.user.id
         return super().form_valid(form)
+
+
+class UsuarioPasswordEdit(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'bases/cambiar_contraseña.html'
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('bases:home')
+    success_message = "Su contraseña se cambió sastifactoriamente"
+
+
+class UsuarioPasswordReset(SuccessMessageMixin, PasswordResetView):
+    template_name = 'bases/resetear_contraseña.html'
+    form_class = PasswordResetForm
+    email_template_name = 'bases/resetear_contraseña_email.html'
+    success_url = reverse_lazy('usuario:password_reset_done')
+    success_message = "Su contraseña se cambió sastifactoriamente"
+
+
+class UsuarioPasswordResetDone(SuccessMessageMixin, PasswordResetDoneView):
+    template_name = 'bases/resetear_contraseña_done.html'
+    success_message = "Su contraseña se cambió sastifactoriamente"
+
+
+class UsuarioPasswordResetConfirm(SuccessMessageMixin, PasswordResetConfirmView):
+    template_name = 'bases/resetear_contraseña_confirm.html'
+    form_class = SetPasswordForm
+    success_url = reverse_lazy('usuario:password_reset_complete')
+
+
+class UsuarioPasswordResetComplete(SuccessMessageMixin, PasswordResetCompleteView):
+    template_name = 'bases/resetear_contraseña_complete.html'
