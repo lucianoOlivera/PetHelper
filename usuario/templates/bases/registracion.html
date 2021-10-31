@@ -2,6 +2,7 @@
 {% block side_bar %} {% endblock  %}
 {% block top_bar %} {% endblock %}
 {% block page_content %}
+{% load static%}
 <html lang="en">
 <body class="bg-gradient-primary">
 
@@ -16,10 +17,11 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                            <div class="col-lg-5 d-none d-lg-block bg-register-image"> </div>
                             <div class="col-lg-7">
                                 <div class="p-5">
                                     <div class="text-center">
+                                        <img style="width:40%" src="{% static 'base/img/final2.png' %}">
                                         <h1 class="h4 text-gray-900 mb-4"><strong>¡Crea una cuenta!</strong></h1>
                                     </div>
                                     
