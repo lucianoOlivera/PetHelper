@@ -15,8 +15,8 @@
                         Crear nueva solicitud de donación
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-width: 100%">
-                        <a class="dropdown-item" href="{% url 'donacion:solicitud_monetaria_new' %}">Solicitud Monetaria</a>
-                        <a class="dropdown-item" href="{% url 'donacion:solicitud_insumo_new' %}">Solicitud de Insumos</a>
+                        <a class="dropdown-item" href="">Solicitud Monetaria</a>
+                        <a class="dropdown-item" href="{% url 'solicitud:solicitud_insumo_new' %}">Solicitud de Insumos</a>
                       </div>
                 </div>
                 <br>
@@ -57,7 +57,9 @@
                         <label class="text-gray-900"> Cantidad a recaudar:  </label>
                         {%  for cantidad_insumo in cantidades_insumos %}
                             {% if solicitud_insumo.id == cantidad_insumo.solicitud_insumo.id %}
-                                <label >{{ cantidad_insumo.cantidad }} {{ cantidad_insumo.insumo.nombre }} </label>
+                                <ul>
+                                    <li>{{ cantidad_insumo.cantidad }} {{ cantidad_insumo.insumo.nombre }}</li>
+                                </ul>
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -69,7 +71,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Fecha pulicación: {{solicitud_insumo.fc|date:"d/m/Y"}}</small>
-                    <a href="{% url 'donacion:donacion_insumo_new' %}" type="button" class="btn btn-primary btn-user bg-gradient-primary text-gray-100" style="float: right;">Donar</a>
+                    <a href="" type="button" class="btn btn-primary btn-user bg-gradient-primary text-gray-100" style="float: right;">Donar</a>
                 </div>
             </div>
             {% endfor %}
@@ -114,7 +116,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Fecha pulicación: {{ solicitud_monetaria.fc|date:"d/m/Y" }}</small>
-                    <a href="{% url 'donacion:donacion_monetaria_new' %}" type="button" class="btn btn-primary btn-user bg-gradient-primary text-gray-100" style="float: right;">Donar</a>
+                    <a href="" type="button" class="btn btn-primary btn-user bg-gradient-primary text-gray-100" style="float: right;">Donar</a>
                 </div>
             </div>
             {% endfor %}

@@ -26,7 +26,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('Email', unique=True)
     username = models.CharField(max_length=25, unique=True)
     """ tiene que ser nombre no username """
-    apellido = models.CharField(max_length=25, unique=True)
+    apellido = models.CharField(max_length=25)
     date_joined = models.DateTimeField(default=timezone.now)
     DNI = models.CharField(max_length=8, default="")
     foto = models.ImageField(blank=True, null=True)

@@ -24,10 +24,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                 <div class="dropdown-header">Acciones</div>
-                <button class="dropdown-item" onclick="abrir_modal_crear('{% url 'organizaciones:organizaciones_new' %}')" data-toggle="modal" data-target="#crear"><i class="far fa-calendar-plus"></i> Nuevo</button>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a type="button" class="dropdown-item" href="{% url 'organizaciones:organizaciones_new' %}" ><i class="far fa-calendar-plus"></i> Nuevo</a>
             </div>
         </div>
     </div>
@@ -82,11 +79,6 @@
 <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
    
 </div> 
-
-<!-- Modal crear-->
-<div class="modal fade" id="crear" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
-   
-</div> 
 {% endblock %}
 
 {% block js_page %} 
@@ -102,13 +94,7 @@
         $('#eliminar').load(url, function(){
             $(this).modal('show');
         });
-    }
-
-    function abrir_modal_crear(url){
-        $('#crear').load(url, function(){
-            $(this).modal('show');
-        });
-    }    
+    }  
 
 </script>
 {% endblock %}

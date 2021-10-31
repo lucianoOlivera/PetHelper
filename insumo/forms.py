@@ -4,7 +4,7 @@ from .models import Cantidad_Insumo, Insumo
 
 class CantidadDeInsumo(forms.ModelForm):
     class Meta:
-        modal = Cantidad_Insumo
+        model = Cantidad_Insumo
         fields = ['cantidad', 'insumo']
 
         def __init__(self, *arg, **kwargs):
