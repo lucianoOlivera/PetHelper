@@ -36,7 +36,7 @@ class SolicitudDonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
     template_name = 'solicitud/solicitud_insumo_form.html'
     context_object_name = 'solicitud'
     fields = ['titulo', 'pedido', 'veterinario']
-    success_url = reverse_lazy('solicitud:solicitudes_list')
+    success_url = reverse_lazy('solicitud:solicitud_list')
     success_message = "Solicitud creada sastifactoriamente"
     
     def get_context_data(self, **kwargs):

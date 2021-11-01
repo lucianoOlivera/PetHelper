@@ -1,6 +1,12 @@
 from django.db import models
+from django.forms import forms
 from bases.models import ClaseModelo
+<<<<<<< HEAD
+=======
+from donacion.models import Donacion_Insumo
+>>>>>>> 5e90ae5 (primero iteracion de solicitud)
 from solicitud.models import Solicitud_Donacion_Insumo
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 
@@ -25,6 +31,11 @@ class Cantidad_Insumo(models.Model):
 
     def save(self):
         super(Cantidad_Insumo, self).save()
-             
+        
     class Meta:
         verbose_name_plural = 'cantidad_insumos'
+
+    def clean(self):
+        if self.cantidad < 0:
+            raise forms.ValidationError('Negative price..... seriously?')
+        return self.cantidad

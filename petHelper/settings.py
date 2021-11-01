@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'verify_email.apps.VerifyEmailConfig',
     'bases',
     'usuario',
+    'donacionV2',
     'insumo',
     'solicitud',
     'organizaciones',
