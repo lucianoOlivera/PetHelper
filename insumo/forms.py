@@ -14,6 +14,8 @@ class CantidadDeInsumo(forms.ModelForm):
                     'class': 'form-control'
                 })
 
+        
+
 
 class InsumoForm(forms.ModelForm):
     class Meta:
