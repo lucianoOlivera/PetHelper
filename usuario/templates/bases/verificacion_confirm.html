@@ -2,8 +2,7 @@
 {% block side_bar %} {% endblock  %}
 {% block top_bar %} {% endblock %}
 {% block page_content %}
-{% load static %}
-
+{% load static%}
 <body class="bg-gradient-primary">
 
     <div class="container">
@@ -17,15 +16,17 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-5 d-none d-lg-block bg-register-image"> </div>
+                            <div class="col-lg-7">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <img style="width:40%" src="{% static 'base/img/final2.png' %}">
-                                        <h1 class="h4 text-gray-900 mb-2"><strong>Se ha enviado un email de reinicialización de contraseña</strong></h1>
-                                        <p class="mb-4">Se le han enviado instrucciones sobre cómo restablecer su contraseña. Si la dirección de email que proveyó existe, debería recibir las mismas pronto.
+                                        <h1 class="h4 text-gray-900 mb-4"><strong>Hemos enviado un email de verificación para que puedas activar tu cuenta.</strong></h1>
+                                    </div>
                                     
-                                            Si no ha recibido un email, por favor asegúrese de que ha introducido la dirección de correo con la que se había registrado y verifique su carpeta de Correo no deseado.
+                                    <div class="content-section">
+                                        <p class="mb-4">
+                                            Si no ha recibido un email, por favor asegúrese de que ha introducido una dirección de correo correcta y verifique su carpeta de correo no deseado.
                                         </p>
                                     </div>
                                 </div>
@@ -40,3 +41,4 @@
 
 {% endblock %}
 {% block footer %} {% endblock %}
+

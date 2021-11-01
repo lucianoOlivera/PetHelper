@@ -5,6 +5,7 @@ from django.views.generic.edit import FormView
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from verify_email.email_handler import send_verification_email
 from .forms import  UserRegisterForm, UserEditForm
 
 
@@ -12,11 +13,19 @@ class RegistroUsuario(FormView):
     model = Usuario
     template_name = "bases/registracion.html"
     form_class = UserRegisterForm
-    success_url = reverse_lazy('bases:home')
+    success_url = reverse_lazy('usuario:verification_mensage')
 
     def form_valid(self, form):
-        form.save()
+        inactive_user = send_verification_email(self.request, form)
+        """ form.save() """
         return super().form_valid(form)
+
+
+class VerificarEmailMensage(generic.ListView):
+    model = Usuario
+    template_name = "bases/verificacion_confirm.html"
+    context_object_name = "obj"
+    login_url = 'bases/login.html'
 
 
 class UsuarioDetail(generic.DetailView):

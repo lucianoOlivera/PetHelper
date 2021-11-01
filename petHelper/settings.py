@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'verify_email.apps.VerifyEmailConfig',
     'bases',
     'usuario',
     'insumo',
@@ -147,13 +148,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-LOGIN_URL = '/login/'
+LOGIN_URL = 'bases:login'
+
+LOGIN_REDIRECT_URL = 'bases:home'
 
 LOGOUT_REDIRECT_URL = '/login/'
 
 AUTH_USER_MODEL = "usuario.Usuario"
 
-LOGIN_URL = '/login'
 LOGOUT_URL = 'logout'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '603112644018191'  # App ID
@@ -181,3 +183,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'pethelper70@gmail.com'
 EMAIL_HOST_PASSWORD = 'proyecto2021'
+
+DEFAULT_FROM_EMAIL = 'noreply<no_reply@domain.com>'
+SUBJECT = 'Confirmación de email'
+HTML_MESSAGE_TEMPLATE = 'bases/verificacion_email.html'
+VERIFICATION_SUCCESS_TEMPLATE = 'bases/verificacion_exito.html'
+VERIFICATION_FAILED_TEMPLATE = 'bases/verificacion_error.html'
