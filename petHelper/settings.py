@@ -190,3 +190,6 @@ SUBJECT = 'Confirmación de email'
 HTML_MESSAGE_TEMPLATE = 'bases/verificacion_email.html'
 VERIFICATION_SUCCESS_TEMPLATE = 'bases/verificacion_exito.html'
 VERIFICATION_FAILED_TEMPLATE = 'bases/verificacion_error.html'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
