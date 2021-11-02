@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include(('insumo.urls', 'insumo'), namespace='insumo')),
     path('', include(('solicitud.urls', 'solicitud'), namespace='solicitud')),
     path('', include(('donacionV2.urls', 'donacion'), namespace='donacionV2')),
+    path('', include(('mapa.urls', 'mapa'), namespace='mapa')),
     path('chaining/', include('smart_selects.urls')),
     path('admin/', admin.site.urls),
 ]

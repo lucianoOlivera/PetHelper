@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import Pais, Departamento, Ciudad
 
 # Register your models here.
-@admin.register(Pais)
+""" @admin.register(Pais)
 class PaisAdmin(admin.ModelAdmin):
 	list_display =['id', 'nombre']
 
@@ -12,4 +11,4 @@ class CiudadAdmin(admin.ModelAdmin):
 
 @admin.register(Departamento)
 class DepartamentoAdmin(admin.ModelAdmin):
-	list_display = ['id', 'nombre', 'ciudad']
+	list_display = ['id', 'nombre', 'ciudad'] """

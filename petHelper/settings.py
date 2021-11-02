@@ -39,16 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'verify_email.apps.VerifyEmailConfig',
+    'django_filters',
     'bases',
     'usuario',
     'donacionV2',
     'insumo',
     'solicitud',
     'organizaciones',
+    'mapa',
     'widget_tweaks',
     'smart_selects',
     'social_django',
-
+    'geocoder',
 ]
 
 MIDDLEWARE = [
@@ -193,3 +195,4 @@ VERIFICATION_FAILED_TEMPLATE = 'bases/verificacion_error.html'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+EASY_MAPS_GOOGLE_KEY = 'AIzaSyADpYBTwpzczBSJa28xgSILCfNwLBkHfRk'
