@@ -14,20 +14,94 @@
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Nuevo veterinario</div>
                                 </div>
                                 <div class="row">
-                                        <!-- <div class="input-group">
-                                            <input type="text" name="descripcion" maxlength="100" class="form-control" required
-                                                id="id_descripcion" placeholder="Descripción"
-                                                value="{% if obj %} {{ form.descripcion }} {% endif %}">
-                                            </input>
-                                        </div> -->
-                                    <!-- <div class="col-2">
-                                                    <div class="form-group">
-                                                        <label for="id_estado">Estado</label>
-                                                        <input type="checkbox" name="estado" class="form-control" id="id_estado"
-                                                        {% if obj.estado %} checked {% endif %} >
-                                                    </div>
-                                                </div> --> 
-                                    {{ form.as_p }}   
+                                    <small class="text-danger">
+                                        {{form.descripcion.errors}}
+                                    </small>
+                                    <div class="form-group">
+                                        <label>{{form.descripcion.label}}:</label>
+                                        {{form.descripcion}}
+                                    </div>
+                                    <small class="text-danger">
+                                        {{form.nombre.errors}}
+                                    </small>
+                                    <div class="form-group">
+                                        <label>{{form.nombre.label}}:</label>
+                                        {{form.nombre}}
+                                    </div>
+                                    <small class="text-danger">
+                                        {{form.apellido.errors}}
+                                    </small>
+                                    <div class="form-group">
+                                        <label>{{form.apellido.label}}:</label>
+                                        {{form.apellido}}
+                                    </div>
+                                    <small class="text-danger">
+                                        {{form.direccion.errors}}
+                                    </small>
+                                    <div class="form-group">
+                                        <label>{{form.direccion.label}}:</label>
+                                        {{form.direccion}}
+                                        {{form.direccion.help_text}}
+                                    </div>
+                                    <small class="text-danger">
+                                        {{form.matricula.errors}}
+                                    </small>
+                                    <div class="form-group">
+                                        <label>{{form.matricula.label}}:</label>
+                                        {{form.matricula}}
+                                    </div>
+                                    <small class="text-danger">
+                                        {{form.email.errors}}
+                                    </small>
+                                    <div class="form-group">
+                                        <label>{{form.email.label}}:</label>
+                                        {{form.email}}
+                                    </div>
+                                    <small class="text-danger">
+                                        {{form.logo.errors}}
+                                    </small>
+                                    <div class="form-group">
+                                        <label>{{form.logo.label}}:</label>
+                                        {{form.logo}}
+                                    </div>
+                                    <small class="text-danger">
+                                        {{form.telefono.errors}}
+                                    </small>
+                                    <div class="form-group">
+                                        <label>{{form.telefono.label}}:</label>
+                                        {{form.telefono}}
+                                        {{form.telefono.help_text}}
+                                    </div>
+                                    <small class="text-danger">
+                                        {{form.whatsapp.errors}}
+                                    </small>
+                                    <div class="form-group">
+                                        <label>{{form.whatsapp.label}}:</label>
+                                        {{form.whatsapp}}
+                                        {{form.whatsapp.help_text}}
+
+                                        <br><br><label>Horarios de atención: </label>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col">
+                                            <label>{{form.dia_desde.label}}</label>
+                                            {{form.dia_desde}}
+                                        </div>
+                                        <div>
+                                            <label>{{form.dia_hasta.label}}</label>
+                                            {{form.dia_hasta}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col">
+                                            <label>{{form.hora_desde.label}}</label>
+                                            {{form.hora_desde}}
+                                        </div>
+                                        <div>
+                                            <label>{{form.hora_hasta.label}}</label>
+                                            {{form.hora_hasta}}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +109,7 @@
                     <div class="modal-footer">
                         <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>
                             Cancelar</a>   
-                        <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#errores">
+                        <button type="submit" class="btn btn-success">
                             <span class="fa fa-save"></span> 
                             Guardar
                         </button>  

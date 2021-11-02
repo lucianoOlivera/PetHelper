@@ -38,12 +38,12 @@
         zoom: 10 // starting zoom
     });
     </script>
-    {% for direccion in direcciones %}
+    {% for coordenada in coordenadas %}
     <script>
     // Create a new marker.
     var direccion = new mapboxgl.Marker()
-        .setLngLat(['{{ direccion.longitud }}', '{{ direccion.latitud }}'])
-        .setPopup(new mapboxgl.Popup().setHTML("<p>{{obj.nombre}}<p><br> <p>{{direccion.direccion}}</p> </p>"))
+        .setLngLat(['{{ coordenada.longitud }}', '{{ coordenada.latitud }}'])
+        .setPopup(new mapboxgl.Popup().setHTML("<p>{{veterinario.nombre}}<p><br><p>{{coordenada.direccion}}</p>"))
         .addTo(map);
     </script>
     {% endfor %}
@@ -51,4 +51,3 @@
 </div>
 
 {% endblock %}
-

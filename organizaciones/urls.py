@@ -2,7 +2,7 @@ from organizaciones.models import Veterinario
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 
-from .views import OrganizacionView, OrganizacionNew, OrganizacionDel, OrganizacionEdit, ClinicaView, ClinicaNew, ClinicaDel, ClinicaEdit, VeterinarioView, VeterinarioNew, VeterinarioDel, VeterinarioEdit, VeterinarioClinicaView, OrganizacionListView, OrganizacionDetail, ClinicaDetail, VeterinarioDetail
+from .views import ClinicaFilterView, OrganizacionView, OrganizacionNew, OrganizacionDel, OrganizacionEdit, ClinicaView, ClinicaNew, ClinicaDel, ClinicaEdit, VeterinarioFilterView, VeterinarioView, VeterinarioNew, VeterinarioDel, VeterinarioEdit, VeterinarioClinicaView, OrganizacionListView, OrganizacionDetail, ClinicaDetail, VeterinarioDetail
 
 urlpatterns = [
     path('organizaciones/', login_required(OrganizacionView.as_view()), name='organizaciones_list'),
@@ -21,5 +21,7 @@ urlpatterns = [
     path('veterinarios/edit/<int:pk>', login_required(VeterinarioEdit.as_view()), name='veterinarios_edit'),
     path('veterinarios/profile/<int:pk>', login_required(VeterinarioDetail.as_view()), name='veterinarios_profile'),
     path('profesionales/', login_required(VeterinarioClinicaView.as_view()), name='profesionales_list'),
+    path('profesionales/veterinarios', login_required(VeterinarioFilterView.as_view()), name='filter_veterinarios'),
+    path('profesionales/clinicas', login_required(ClinicaFilterView.as_view()), name='filter_clinicas'),
     path('listar_organizaciones/', login_required(OrganizacionListView.as_view()), name='listar_organizaciones'),
 ]

@@ -5,8 +5,11 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 
+from mapa.models import Direccion
+
 from .models import Organizacion, Clinica, Veterinario 
 from .forms import OrganizacionForm, ClinicaForm, VeterinarioForm
+from .filters import OrganizacionFilter, VeterinarioFilter, ClinicaFilter
 # Create your views here.
 
 
@@ -23,6 +26,11 @@ class OrganizacionDetail(generic.DetailView):
     context_object_name = "obj"
     login_url = 'bases/login.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['coordenadas'] = Direccion.objects.get(direccion=self.object.direccion)
+        return context
+
 
 class OrganizacionNew(SuccessMessageMixin, generic.CreateView):
     model = Organizacion
@@ -34,6 +42,8 @@ class OrganizacionNew(SuccessMessageMixin, generic.CreateView):
 
     def form_valid (self, form):
         form.instance.uc = self.request.user
+        organizacion = form.instance
+        Direccion.objects.get_or_create(direccion=organizacion.direccion)
         return super().form_valid(form)
 
 class OrganizacionDel(SuccessMessageMixin, generic.DeleteView):
@@ -70,6 +80,11 @@ class ClinicaDetail(generic.DetailView):
     context_object_name = "obj"
     login_url = 'bases/login.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['coordenadas'] = Direccion.objects.get(direccion=self.object.direccion)
+        return context
+
 
 class ClinicaNew(SuccessMessageMixin, generic.CreateView):
     model = Clinica
@@ -81,6 +96,8 @@ class ClinicaNew(SuccessMessageMixin, generic.CreateView):
 
     def form_valid (self, form):
         form.instance.uc = self.request.user
+        clinica = form.instance
+        Direccion.objects.get_or_create(direccion=clinica.direccion)
         return super().form_valid(form)
 
 
@@ -118,6 +135,11 @@ class VeterinarioDetail(generic.DetailView):
     context_object_name = "obj"
     login_url = 'bases/login.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['coordenadas'] = Direccion.objects.get(direccion=self.object.direccion)
+        return context
+
 
 class VeterinarioNew(SuccessMessageMixin, generic.CreateView):
     model = Veterinario
@@ -129,6 +151,8 @@ class VeterinarioNew(SuccessMessageMixin, generic.CreateView):
 
     def form_valid (self, form):
         form.instance.uc = self.request.user
+        veterinario = form.instance
+        Direccion.objects.get_or_create(direccion=veterinario.direccion)
         return super().form_valid(form)
 
 
@@ -150,6 +174,8 @@ class VeterinarioEdit(SuccessMessageMixin, generic.UpdateView):
 
     def form_valid (self, form):
         form.instance.um = self.request.user.id
+        veterinario = form.instance
+        Direccion.objects.get_or_create(direccion=veterinario.direccion)
         return super().form_valid(form)
 
 
@@ -161,24 +187,43 @@ class VeterinarioClinicaView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        if self.request.GET.get('order') == 'independientes':
-            context['veterinarios'] = Veterinario.objects.all()
-            context['total_veterinarios'] = Veterinario.objects.all().count
-            context['total_clinicas'] = 0
-            return context
-        else:
-            if self.request.GET.get('order') == 'clinicas':
-                context['clinicas'] = Clinica.objects.all()
-                context['total_veterinarios'] = 0
-                context['total_clinicas'] = Clinica.objects.all().count
-                return context
-            else:
-                context['veterinarios'] = Veterinario.objects.all()
-                context['clinicas'] = Clinica.objects.all()
-                context['total_veterinarios'] = Veterinario.objects.all().count
-                context['total_clinicas'] = Clinica.objects.all().count
-                return context
-                
+        context['veterinarios'] = Veterinario.objects.all()
+        context['clinicas'] = Clinica.objects.all()
+        context['total_veterinarios'] = Veterinario.objects.all().count
+        context['total_clinicas'] = Clinica.objects.all().count
+        return context
+
+
+class VeterinarioFilterView(generic.ListView):
+    model = Veterinario
+    template_name = 'organizaciones/filter_veterinario.html'
+    login_url = 'bases/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        veterinarios = Veterinario.objects.all()
+        context['total_veterinarios'] = Veterinario.objects.all().count
+        context['total_clinicas'] = 0
+        context['myFilter'] = VeterinarioFilter(self.request.GET, queryset=veterinarios)
+        context['veterinarios'] = context['myFilter'].qs
+        return context
+
+
+class ClinicaFilterView(generic.ListView):
+    model = Veterinario
+    template_name = 'organizaciones/filter_clinica.html'
+    login_url = 'bases/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        clinicas = Clinica.objects.all()
+        context['total_clinicas'] = Clinica.objects.all().count
+        context['total_veterinarios'] = 0
+        context['myFilter'] = ClinicaFilter(self.request.GET, queryset=clinicas)
+        context['clinicas'] = context['myFilter'].qs
+        return context
 
 
 class OrganizacionListView(TemplateView):
@@ -189,6 +234,25 @@ class OrganizacionListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        organizaciones = Organizacion.objects.all()
         context['organizaciones'] = Organizacion.objects.all()
         context['total_organizaciones'] = Organizacion.objects.all().count
+        context['myFilter'] = OrganizacionFilter(self.request.GET, queryset=organizaciones)
+        context['organizaciones'] = context['myFilter'].qs
         return context
+
+
+# class OrganizacionFilterView(generic.ListView):
+#     model = Organizacion
+#     template_name = 'organizaciones/filter_organizacion.html'
+#     login_url = 'bases/login.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+
+#         organizaciones = Organizacion.objects.all()
+#         context['organizaciones'] = Organizacion.objects.all()
+#         context['total_organizaciones'] = Organizacion.objects.all().count
+#         context['myFilter'] = OrganizacionFilter(self.request.GET, queryset=organizaciones)
+#         context['organizaciones'] = context['myFilter'].qs
+#         return context

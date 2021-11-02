@@ -25,7 +25,7 @@
 
 <div class="card border-dark mb-3" style="max-width: 50rem;text-align: center;margin-left: 130px;">
     <div class="card-body text-gray-900">
-      <p class="card-text"><i class="far fa-clock"></i> Horario de atención: </p>
+      <p class="card-text"><i class="far fa-clock"></i> Horario de atención: {{obj.get_dia_desde_display}} a {{obj.get_dia_hasta_display}} de {{obj.hora_desde}} a {{obj.hora_hasta}} hs</p>
     </div>
 </div>
 
@@ -33,6 +33,22 @@
     <div class="card-body text-gray-900">
       <p class="card-text"><i class="fas fa-map-marker-alt"></i> Dirección: {{obj.direccion}} </p>
     </div>
+
+  <div id='map' style='width: 100%; height: 400px;'></div>
+  <script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoibWFyaWFsdXoiLCJhIjoiY2t2OG9jZmlhOXdtYjJvcWprYjhqOTFpaSJ9.vYDuCmCvJtO_hA6gYRUa5A';
+  const map = new mapboxgl.Map({
+      container: 'map', // container ID
+      style: 'mapbox://styles/mapbox/streets-v11', // style URL
+      center: [-68.8472, -32.8903], // starting position [lng, lat]
+      zoom: 10 // starting zoom
+  });
+  // Create a new marker.
+  const marker = new mapboxgl.Marker()
+      .setLngLat(['{{coordenadas.longitud}}', '{{coordenadas.latitud}}'])
+      .setPopup(new mapboxgl.Popup().setHTML("<p>{{obj.nombre}}<p><br> <p>{{obj.direccion}}</p>")) 
+      .addTo(map);
+  </script>
 </div>
 
 {% endblock %}

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'verify_email.apps.VerifyEmailConfig',
+    'django_filters',
     'bases',
     'usuario',
     'donacionV2',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'smart_selects',
     'social_django',
+    'geocoder',
 ]
 
 MIDDLEWARE = [

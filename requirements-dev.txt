@@ -6,3 +6,4 @@ django-widget-tweaks==1.4.1
 social-auth-app-django==5.0.0
 Django-Verify-Email==1.0.8
 geocoder==1.38.1
+django-filter==21.1
