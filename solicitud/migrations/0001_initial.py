@@ -10,63 +10,44 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('organizaciones', '0002_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Cantidad_Insumo_Donacion',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('cantidad', models.PositiveIntegerField()),
-                ('fc', models.DateTimeField(auto_now_add=True)),
-            ],
-            options={
-                'verbose_name_plural': 'cantidad_insumos_donacion',
-            },
-        ),
-        migrations.CreateModel(
-            name='Donacion_Insumo',
+            name='Solicitud_Donacion_Monetaria',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('estado', models.BooleanField(default=False)),
                 ('fc', models.DateTimeField(auto_now_add=True)),
                 ('fm', models.DateTimeField(auto_now=True)),
                 ('um', models.IntegerField(blank=True, null=True)),
-                ('fechaCreacion', models.DateField(auto_now_add=True)),
-            ],
-            options={
-                'verbose_name_plural': 'donaciones_insumos',
-            },
-        ),
-        migrations.CreateModel(
-            name='Donacion_monetaria',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('estado', models.BooleanField(default=False)),
-                ('fc', models.DateTimeField(auto_now_add=True)),
-                ('fm', models.DateTimeField(auto_now=True)),
-                ('um', models.IntegerField(blank=True, null=True)),
+                ('titulo', models.TextField(max_length=100)),
+                ('pedido', models.ImageField(blank=True, null=True, upload_to='')),
                 ('monto', models.FloatField(max_length=100)),
+                ('uc', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('veterinario', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='organizaciones.veterinario')),
             ],
             options={
-                'verbose_name_plural': 'donaciones_monetaria',
+                'verbose_name_plural': 'solicitudes_monetarias',
             },
         ),
         migrations.CreateModel(
-            name='Medio_Pago',
+            name='Solicitud_Donacion_Insumo',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('estado', models.BooleanField(default=False)),
                 ('fc', models.DateTimeField(auto_now_add=True)),
                 ('fm', models.DateTimeField(auto_now=True)),
                 ('um', models.IntegerField(blank=True, null=True)),
-                ('nombre_pago', models.CharField(max_length=100)),
-                ('imagen', models.ImageField(blank=True, null=True, upload_to='pothos')),
+                ('titulo', models.TextField(max_length=100)),
+                ('pedido', models.ImageField(blank=True, null=True, upload_to='')),
                 ('uc', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('veterinario', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='organizaciones.veterinario')),
             ],
             options={
-                'verbose_name_plural': 'medios_pagos',
+                'verbose_name_plural': 'solicitudes_insumos',
             },
         ),
     ]
