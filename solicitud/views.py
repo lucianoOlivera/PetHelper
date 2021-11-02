@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 from django.forms import forms
 from django.forms.formsets import formset_factory
 from django.shortcuts import render
@@ -7,22 +8,28 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http.response import HttpResponseRedirect
 >>>>>>> 5e90ae5 (primero iteracion de solicitud)
+=======
+>>>>>>> 8802b2c (donacion monetaria)
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
+<<<<<<< HEAD
 from .models import Solicitud_Donacion_Insumo
 <<<<<<< HEAD
 from insumo.forms import CantidadDeInsumo
 from .forms import SolicitudDonacionInsumoForm
+=======
+from .models import Solicitud_Donacion_Insumo, Solicitud_Donacion_Monetaria
+from .forms import SolicitudDonacionMonetariaForm
+>>>>>>> 8802b2c (donacion monetaria)
 from insumo.models import Cantidad_Insumo, Insumo
 from usuario.models import Usuario
-from organizaciones.models import Veterinario
-from django.forms.models import inlineformset_factory, modelformset_factory
-from django.views.generic.edit import FormView, UpdateView
-#  fields=('titulo', 'pedido', 'veterinario',)
+from django.forms.models import inlineformset_factory
+
 InsumoFormset = inlineformset_factory(
    Solicitud_Donacion_Insumo, Cantidad_Insumo, extra=5, fields=('insumo', 'cantidad', 'solicitud_insumo',))
+
 
 class SolicitudesListView(TemplateView):
     template_name = "solicitud/solicitud_list.html"
@@ -31,7 +38,7 @@ class SolicitudesListView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['solicitudes_insumos'] = Solicitud_Donacion_Insumo.objects.all()
-        # context['solicitudes_monetarias'] = Solicitud_Donacion_Monetaria.objects.all()
+        context['solicitudes_monetarias'] = Solicitud_Donacion_Monetaria.objects.all()
         context['usuario'] = Usuario.objects.get(pk=1) 
         context['cantidades_insumos'] = Cantidad_Insumo.objects.select_related('solicitud_insumo')
         context['insumos'] = Insumo.objects.all()
@@ -90,22 +97,14 @@ class SolicitudDonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-# class SolicitudDonacionInsumoDel(SuccessMessageMixin, generic.DeleteView):
-#     model = Solicitud_Donacion_Insumo
-#     template_name = 'donacion/solicitud_insumo_del.html'
-#     context_object_name = 'solicitudes_insumos'
-#     success_url = reverse_lazy('donacion:solicitudes_list')
-#     success_message = "Solicitud eliminada sastifactoriamente"
+class SolicitudDonacionMonetariaNew(SuccessMessageMixin, generic.CreateView):
+    model = Solicitud_Donacion_Monetaria
+    template_name = 'solicitud/solicitud_monetaria_form.html'
+    context_object_name = "solicitudes_monetarias"
+    form_class = SolicitudDonacionMonetariaForm
+    success_url = reverse_lazy('solicitud:solicitud_list')
+    success_message = "Solicitud creada sastifactoriamente"
 
-
-# class SolicitudDonacionInsumoEdit(SuccessMessageMixin, generic.UpdateView):
-#     model = Solicitud_Donacion_Insumo
-#     template_name = 'donacion/solicitud_insumo_modal_editar.html'
-#     context_object_name = "solicitudes_insumos"
-#     form_class = SolicitudDonacionInsumoForm
-#     success_url = reverse_lazy('donacion:solicitudes_list')
-#     success_message = "Solicitud editada sastifactoriamente"
-
-#     def form_valid(self, form):
-#         form.instance.um = self.request.user.id
-#         return super().form_valid(form)
+    def form_valid(self, form):
+        form.instance.uc = self.request.user
+        return super().form_valid(form)
