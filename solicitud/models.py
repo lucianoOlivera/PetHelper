@@ -30,3 +30,43 @@ class Solicitud_Donacion_Monetaria(ClaseModelo):
         verbose_name_plural = 'solicitudes_monetarias'
 
 
+class Estado_Solicitud_Monetaria(ClaseModelo):
+    nombre = models.CharField(max_length=100)
+
+    def save(self):
+        super(Estado_Solicitud_Monetaria, self).save()
+
+    class Meta:
+        verbose_name_plural = 'estados_solicitudes_monetarias'
+
+
+class Estado_Solicitud_Insumo(ClaseModelo):
+    nombre = models.CharField(max_length=100)
+
+    def save(self):
+        super(Estado_Solicitud_Insumo, self).save()
+
+    class Meta:
+        verbose_name_plural = 'estados_solicitudes_insumos'
+
+
+class Estado_Solicitud_Monetaria_Detalle(ClaseModelo):
+    fecha_desde = models.DateField()
+    fecha_hasta = models.DateField()
+
+    def save(self):
+        super(Estado_Solicitud_Monetaria_Detalle, self).save()
+
+    class Meta:
+        verbose_name_plural = 'estados_solicitudes_monetarias_detalle'
+
+
+class Estado_Solicitud_Insumo_Detalle(ClaseModelo):
+    fecha_desde = models.DateField()
+    fecha_hasta = models.DateField()
+
+    def save(self):
+        super(Estado_Solicitud_Monetaria_Detalle, self).save()
+
+    class Meta:
+        verbose_name_plural = 'estados_solicitudes_monetarias_detalle'
