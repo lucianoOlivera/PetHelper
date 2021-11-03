@@ -2,9 +2,8 @@ from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
-from .models import Solicitud_Donacion_Insumo
-from .models import Solicitud_Donacion_Insumo, Solicitud_Donacion_Monetaria
-from .forms import SolicitudDonacionMonetariaForm
+from .models import Solicitud_Donacion_Insumo, Solicitud_Donacion_Monetaria, Estado_Solicitud_Insumo, Estado_Solicitud_Insumo_Detalle, Estado_Solicitud_Monetaria, Estado_Solicitud_Monetaria_Detalle
+from .forms import SolicitudDonacionMonetariaForm, EstadoSolicitudInsumoForm, EstadoSolicitudMonetariaForm
 from insumo.models import Cantidad_Insumo, Insumo
 from usuario.models import Usuario
 from django.forms.models import inlineformset_factory
@@ -56,7 +55,7 @@ class SolicitudDonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
 
 class SolicitudDonacionMonetariaNew(SuccessMessageMixin, generic.CreateView):
     model = Solicitud_Donacion_Monetaria
-    template_name = 'solicitud/solicitud_monetaria_form.html'
+    template_name = 'solicitud/solicitud_form.html'
     context_object_name = "solicitudes_monetarias"
     form_class = SolicitudDonacionMonetariaForm
     success_url = reverse_lazy('solicitud:solicitud_list')
@@ -65,3 +64,59 @@ class SolicitudDonacionMonetariaNew(SuccessMessageMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.uc = self.request.user
         return super().form_valid(form)
+
+
+class EstadosMonetariosListView(generic.ListView):
+    model = Estado_Solicitud_Monetaria
+    template_name = 'solicitud/estado_monetario_list.html'
+    context_object_name = "obj"
+    login_url = 'bases/login.html'
+
+
+class EstadosMonetariosNew(SuccessMessageMixin, generic.CreateView):
+    model = Estado_Solicitud_Monetaria
+    template_name = 'solicitud/estado_monetario_form.html'
+    context_object_name = "obj"
+    form_class = EstadoSolicitudMonetariaForm
+    success_url = reverse_lazy('solicitud:solicitud_estado_monetaria_list')
+    success_message = "Estado creado sastifactoriamente"
+
+    def form_valid(self, form):
+        form.instance.uc = self.request.user
+        return super().form_valid(form)
+
+
+class EstadosMonetariosDel(SuccessMessageMixin, generic.DeleteView):
+    model = Estado_Solicitud_Monetaria
+    template_name = 'solicitud/estado_monetario_del.html'
+    context_object_name = 'obj'
+    success_url = reverse_lazy('solicitud:solicitud_estado_monetaria_list')
+    success_message = "Estado eliminado sastifactoriamente"
+
+
+class EstadosInsumosListView(generic.ListView):
+    model = Estado_Solicitud_Insumo
+    template_name = 'solicitud/estado_insumo_list.html'
+    context_object_name = "obj"
+    login_url = 'bases/login.html'
+
+
+class EstadosInsumosNew(SuccessMessageMixin, generic.CreateView):
+    model = Estado_Solicitud_Insumo
+    template_name = 'solicitud/estado_insumo_form.html'
+    context_object_name = "obj"
+    form_class = EstadoSolicitudInsumoForm
+    success_url = reverse_lazy('solicitud:solicitud_estado_insumo_list')
+    success_message = "Estado creado sastifactoriamente"
+
+    def form_valid(self, form):
+        form.instance.uc = self.request.user
+        return super().form_valid(form)
+
+
+class EstadosInsumosDel(SuccessMessageMixin, generic.DeleteView):
+    model = Estado_Solicitud_Insumo
+    template_name = 'solicitud/estado_insumos_del.html'
+    context_object_name = 'obj'
+    success_url = reverse_lazy('solicitud:solicitud_estado_insumo_list')
+    success_message = "Estado eliminado sastifactoriamente"

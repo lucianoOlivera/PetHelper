@@ -1,0 +1,26 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="card border-left-danger shadow h-100 py-2"> 
+            <div class="modal-header">
+                    <h4 class="modal-title text-gray-900">Eliminación de Estado de la solicitud monetaria</h4>
+                    <a href="{{ request.META.HTTP_REFERER }}" class="close" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </a>  
+            </div>
+            <form method="POST" action="{% url 'solicitud:solicitud_estado_monetaria_del' object.id %}" class="forms-inline">
+            {% csrf_token %}
+                <div class="modal-body">
+                    <div>
+                        <div class="font-weight-bold text-danger text-uppercase mb-1 text-center">¿Esta seguro que desea eliminar a {{obj.nombre}}?</div> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary" style="float: right;"><span class="fa fa-undo"></span> Cancelar</a>
+                    <button type="submit" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i> Si, eliminar </button>
+                </div>
+            </form>    
+        </div>
+    </div>
+</div>
+            
+           
