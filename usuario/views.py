@@ -40,11 +40,13 @@ class UsuarioEdit(SuccessMessageMixin, generic.UpdateView):
     template_name = 'bases/usuario_editar.html'
     context_object_name = "obj"
     form_class = UserEditForm
-    success_url = reverse_lazy('bases:home')
+    # aca deberia llevar al perfil
+    success_url = reverse_lazy('bases:home') 
     success_message = "Su información fue editada sastifactoriamente"
 
     def form_valid(self, form):
         form.instance.um = self.request.user.id
+        
         return super().form_valid(form)
 
 

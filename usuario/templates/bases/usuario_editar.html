@@ -1,4 +1,18 @@
 {% extends 'base/base.html' %} {% block page_content %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="text-center alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <i class="fas fa-check"></i>
+        <strong> {{ message|safe }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>    
+    </div>
+    {% endfor %}
+{% endif %}
+
+
 <div class="container-fluid">
     <div class="col-xl-10 col-lg-10 col-md-9 items-align-center">
         <h1 class="h3 mb-4 text-gray-800">Configuración general de la cuenta</h1>
@@ -6,10 +20,10 @@
             <div class="p-5">
                 <div class="alert alert-info text-center" role="alert"> Pulse sobre los campos para editar sus datos.
                 </div>
-                <form action="{% url 'usuario:usuario_edit' obj.id %}" method="POST">
+                <form action="{% url 'usuario:usuario_edit' obj.id %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
         
-                    <div class="col-sm-4 mb-3 mb-sm-0">
+                    <div class="col-sm-5 mb-3 mb-sm-0">
                         <small class="text-danger">
                             {{form.username.errors}}
                         </small>
@@ -29,10 +43,9 @@
                         <small class="text-danger">
                             {{form.DNI.errors}}
                         </small>
-                        <label class="text-gray-900">{{form.DNI.label}}</label><br>
+                        <label class="text-gray-900">{{form.DNI.label}}</label>
                         {{form.DNI}}
                     </div><br>
-        
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <small class="text-danger">
                             {{form.email.errors}}

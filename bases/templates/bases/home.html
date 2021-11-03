@@ -39,20 +39,35 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row">
+                            {% for veterinario in veterinarios %}
                             <div class="col">
-                                <img class="d-block w-100" style="height: 120px;" src="{% static 'base/img/undraw_profile.svg' %}" alt="First slide">
+                                <div class="text-center">
+                                    {% if veterinario.logo %}
+                                    <img class="img-profile rounded-circle" style="height: 120px;" src="{{veterinario.logo.url}}" alt="First slide">
+                                    {% else %}
+                                    <img class="img-profile rounded-circle"  style="height: 120px;" src="{% static 'base/img/undraw_profile.svg' %}">
+                                    {% endif %}
+                                    <h6 class="text-gray-900"><strong>{{veterinario.nombre}} {{veterinario.apellido}}</strong> </h6>
+                                </div>
                             </div>
+                            {% endfor %}
+                            {% for clinica in clinicas %}
                             <div class="col">
-                                <img class="d-block w-100" style="height: 120px;" src="{% static 'base/img/undraw_profile_1.svg' %}" alt="Second slide">
+                                <div class="text-center">
+                                    {% if clinica.logo %}
+                                    <img class="img-profile rounded-circle" style="height: 120px;" src="{{clinica.logo.url}}" alt="First slide">
+                                    {% else %}
+                                    <img class="img-profile rounded-circle"  style="height: 120px;" src="{% static 'base/img/undraw_profile.svg' %}">
+                                    {% endif %}
+                                    <h6 class="text-gray-900"><strong>{{clinica.nombre}}</strong> </h6>
+                                </div>
                             </div>
-                            <div class="col">
-                                <img class="d-block w-100" style="height: 120px;" src="{% static 'base/img/undraw_profile_2.svg' %}" alt="Third slide">
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>    
                     <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="color: black"></span>
                     <span class="sr-only">Previous</span>
                     </a>
                     <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
@@ -63,9 +78,17 @@
         </div>
 
         <div>
-           <br><h4 class="text-gray-900 text-center"><strong>Organizaciones</strong></h4>
-           <!-- <div class="panel-body">Fotos de todas las organizaciones registradas</div> -->
-
+           <br><h4 class="text-gray-900 text-center"><strong>Organizaciones</strong></h4><br>
+            <div class="row">
+                {% for organizacion in organizaciones %}
+               <div class="col">
+                    <div class="text-center">
+                        <img class="img-profile rounded-circle" src="{{organizacion.logo.url}}" style="width:90px"><br>
+                        <h6 class="text-gray-900"><strong>{{organizacion.nombre}}</strong> </h6>
+                    </div>
+               </div>
+               {% endfor %}
+           </div>
         </div>
 
        

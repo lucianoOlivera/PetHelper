@@ -58,7 +58,7 @@ class DonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
                             Cantidad_Insumo.objects.filter(id=insumosolicitud.id).update(cantidad=cantidadNew)
                             return super().form_valid(form)
                         else:
-                            messages.error(self.request, f"la cantidad {cantidadID.cantidad} supera a lo pedido")
+                            messages.error(self.request, f"la cantidad {cantidadID.cantidad} supera a lo pedido del insumo {cantidadID.insumo}")
                             return render(self.request, 'donacionV2/donacion_insumo_form.html', context)  
 
 
@@ -86,7 +86,7 @@ class DonacionmonetariaNew(SuccessMessageMixin, generic.CreateView):
             newResult = float(context['Solicitud_monetaria'].monto) - float(form.data['monto'])
             Solicitud_Donacion_Monetaria.objects.filter(id=context['Solicitud_monetaria'].id).update(monto=newResult)
             return super().form_valid(form)
-        messages.error(self.request, f"el monto {form.data['monto']} supera a lo pedido que es monto de la solicitud {context['Solicitud_monetaria'].monto}")
+        messages.error(self.request, f"el monto ${form.data['monto']} supera al pedido de ${context['Solicitud_monetaria'].monto}  en la solicitud")
         return render(self.request, 'donacionV2/donacion_monetaria_form.html', context)  
 
 
