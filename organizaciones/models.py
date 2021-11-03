@@ -21,7 +21,7 @@ HORAS_DE_DIA_24 = [(i,i) for i in range(1,25)]
 
 class Organizacion(ClaseModelo):
     descripcion = models.CharField(max_length=100, null=False)
-    logo = models.ImageField(blank=True, null=True)
+    logo = models.ImageField(upload_to="organizacion",blank=True, null=True)
     nombre = models.CharField(max_length=100, null=False, default="")
     email = models.EmailField('Email', unique=True, null=False)
     cuit = models.CharField(max_length=11, null=False, default="", unique=True)
@@ -37,7 +37,7 @@ class Organizacion(ClaseModelo):
 
 class Clinica(ClaseModelo):
     descripcion = models.CharField(max_length=100, null=False)
-    logo = models.ImageField(blank=True, null=True)
+    logo = models.ImageField(upload_to="clinica",blank=True, null=True)
     nombre = models.CharField(max_length=100, null=False, default="")
     email = models.EmailField('Email', unique=True, null=False)
     cuit = models.CharField(max_length=11, null=False, default="",unique=True)
@@ -58,7 +58,7 @@ class Clinica(ClaseModelo):
 
 class Veterinario(ClaseModelo):
     descripcion = models.CharField(max_length=100, null=False)
-    logo = models.ImageField(blank=True, null=True)
+    logo = models.ImageField(upload_to="veterinario",blank=True, null=True)
     nombre = models.CharField(max_length=100, null=False, default="")
     apellido = models.CharField(max_length=100, null=False, default="")
     email = models.EmailField('Email', unique=True, null=False)

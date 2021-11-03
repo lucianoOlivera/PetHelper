@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </a>
             </div>
-            <form action="{% url 'organizaciones:organizaciones_edit' object.id %}" method="POST">
+            <form action="{% url 'organizaciones:organizaciones_edit' object.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="modal-body">
                     {{ form.as_p }}
