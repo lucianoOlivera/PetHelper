@@ -24,18 +24,30 @@
                     <h6 class="text-gray-700 text-center">Donación Monetaria</h6>  
                     <div class="row" id="donacion">
                         <div clas="column">
-                            <h6 class="text-gray-900"><strong>Monto a donar</strong></h6>
-                                {{ form.as_p }}
-                                <br><label class="text-gray-900" for="cantidad_insumo"> solicitud monetaria </label>
-                                    {{Solicitud_monetaria.as_p}}
+                            <h6 class="text-gray-900"><strong>Solicitud Monetaria</strong></h6>
+                            <label>Titulo: </label>
+                                {{Solicitud_monetaria.titulo}}<br>
+                            <label>Monto Máximo: $</label>
+                                {{Solicitud_monetaria.monto}}
+                            <h6 class="text-gray-900"><strong>Datos del destinatario</strong></h6>
+                            <label>Destinatario: </label>
+                                {{Solicitud_monetaria.uc.username}} {{Solicitud_monetaria.uc.apellido}}<br>
+                            {% if Solicitud_monetaria.uc.telefono%} 
+                            <label>Telefono de contacto: </label>
+                                {{Solicitud_monetaria.uc.telefono}}<br>   
+                            {% else %} 
+                            <label>Email de contacto: </label>
+                                {{Solicitud_monetaria.uc.email}}<br>   
+                            {% endif %}
+                            <h6 class="text-gray-900"><strong>Cantidad a donar</strong></h6>
+                                {{form.monto.label}} $
+                                {{ form.monto }} <br>
+                            <h6 class="text-gray-900"><strong>Seleccione el método de pago</strong></h6>
                         </div>    
-                        <div class="column text-left">
-                            <h6 class="text-gray-900"><strong>Cantidad</strong></h6>
-                        </div>
+                    </div><br>
+                    <div class="alert alert-info text-center" role="alert"> Una vez hecha la donación se descontará de la cantidad pedida.
                     </div>
-                    <div class="text-center">
-                        <h6 class="text-gray-900"><strong>Total a donar</strong></h6>
-                    </div>
+
                     
                     <div class="border-top pt-3 text-right">
                         <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>

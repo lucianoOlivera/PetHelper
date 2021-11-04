@@ -42,17 +42,24 @@
                                      {% endif %}
                                  {% endif %}
                              </small>
+                            <h6 class="text-gray-900"><strong>Datos del destinatario</strong></h6>
+                            <label>Destinatario: </label>
+                            {{Solicitud_insumo.uc.username}} {{Solicitud_insumo.uc.apellido}}
+                            {% if Solicitud_insumo.uc.telefono %}
+                            <br><label>Telefono de contacto: </label>
+                            {{Solicitud_insumo.uc.telefono}}
+                            {% else %}
+                            <br><label>Email de contacto: </label>
+                            {{Solicitud_insumo.uc.email}}
+                            {% endif %}
+                            {% if Solicitud_insumo.uc.direccion %}
+                            <br><label>Domicilio de recepción: </label>
+                            {{Solicitud_insumo.uc.direccion}}
+                            {% endif %}
+
                             <h6 class="text-gray-900"><strong>Elementos a donar</strong></h6>
-                                {{ Donacion }}
-                                <br><label class="text-gray-900" for="cantidad_insumo"> 2 </label>
-                                {{Donacion.solicitud}}
+                                {{ Donacion.as_p }}
                         </div>    
-                        <div class="column text-left">
-                            <h6 class="text-gray-900"><strong>Cantidad</strong></h6>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <h6 class="text-gray-900"><strong>Total a donar</strong></h6>
                     </div>
                     
                     <div class="alert alert-info" role="alert"> Tienes 10 días para concretar la donación, caso contrario no se agregará

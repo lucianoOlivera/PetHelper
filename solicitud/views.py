@@ -20,7 +20,6 @@ class SolicitudesListView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['solicitudes_insumos'] = Solicitud_Donacion_Insumo.objects.all()
         context['solicitudes_monetarias'] = Solicitud_Donacion_Monetaria.objects.all()
-        context['usuario'] = Usuario.objects.get(pk=1) 
         context['cantidades_insumos'] = Cantidad_Insumo.objects.select_related('solicitud_insumo')
         context['insumos'] = Insumo.objects.all()
         return context
