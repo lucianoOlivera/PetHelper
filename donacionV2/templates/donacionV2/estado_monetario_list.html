@@ -1,0 +1,85 @@
+{% extends 'base/base.html' %} {% block page_content %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="text-center alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <i class="fas fa-check"></i>
+        <strong> {{ message|safe }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>    
+    </div>
+    {% endfor %}
+{% endif %}
+
+
+<div class="card shadow mb-4 my-5 text-center">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" >
+        <h6 class="m-0 font-weight-bold text-primary">Listado de los estados de la donacion monetaria</h6>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Acciones</div>
+                <a type="button" class="dropdown-item" href="{% url 'donacionV2:donacion_estado_monetaria_new' %}" ><i class="far fa-calendar-plus"></i> Nuevo</a>
+            </div>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+        {% if not obj %}
+        <div class="alert alert-warning" role="alert">No hay Estados</div>
+        {% else %}
+        <table class="table table-striped table-hover">
+            <thead>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </thead>
+            <tbody>
+                {% for item in obj %}
+                <tr>
+                    <td>{{ item.nombre }}</td>
+                    <td>
+                        <button onclick="abrir_modal_eliminar('{% url 'donacionV2:donacion_estado_monetaria_del' item.id %}')" class="btn btn-danger btn-circle" role="button" data-toggle="modal" data-target="#eliminar"><i class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+
+
+<!-- Modal editar BORRARLO SI NO LO USAMOS -->
+<div class="modal fade" id="edicion" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
+   
+</div> 
+
+<!-- Modal eliminar-->
+<div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
+   
+</div> 
+   
+
+{% endblock %}
+
+{% block js_page %} 
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    function abrir_modal_edicion(url){
+        $('#edicion').load(url, function(){
+            $(this).modal('show');
+        });
+    }
+
+    function abrir_modal_eliminar(url){
+        $('#eliminar').load(url, function(){
+            $(this).modal('show');
+        });
+    }    
+
+</script>
+{% endblock %}

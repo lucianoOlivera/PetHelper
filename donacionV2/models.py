@@ -48,3 +48,45 @@ class Medio_Pago(ClaseModelo):
          
     class Meta:
         verbose_name_plural = 'medios_pagos'
+
+
+class Estado_Donacion_Monetaria(ClaseModelo):
+    nombre = models.CharField(max_length=100)
+
+    def save(self):
+        super(Estado_Donacion_Monetaria, self).save()
+
+    class Meta:
+        verbose_name_plural = 'estados_Donaciones_monetarias'
+
+
+class Estado_Donacion_Insumo(ClaseModelo):
+    nombre = models.CharField(max_length=100)
+
+    def save(self):
+        super(Estado_Donacion_Insumo, self).save()
+
+    class Meta:
+        verbose_name_plural = 'estados_Donaciones_insumos'
+
+
+class Estado_Donacion_Monetaria_Detalle(ClaseModelo):
+    fecha_desde = models.DateField()
+    fecha_hasta = models.DateField()
+
+    def save(self):
+        super(Estado_Donacion_Monetaria_Detalle, self).save()
+
+    class Meta:
+        verbose_name_plural = 'estados_Donaciones_monetarias_detalle'
+
+
+class Estado_Donacion_Insumo_Detalle(ClaseModelo):
+    fecha_desde = models.DateField()
+    fecha_hasta = models.DateField()
+
+    def save(self):
+        super(Estado_Donacion_Monetaria_Detalle, self).save()
+
+    class Meta:
+        verbose_name_plural = 'estados_Donaciones_monetarias_detalle'

@@ -11,6 +11,6 @@ urlpatterns = [
     path('EstadosSolicitudMonetaria/delete/<int:pk>', login_required(EstadosMonetariosDel.as_view()), name='solicitud_estado_monetaria_del'),
 
     path('EstadosSolicitudInsumos/', login_required(EstadosInsumosListView.as_view()), name='solicitud_estado_insumo_list'),
-    path('EstadosSolicitudInsumos/new', login_required(EstadosMonetariosNew.as_view()), name='solicitud_estado_insumo_new'),
+    path('EstadosSolicitudInsumos/new', login_required(EstadosInsumosNew.as_view()), name='solicitud_estado_insumo_new'),
     path('EstadosSolicitudInsumos/delete/<int:pk>', login_required(EstadosInsumosDel.as_view()), name='solicitud_estado_insumo_del'),
     ]

@@ -1,15 +1,14 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.forms.models import inlineformset_factory
 from django.http import request
-from donacionV2.models import Donacion_Insumo, Cantidad_Insumo_Donacion, Donacion_monetaria, Medio_Pago
+from donacionV2.models import Donacion_Insumo, Cantidad_Insumo_Donacion, Donacion_monetaria, Medio_Pago, Estado_Donacion_Insumo,Estado_Donacion_Insumo_Detalle,Estado_Donacion_Monetaria,Estado_Donacion_Monetaria_Detalle
 from django.urls import reverse_lazy
 from django.views import generic
 from solicitud.models import Solicitud_Donacion_Insumo, Solicitud_Donacion_Monetaria
 from insumo.models import Cantidad_Insumo
-from django import forms
 from django.contrib import messages
 from django.shortcuts import render
-from .forms import DonacionMonetariaForm, FormaDePagoForm
+from .forms import DonacionMonetariaForm, FormaDePagoForm, EstadoDonacionInsumoForm, EstadoDonacionMonetariaForm
 
 # Create your views here.
 DonacionFormset = inlineformset_factory(
@@ -121,3 +120,59 @@ class MedioPagoDel(SuccessMessageMixin, generic.DeleteView):
     context_object_name = 'obj'
     success_url = reverse_lazy("donacionV2:medioPago_list")
     success_message = "Medio de pago sastifactoriamente"
+
+
+class EstadosMonetariosListView(generic.ListView):
+    model = Estado_Donacion_Monetaria
+    template_name = 'donacionV2/estado_monetario_list.html'
+    context_object_name = "obj"
+    login_url = 'bases/login.html'
+
+
+class EstadosMonetariosNew(SuccessMessageMixin, generic.CreateView):
+    model = Estado_Donacion_Monetaria
+    template_name = 'donacionV2/estado_monetario_form.html'
+    context_object_name = "obj"
+    form_class = EstadoDonacionMonetariaForm
+    success_url = reverse_lazy('donacionV2:donacion_estado_monetaria_list')
+    success_message = "Estado creado sastifactoriamente"
+
+    def form_valid(self, form):
+        form.instance.uc = self.request.user
+        return super().form_valid(form)
+
+
+class EstadosMonetariosDel(SuccessMessageMixin, generic.DeleteView):
+    model = Estado_Donacion_Monetaria
+    template_name = 'donacionV2/estado_monetario_del.html'
+    context_object_name = 'obj'
+    success_url = reverse_lazy('donacionV2:donacion_estado_monetaria_list')
+    success_message = "Estado eliminado sastifactoriamente"
+
+
+class EstadosInsumosListView(generic.ListView):
+    model = Estado_Donacion_Insumo
+    template_name = 'donacionV2/estado_insumo_list.html'
+    context_object_name = "obj"
+    login_url = 'bases/login.html'
+
+
+class EstadosInsumosNew(SuccessMessageMixin, generic.CreateView):
+    model = Estado_Donacion_Insumo
+    template_name = 'donacionV2/estado_insumo_form.html'
+    context_object_name = "obj"
+    form_class = EstadoDonacionInsumoForm
+    success_url = reverse_lazy('donacionV2:donacion_estado_insumo_list')
+    success_message = "Estado creado sastifactoriamente"
+
+    def form_valid(self, form):
+        form.instance.uc = self.request.user
+        return super().form_valid(form)
+
+
+class EstadosInsumosDel(SuccessMessageMixin, generic.DeleteView):
+    model = Estado_Donacion_Insumo
+    template_name = 'donacionV2/estado_insumos_del.html'
+    context_object_name = 'obj'
+    success_url = reverse_lazy('donacionV2:donacion_estado_insumo_list')
+    success_message = "Estado eliminado sastifactoriamente"
