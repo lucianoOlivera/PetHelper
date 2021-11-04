@@ -11,16 +11,32 @@
                 <h6 class="text-gray-700 text-center">Formulario de solicitud de donación de insumos</h6>
                     <div class="col-xl-6 col-md-6 mb-6">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Nueva
-                                    Solicitud</div>
-                            </div>
-                            <div class="dropdown-divider"></div>
                             <div class="row">
-                                {{ form.as_p }}
-                            </div>
-                            <div>
-                                {{ Insumo.as_p }}
+                                <h6 class="text-gray-900"><strong>Dirección de recepción de la donación</strong></h6>
+                                    <!-- <small class="text-danger">
+                                        {{form.email.errors}}
+                                    </small> -->
+                                    <div class="form-group">
+                                        <label > Calle y número </label>
+                                        <input name="" >   
+                                    </div>
+                                    <h6 class="text-gray-900"><strong>Datos de la donación</strong></h6>
+                                    <div class="form-control-user">
+                                        {{ form.titulo.label }}
+                                        {{form.titulo}}
+                                    </div><br>
+                                    {{ Insumo.as_p }}
+                                    <h6 class="text-gray-900"><strong>Datos del archivo</strong></h6>
+                                    <div class="form-control-user">
+                                        {{ form.pedido.label }}
+                                        {{form.pedido}}
+                                    </div><br>
+                                    <h6 class="text-gray-900 pt-2"><strong>Datos del profesional</strong></h6>
+                                    <label > Seleccione el profesional que elaboro el pedido </label>
+                                    <div class="form-control-user">
+                                        <label>Profesional</label>
+                                        {{form.veterinario}}
+                                    </div>
                             </div>
                         </div>
                     </div>

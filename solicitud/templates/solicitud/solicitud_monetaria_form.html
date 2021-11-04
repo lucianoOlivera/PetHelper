@@ -1,35 +1,46 @@
 {% extends 'base/base.html' %} {% block page_content %}
-<div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="modal-header">
-                <h4 class="modal-title text-gray-900">Creación de Solicitud Monetaria</h4>
-                <a href="{{ request.META.HTTP_REFERER }}" class="close" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </a>
-            </div>
-            <form method="POST" action="{% url 'solicitud:solicitud_monetaria_new' %}"class="forms-inline" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="modal-body">
-                    <div class="col-xl-6 col-md-6 mb-6">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Nueva
-                                    Solicitud</div>
+<div class="container">
+    <div class="col-xl-10 col-lg-12 col-md-9 items-align-center">
+        <h4 class="h3 mb-4 text-gray-900">Nueva Solicitud de Donación</h4>
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="p-5">
+                <form method="POST" action="{% url 'solicitud:solicitud_monetaria_new' %}"class="forms-inline" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h6 class="text-gray-700 text-center">Formulario de solicitud de donación monetaris</h6>
+                    <div class="row">
+                        <div class="column">
+                            <h6 class="text-gray-900"><strong>Datos de la donación</strong></h6>
+                            <div class="form-control-user">
+                                {{ form.titulo.label }}
+                                {{form.titulo}}
                             </div>
-                            <div class="dropdown-divider"></div>
-                            <div class="row">
-                                {{ form.as_p }}
-                            </div>
-                        </div>
+                            <div class="form-control-user">
+                                {{ form.monto.label }}
+                                ${{form.monto}}
+                            </div><br>
+                            <h6 class="text-gray-900"><strong>Datos del archivo</strong></h6>
+                            <div class="form-control-user">
+                                {{ form.pedido.label }}
+                                {{form.pedido}}
+                            </div><br>
+                            <h6 class="text-gray-900"><strong>Datos del profesional</strong></h6>
+                            <label > Seleccione el profesional que elaboro el pedido </label>
+                            <div class="form-control-user">
+                                <label > Profesional </label>
+                                {{form.veterinario}}
+                            </div><br>
+                        </div>    
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>
-                        Cancelar</a>
-                    <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
-                </div>
-            </form>
+                    <div class="border-top pt-3 text-right">
+                        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>
+                            Cancelar</a>   
+                        <button type="submit" class="btn btn-primary">
+                            <span class="fa fa-save"></span> 
+                            Aceptar
+                        </button>    
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

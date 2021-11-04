@@ -27,6 +27,11 @@ class DonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['idSolicitud_insumo'] = self.kwargs['pk'] 
+        context['Solicitud_insumo_obj'] = Solicitud_Donacion_Monetaria.objects.get(id=self.kwargs['pk'])
+        objs = Solicitud_Donacion_Insumo.objects.all()
+        for obj in objs:
+            if obj.id == self.kwargs['pk']:
+                context['Solicitud_insumo'] = obj
         if self.request.POST:
             context['Donacion'] = DonacionFormset(self.request.POST, instance=self.object)
         else:
@@ -58,7 +63,7 @@ class DonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
                             Cantidad_Insumo.objects.filter(id=insumosolicitud.id).update(cantidad=cantidadNew)
                             return super().form_valid(form)
                         else:
-                            messages.error(self.request, f"la cantidad {cantidadID.cantidad} supera a lo pedido del insumo {cantidadID.insumo}")
+                            messages.error(self.request, f"La cantidad {cantidadID.cantidad} supera a lo pedido del insumo {cantidadID.insumo}")
                             return render(self.request, 'donacionV2/donacion_insumo_form.html', context)  
 
 
@@ -86,7 +91,7 @@ class DonacionmonetariaNew(SuccessMessageMixin, generic.CreateView):
             newResult = float(context['Solicitud_monetaria'].monto) - float(form.data['monto'])
             Solicitud_Donacion_Monetaria.objects.filter(id=context['Solicitud_monetaria'].id).update(monto=newResult)
             return super().form_valid(form)
-        messages.error(self.request, f"el monto ${form.data['monto']} supera al pedido de ${context['Solicitud_monetaria'].monto}  en la solicitud")
+        messages.error(self.request, f"El monto de ${form.data['monto']} supera al pedido de ${context['Solicitud_monetaria'].monto}  en la solicitud")
         return render(self.request, 'donacionV2/donacion_monetaria_form.html', context)  
 
 

@@ -83,7 +83,11 @@
                 {% for organizacion in organizaciones %}
                <div class="col">
                     <div class="text-center">
+                        {% if organizacion.logo %}
                         <img class="img-profile rounded-circle" src="{{organizacion.logo.url}}" style="width:90px"><br>
+                        {% else %}
+                        <img class="img-profile rounded-circle"  style="height: 120px;" src="{% static 'base/img/undraw_profile.svg' %}">
+                        {% endif %}
                         <h6 class="text-gray-900"><strong>{{organizacion.nombre}}</strong> </h6>
                     </div>
                </div>
