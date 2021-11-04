@@ -54,7 +54,7 @@ class SolicitudDonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
 
 class SolicitudDonacionMonetariaNew(SuccessMessageMixin, generic.CreateView):
     model = Solicitud_Donacion_Monetaria
-    template_name = 'solicitud/solicitud_form.html'
+    template_name = 'solicitud/solicitud_monetaria_form.html'
     context_object_name = "solicitudes_monetarias"
     form_class = SolicitudDonacionMonetariaForm
     success_url = reverse_lazy('solicitud:solicitud_list')
