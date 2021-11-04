@@ -35,6 +35,7 @@
         <div class="container">
             <br><h4 class="text-gray-900 text-center"><strong>Profesionales</strong></h4>
             <!-- carrusel -->
+            {% if veterinarios %}
             <div id="carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -74,11 +75,15 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                     </a>
-            </div>    
+            </div> 
         </div>
+        {% else %}
+            <div class="alert alert-warning text-center" role="alert">No hay profesionales registrados</div>
+        {% endif %}
 
         <div>
            <br><h4 class="text-gray-900 text-center"><strong>Organizaciones</strong></h4><br>
+           {% if organizaciones %}
             <div class="row">
                 {% for organizacion in organizaciones %}
                <div class="col">
@@ -93,10 +98,14 @@
                </div>
                {% endfor %}
            </div>
+           {% else %}
+           <div class="alert alert-warning text-center" role="alert">No hay organizaciones registradas</div>
+           {% endif %}
         </div>
+    </div>
 
        
-    </div>
+</div>
     <!-- /.container-fluid -->
 
 {% endblock %}
