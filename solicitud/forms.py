@@ -1,5 +1,5 @@
 from django import forms
-from .models import Solicitud_Donacion_Insumo, Solicitud_Donacion_Monetaria, Estado_Solicitud_Monetaria, Estado_Solicitud_Insumo
+from .models import Solicitud_Donacion_Insumo, Solicitud_Donacion_Monetaria, Estado_Solicitud_Monetaria, Estado_Solicitud_Insumo, Estado_Solicitud_Monetaria_Detalle
 
 class SolicitudDonacionInsumoForm(forms.ModelForm):
     class Meta:
@@ -44,6 +44,19 @@ class EstadoSolicitudInsumoForm(forms.ModelForm):
     class Meta:
         model = Estado_Solicitud_Insumo
         fields = ['nombre']
+
+    def __init__(self, *arg, **kwargs):
+        super().__init__(*arg, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+            })
+
+
+class EstadoSolicitudMonetariaDetalleForm(forms.ModelForm):
+    class Meta:
+        model = Estado_Solicitud_Monetaria_Detalle
+        fields = ['fecha_hasta']
 
     def __init__(self, *arg, **kwargs):
         super().__init__(*arg, **kwargs)

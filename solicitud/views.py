@@ -11,6 +11,10 @@ from django.forms.models import inlineformset_factory
 InsumoFormset = inlineformset_factory(
    Solicitud_Donacion_Insumo, Cantidad_Insumo, extra=5, fields=('insumo', 'cantidad', 'solicitud_insumo',))
 
+EstadoFormsetMonetarios = inlineformset_factory(
+    Solicitud_Donacion_Monetaria, Estado_Solicitud_Monetaria_Detalle, extra=1, fields=('solicitud_Donacion_Monetaria','estado_Solicitud_Monetaria', 'fecha_hasta',)
+)
+
 
 class SolicitudesListView(TemplateView):
     template_name = "solicitud/solicitud_list.html"
@@ -60,8 +64,23 @@ class SolicitudDonacionMonetariaNew(SuccessMessageMixin, generic.CreateView):
     success_url = reverse_lazy('solicitud:solicitud_list')
     success_message = "Solicitud creada sastifactoriamente"
 
-    def form_valid(self, form):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.POST:
+            context['EstadoMonetarios'] = EstadoFormsetMonetarios(self.request.POST, instance=self.object)
+        else:
+            context['EstadoMonetarios'] = EstadoFormsetMonetarios(instance=self.object)
+        return context
+
+    def form_valid(self, form,  *args, **kwargs):
         form.instance.uc = self.request.user
+        context = self.get_context_data()
+        EstadoMonetarios = context["EstadoMonetarios"]
+        self.object = form.save()
+        if EstadoMonetarios.is_valid():
+            print("is valid perrro")
+            EstadoMonetarios.instance = self.object
+            EstadoMonetarios.save()
         return super().form_valid(form)
 
 

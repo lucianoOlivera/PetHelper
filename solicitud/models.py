@@ -22,7 +22,7 @@ class Solicitud_Donacion_Monetaria(ClaseModelo):
     pedido = models.ImageField(upload_to="solicitud",blank=True, null=True)
     monto = models.FloatField(max_length=100, null=False, blank=False)
     veterinario = models.ForeignKey(Veterinario, on_delete=models.CASCADE, null=True)
-     
+    
     def save(self):
         super(Solicitud_Donacion_Monetaria, self).save()
 
@@ -51,9 +51,11 @@ class Estado_Solicitud_Insumo(ClaseModelo):
 
 
 class Estado_Solicitud_Monetaria_Detalle(ClaseModelo):
-    fecha_desde = models.DateField()
-    fecha_hasta = models.DateField()
-
+    fecha_desde = models.DateField(auto_now_add=True,blank=False)
+    fecha_hasta = models.DateField(null=False, blank=False)
+    estado_Solicitud_Monetaria = models.ForeignKey(Estado_Solicitud_Monetaria, on_delete=models.CASCADE, null=True)
+    solicitud_Donacion_Monetaria = models.ForeignKey(Solicitud_Donacion_Monetaria, on_delete=models.CASCADE, null=True)
+   
     def save(self):
         super(Estado_Solicitud_Monetaria_Detalle, self).save()
 
@@ -62,8 +64,9 @@ class Estado_Solicitud_Monetaria_Detalle(ClaseModelo):
 
 
 class Estado_Solicitud_Insumo_Detalle(ClaseModelo):
-    fecha_desde = models.DateField()
-    fecha_hasta = models.DateField()
+    fecha_desde = models.DateField(auto_now_add=True)
+    fecha_hasta = models.DateField(null=False, blank=False)
+    estado_Solicitud_Insumo = models.ForeignKey(Estado_Solicitud_Insumo, on_delete=models.CASCADE, null=True)
 
     def save(self):
         super(Estado_Solicitud_Monetaria_Detalle, self).save()
