@@ -7,3 +7,4 @@ social-auth-app-django==5.0.0
 Django-Verify-Email==1.0.8
 geocoder==1.38.1
 django-filter==21.1
+django-recaptcha==2.0.6

@@ -3,7 +3,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from .models import Solicitud_Donacion_Insumo, Solicitud_Donacion_Monetaria, Estado_Solicitud_Insumo, Estado_Solicitud_Insumo_Detalle, Estado_Solicitud_Monetaria, Estado_Solicitud_Monetaria_Detalle
-from .forms import SolicitudDonacionMonetariaForm, EstadoSolicitudInsumoForm, EstadoSolicitudMonetariaForm
+from .forms import ReCaptcha, SolicitudDonacionInsumoForm, SolicitudDonacionMonetariaForm, EstadoSolicitudInsumoForm, EstadoSolicitudMonetariaForm
 from insumo.models import Cantidad_Insumo, Insumo
 from usuario.models import Usuario
 from django.forms.models import inlineformset_factory
@@ -35,6 +35,7 @@ class SolicitudDonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['captcha'] = ReCaptcha
         if self.request.POST:
             context['Insumo'] = InsumoFormset(self.request.POST, instance=self.object)
         else:
@@ -59,6 +60,11 @@ class SolicitudDonacionMonetariaNew(SuccessMessageMixin, generic.CreateView):
     form_class = SolicitudDonacionMonetariaForm
     success_url = reverse_lazy('solicitud:solicitud_list')
     success_message = "Solicitud creada sastifactoriamente"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['captcha'] = ReCaptcha
+        return context
 
     def form_valid(self, form):
         form.instance.uc = self.request.user
