@@ -10,10 +10,13 @@ from mapa.models import Direccion
 from .models import Organizacion, Clinica, Veterinario 
 from .forms import OrganizacionForm, ClinicaForm, VeterinarioForm
 from .filters import OrganizacionFilter, VeterinarioFilter, ClinicaFilter
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from bases.views import SinPrivilegios
 # Create your views here.
 
 
-class OrganizacionView(generic.ListView):
+class OrganizacionView(SinPrivilegios, generic.ListView):
+    permission_required = "organizaciones.view_organizacion"
     model = Organizacion
     template_name = "organizaciones/org_list.html"
     context_object_name = "obj"
@@ -54,7 +57,7 @@ class OrganizacionDel(SuccessMessageMixin, generic.DeleteView):
     success_message = "Organizacion eliminada sastifactoriamente"
 
 
-class OrganizacionEdit(SuccessMessageMixin,generic.UpdateView):
+class OrganizacionEdit(SuccessMessageMixin, generic.UpdateView):
     model = Organizacion
     template_name = 'organizaciones/org_modal_editar.html'
     context_object_name = "obj"
@@ -67,7 +70,8 @@ class OrganizacionEdit(SuccessMessageMixin,generic.UpdateView):
         return super().form_valid(form)
 
 
-class ClinicaView(generic.ListView):
+class ClinicaView(SinPrivilegios, generic.ListView):
+    permission_required = "organizaciones.view_clinica"
     model = Clinica
     template_name = "organizaciones/cli_list.html"
     context_object_name = "obj"
@@ -122,7 +126,8 @@ class ClinicaEdit(SuccessMessageMixin, generic.UpdateView):
         return super().form_valid(form)
 
 
-class VeterinarioView(generic.ListView):
+class VeterinarioView(SinPrivilegios, generic.ListView):
+    permission_required = "organizaciones.view_veterinario"
     model = Veterinario
     template_name = "organizaciones/vet_list.html"
     context_object_name = "obj"

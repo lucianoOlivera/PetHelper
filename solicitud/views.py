@@ -2,17 +2,21 @@ from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
+
+from bases.views import SinPrivilegios
 from .models import Solicitud_Donacion_Insumo, Solicitud_Donacion_Monetaria, Estado_Solicitud_Insumo, Estado_Solicitud_Insumo_Detalle, Estado_Solicitud_Monetaria, Estado_Solicitud_Monetaria_Detalle
 from .forms import ReCaptcha, SolicitudDonacionInsumoForm, SolicitudDonacionMonetariaForm, EstadoSolicitudInsumoForm, EstadoSolicitudMonetariaForm
 from insumo.models import Cantidad_Insumo, Insumo
 from usuario.models import Usuario
 from django.forms.models import inlineformset_factory
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 InsumoFormset = inlineformset_factory(
    Solicitud_Donacion_Insumo, Cantidad_Insumo, extra=5, fields=('insumo', 'cantidad', 'solicitud_insumo',))
 
 
-class SolicitudesListView(TemplateView):
+class SolicitudesListView(SinPrivilegios, TemplateView):
+    permission_required = "solicitud.view_solicitud"
     template_name = "solicitud/solicitud_list.html"
     login_url = 'bases/login.html'
 

@@ -1,12 +1,14 @@
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
-    PermissionsMixin)
+    PermissionsMixin,
+    Group)
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 
 dni_regex = RegexValidator(regex=r"^[\d]{1,3}\.?[\d]{3,3}\.?[\d]{3,3}$", message="El formato de DNI debe tener 8 caracteres numericos")
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -28,7 +30,7 @@ class UserManager(BaseUserManager):
 class Usuario(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('Email', unique=True)
     username = models.CharField(max_length=25, unique=True)
-    """ tiene que ser nombre no username """
+    permiso = models.ForeignKey(Group, null=True, on_delete=models.CASCADE, default=1)
     apellido = models.CharField(max_length=25)
     date_joined = models.DateTimeField(default=timezone.now)
     DNI = models.CharField(max_length=8, default="", validators=[dni_regex])

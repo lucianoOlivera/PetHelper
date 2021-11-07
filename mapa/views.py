@@ -2,11 +2,13 @@ from django.views import generic
 
 from .models import Direccion
 from organizaciones.models import Organizacion, Veterinario, Clinica
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from bases.views import SinPrivilegios
 
 # Create your views here.
-
 """ esto seria para crear la direccion """
-class MapaList(generic.ListView):
+class MapaList(SinPrivilegios, generic.ListView):
+    permission_required = "mapa.view_mapa"
     model = Direccion
     template_name = 'mapa/mapa.html'
     login_url = 'bases/login.html'
