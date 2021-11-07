@@ -9,6 +9,7 @@ from insumo.models import Cantidad_Insumo
 from django.contrib import messages
 from django.shortcuts import render
 from .forms import DonacionMonetariaForm, FormaDePagoForm, EstadoDonacionInsumoForm, EstadoDonacionMonetariaForm
+from .forms import ReCaptcha
 
 # Create your views here.
 DonacionFormset = inlineformset_factory(
@@ -25,6 +26,7 @@ class DonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['captcha'] = ReCaptcha
         context['idSolicitud_insumo'] = self.kwargs['pk'] 
         context['Solicitud_insumo_obj'] = Solicitud_Donacion_Monetaria.objects.get(id=self.kwargs['pk'])
         objs = Solicitud_Donacion_Insumo.objects.all()
@@ -75,6 +77,7 @@ class DonacionmonetariaNew(SuccessMessageMixin, generic.CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['captcha'] = ReCaptcha
         context['Solicitud_monetaria_obj'] = Solicitud_Donacion_Monetaria.objects.get(id=self.kwargs['pk'])
         objs = Solicitud_Donacion_Monetaria.objects.all()
         for obj in objs:

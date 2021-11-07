@@ -47,10 +47,12 @@ INSTALLED_APPS = [
     'solicitud',
     'organizaciones',
     'mapa',
+    'reportes',
     'widget_tweaks',
     'smart_selects',
     'social_django',
     'geocoder',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -196,3 +198,7 @@ VERIFICATION_FAILED_TEMPLATE = 'bases/verificacion_error.html'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 EASY_MAPS_GOOGLE_KEY = 'AIzaSyADpYBTwpzczBSJa28xgSILCfNwLBkHfRk'
+
+RECAPTCHA_PUBLIC_KEY = '6LcejBUdAAAAAIVU8UZFxGChhOOdn4Wu7niMhi9Z'
+RECAPTCHA_PRIVATE_KEY = '6LcejBUdAAAAAPEieTcmoWLvFK9wv7A66i-xd_xj'
+RECAPTCHA_REQUIRED_SCORE = 0.85

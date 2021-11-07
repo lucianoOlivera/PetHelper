@@ -1,5 +1,9 @@
 from django import forms
+from captcha.fields import ReCaptchaField 
 from .models import Solicitud_Donacion_Insumo, Solicitud_Donacion_Monetaria, Estado_Solicitud_Monetaria, Estado_Solicitud_Insumo
+
+class ReCaptcha(forms.Form):
+    captcha = ReCaptchaField()
 
 class SolicitudDonacionInsumoForm(forms.ModelForm):
     class Meta:
