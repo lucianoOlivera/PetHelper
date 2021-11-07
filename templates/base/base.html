@@ -59,12 +59,14 @@
             </li>
             {% endif %} 
             <!-- Nav Item - Donations -->
+            {% if perms.solicitud.view_solicitud_donacion_monetaria %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'solicitud:solicitud_list' %}">
                     <i class="fas fa-hand-holding-usd"></i>
                     <span>Donaciones</span>
                 </a>
             </li>
+            {% endif %} 
 
             <!-- Nav Item - Medical asistance Collapse Menu -->
             <li class="nav-item">

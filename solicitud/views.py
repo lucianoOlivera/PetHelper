@@ -15,8 +15,9 @@ InsumoFormset = inlineformset_factory(
    Solicitud_Donacion_Insumo, Cantidad_Insumo, extra=5, fields=('insumo', 'cantidad', 'solicitud_insumo',))
 
 
-class SolicitudesListView(SinPrivilegios, TemplateView):
-    permission_required = "solicitud.view_solicitud"
+class SolicitudesListView(SinPrivilegios, generic.ListView):
+    model = Solicitud_Donacion_Insumo
+    permission_required = "solicitud.view_solicitud_donacion_monetaria"
     template_name = "solicitud/solicitud_list.html"
     login_url = 'bases/login.html'
 

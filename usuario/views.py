@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.contrib.auth.views import PasswordChangeView, PasswordResetCompleteView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetView
 from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from .models import Usuario
@@ -16,8 +17,21 @@ class RegistroUsuario(FormView):
     success_url = reverse_lazy('usuario:verification_mensage')
 
     def form_valid(self, form):
-        inactive_user = send_verification_email(self.request, form)
-        """ form.save() """
+        user_form = form.save()
+        id_group = form.instance.permiso
+        if id_group == 1:
+            group = Group.objects.get(name='Usuario')
+            user_form.groups.add(group)
+        elif id_group == 2:
+            group = Group.objects.get(name='Veterinario')
+            user_form.groups.add(group)
+        elif id_group == 3:
+            group = Group.objects.get(name='Organizacion')
+            user_form.groups.add(group)
+        elif id_group == 4:
+            group = Group.objects.get(name='Clinicas')
+            user_form.groups.add(group)
+        send_verification_email(self.request, form)
         return super().form_valid(form)
 
 

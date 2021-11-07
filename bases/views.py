@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group, GroupManager
 from django.urls.base import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -22,6 +23,11 @@ class Home(LoginRequiredMixin, generic.TemplateView):
     login_url = 'bases:login'
 
     def get_context_data(self, **kwargs):
+        user = self.request.user
+        print(user.get_group_permissions())
+        print("asd")
+        a = Group.objects.all()
+        print(a)
         context = super().get_context_data(**kwargs)
         context['veterinarios'] = Veterinario.objects.all()
         context['clinicas'] = Clinica.objects.all()

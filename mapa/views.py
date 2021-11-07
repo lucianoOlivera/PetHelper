@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.views import generic
 
 from .models import Direccion
