@@ -4,6 +4,8 @@
 </div>
 
 <div class="text-gray-900" style="margin-bottom: 15px;margin-right: 10px;">
+    <a style="float: right;" href="{% url 'organizaciones:veterinarios_new' %}"><i class="fas fa-dog"></i>  Darme de alta como Veterinario</a><br><br>
+    <a style="float: right;" href="{% url 'organizaciones:clinicas_new' %}" ><i class="fas fa-clinic-medical"></i> Darme de alta como Clinica</a><br><br>
     <h6 style="float: right;margin-bottom: 8px;"> Se encontraron {{ total_veterinarios }} veterinarios y {{ total_clinicas }} clínicas</h6>
     <div class="container">
         <div class="row">

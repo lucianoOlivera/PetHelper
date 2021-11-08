@@ -50,20 +50,23 @@
             </li>
 
             <!-- Nav Item - Mapa Collapse Menu -->
+            {% if perms.mapa.view_direccion %}
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{% url 'mapa:mapa_list' %}">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>Mapa</span>
                 </a>
             </li>
-
+            {% endif %} 
             <!-- Nav Item - Donations -->
+            {% if perms.solicitud.view_solicitud_donacion_monetaria %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'solicitud:solicitud_list' %}">
                     <i class="fas fa-hand-holding-usd"></i>
                     <span>Donaciones</span>
                 </a>
             </li>
+            {% endif %} 
 
             <!-- Nav Item - Medical asistance Collapse Menu -->
             <li class="nav-item">
@@ -79,12 +82,13 @@
             </li>
 
             <!-- Nav Item - Organizations -->
+            {% if perms.organizacion.view_organizacion %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'organizaciones:listar_organizaciones' %}">
                     <i class="fas fa-users"></i>
                     <span>Organizaciones</span></a>
             </li>
-
+            {% endif %} 
             <!-- Nav Item - Reports -->
             <li class="nav-item">
                 <a class="nav-link" href="#">
@@ -197,7 +201,14 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-900">{{ user.username }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-900 text-center">
+                                    {{ user.username }}<br>
+                                    {% if user.is_superuser %}
+                                    <small class="text-primary">Superadmin</small>
+                                    {% else %}
+                                    <small class="text-primary">{{ user.get_permiso_display }}</small>
+                                    {% endif %}
+                                </span>
                                 {% if user.foto %}
                                 <img class="img-profile rounded-circle" src="{{ user.foto.url }}">
                                 {% else %}
@@ -222,7 +233,6 @@
                                 </a>
                             </div>
                         </li>
-
                     </ul>
 
                 </nav>
