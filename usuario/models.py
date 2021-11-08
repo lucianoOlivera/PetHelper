@@ -13,7 +13,7 @@ PERMISOS = [
   (1, "Usuario"),
   (2, "Veterinario"),
   (3, "Organizacion"),
-  (4, "Clinicas")
+  (4, "Clinica")
 ]
 
 class UserManager(BaseUserManager):
