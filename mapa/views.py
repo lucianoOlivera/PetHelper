@@ -9,7 +9,7 @@ from bases.views import SinPrivilegios
 # Create your views here.
 """ esto seria para crear la direccion """
 class MapaList(SinPrivilegios, generic.ListView):
-    permission_required = "mapa.view_mapa"
+    permission_required = "mapa.view_direccion"
     model = Direccion
     template_name = 'mapa/mapa.html'
     login_url = 'bases/login.html'

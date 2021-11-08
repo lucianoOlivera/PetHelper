@@ -29,7 +29,7 @@ class RegistroUsuario(FormView):
             group = Group.objects.get(name='Organizacion')
             user_form.groups.add(group)
         elif id_group == 4:
-            group = Group.objects.get(name='Clinicas')
+            group = Group.objects.get(name='Clinica')
             user_form.groups.add(group)
         send_verification_email(self.request, form)
         return super().form_valid(form)
