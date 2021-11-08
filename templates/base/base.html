@@ -82,13 +82,11 @@
             </li>
 
             <!-- Nav Item - Organizations -->
-            {% if perms.organizacion.view_organizacion %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'organizaciones:listar_organizaciones' %}">
                     <i class="fas fa-users"></i>
                     <span>Organizaciones</span></a>
             </li>
-            {% endif %} 
             <!-- Nav Item - Reports -->
             <li class="nav-item">
                 <a class="nav-link" href="#">

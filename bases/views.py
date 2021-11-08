@@ -25,6 +25,7 @@ class Home(LoginRequiredMixin, generic.TemplateView):
     def get_context_data(self, **kwargs):
         user = self.request.user
         a = Group.objects.all()
+        print(user.get_all_permissions())
         context = super().get_context_data(**kwargs)
         context['veterinarios'] = Veterinario.objects.all()
         context['clinicas'] = Clinica.objects.all()
