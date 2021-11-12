@@ -26,7 +26,7 @@
               <div class="col">
                 <div class="text-center">
                     <i class="fas fa-chart-line fa-lg" style="color: red; size: 5mm;"></i><br>
-                    <button class= "btn btn-primary btn-user bg-gradient-primary text-gray-100">Reportes</button>
+                    <a href="{% url 'reportes:reportes_list' %}" class= "btn btn-primary btn-user bg-gradient-primary text-gray-100">Reportes</a>
                 </div>
               </div>
             </div>
@@ -105,7 +105,6 @@
     </div>
 
        
-</div>
     <!-- /.container-fluid -->
 
 {% endblock %}

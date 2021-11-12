@@ -1,18 +1,5 @@
 {% extends 'base/base.html' %} {% block page_content %}
 
-{% if messages %}
-    {% for message in messages %}
-    <div class="text-center alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-        <i class="fas fa-check"></i>
-        <strong> {{ message|safe }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>    
-    </div>
-    {% endfor %}
-{% endif %}
-
-
 <div class="container-fluid">
     <div class="col-xl-10 col-lg-10 col-md-9 items-align-center">
         <h1 class="h3 mb-4 text-gray-800">Configuración general de la cuenta</h1>
