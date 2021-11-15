@@ -7,14 +7,19 @@
     <h1 class="h3 mb-4 text-gray-800">Reportes</h1>
 
     
-    <div class="row text-center">
+    <div class="row text-center justify-content-center">
+        <div class="col-xl-3 col-md-6 mb-4">
             <div class="card shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Donaciones Monetarias</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                            {% if donaciones_monetarias > 0 %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">${{donaciones_monetarias}}</div>
+                            {% else %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">$0</div>
+                            {% endif %}
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -22,6 +27,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card shadow h-100 py-2">
@@ -29,8 +35,12 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Donaciones de insumos</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                Cantidad de insumos donados</div>
+                            {% if donaciones_insumos > 0 %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{donaciones_insumos}}</div>
+                            {% else %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                            {% endif %}
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-capsules fa-2x text-gray-300"></i>
@@ -41,26 +51,48 @@
         </div>
     </div>
 
-    <div class="card-deck">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <h5 class="m-0 font-weight-bold text-gray-800"><i class="fas fa-hand-holding-usd"></i> {{titulo1}} </h5>
-                        </div>
-                        <div class="col">
-                            <a href="{% url 'reportes:reporte_solicitudes_pdf' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="float: right;"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
+        <div class="card-deck">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="m-0 font-weight-bold text-gray-800"><i class="fas fa-scroll"></i> {{titulo1}} </h5>
+                            </div>
+                            <div class="col">
+                                <a href="{% url 'reportes:reporte_solicitudes_pdf' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="float: right;"><i
+                                    class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <div id="container1"></div>
+                <div class="card-body">
+                    <div id="container1"></div>
+                </div>
             </div>
         </div>
-    </div>
+
+        <div class="card-deck">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="m-0 font-weight-bold text-gray-800"><i class="fas fa-hand-holding-usd"></i> {{titulo3}} </h5>
+                            </div>
+                            <div class="col">
+                                <a href="{% url 'reportes:reporte_donaciones_pdf' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="float: right;"><i
+                                    class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="container3"></div>
+                </div>
+            </div>
+        </div>
+
 
     <div class="card-deck">
         <div class="card shadow mb-4">
@@ -137,6 +169,63 @@
     }, {
         name: 'Solicitud de insumos',
         data: {{ solicitudes_insumos|safe }}
+
+    }]
+});
+</script>
+
+<script type="application/javascript">
+    Highcharts.chart('container3', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Cantidad de donaciones mensuales'
+    },
+    xAxis: {
+        categories: [
+            'Ene',
+            'Feb',
+            'Mar',
+            'Abr',
+            'May',
+            'Jun',
+            'Jul',
+            'Ago',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dic'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Cant. donaciones '
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0,
+        }
+    },
+    series: [{
+        name: 'Donación monetaria',
+        data: {{ donaciones_monetarias_mes|safe }}
+
+    }, {
+        name: 'Donación de insumos',
+        data: {{ donaciones_insumos_mes|safe }}
 
     }]
 });
