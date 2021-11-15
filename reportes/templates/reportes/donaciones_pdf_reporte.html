@@ -1,0 +1,86 @@
+{% extends "easy_pdf/base.html" %}
+{% block content %}
+
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+        h1{
+            text-align: center;
+            color: blue
+        }
+        h5{
+            text-align: center;
+        }
+        .table{
+            border: 0.5px solid #ababab;
+            text-align: center;
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 15px;
+            table-layout:fixed;
+        }
+        .table tr th td{
+            white-space: nowrap;
+        }
+        .table th {
+            padding: 5px;
+            vertical-align: top;
+            background-color: #e8e8e8;
+        }
+        .table td {
+            padding: 5px;
+            vertical-align: top;
+            -pdf-keep-with-next: false;
+        }
+
+
+    </style>
+
+    <div class="container-fluid">
+        <div class="text-center">
+            <h1>PetHelper</h1>
+            <h5>Cantidad de donaciones de insumos mensuales</h5>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                {% for mes in meses %}
+                <th>{{mes}}</th>
+                {% endfor %}
+            </thead>
+            <tbody>
+                
+                <tr>
+                    {% for donacion_insumo in donaciones_insumos %}
+                    <td>{{donacion_insumo}}</td>
+                    {% endfor %}
+                </tr>
+                
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            <h5>Cantidad de donaciones monetarias mensuales</h5>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                {% for mes in meses %}
+                <th>{{mes}}</th>
+                {% endfor %}
+            </thead>
+            <tbody>
+                
+                <tr>
+                    {% for donacion_monetaria in donaciones_monetarias %}
+                    <td>{{donacion_monetaria}}</td>
+                    {% endfor %}
+                </tr>
+                
+            </tbody>
+        </table>
+
+        <h5>Reporte generado el {{ fecha|date:"d/m/Y" }}</h5>
+    </div>
+
+{% endblock %}

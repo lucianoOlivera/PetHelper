@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'verify_email.apps.VerifyEmailConfig',
     'django_filters',
+    'easy_pdf',
     'bases',
     'usuario',
     'donacionV2',

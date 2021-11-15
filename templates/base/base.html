@@ -23,6 +23,14 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css' rel='stylesheet' />
 
+    <!-- charts -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+  
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
 
 </head>
 
@@ -89,7 +97,7 @@
             </li>
             <!-- Nav Item - Reports -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'reportes:reportes_list' %}">
                     <i class="fas fa-chart-bar"></i>
                     <span>Reportes</span></a>
             </li>
