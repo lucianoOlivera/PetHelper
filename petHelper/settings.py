@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'verify_email.apps.VerifyEmailConfig',
     'django_filters',
     'easy_pdf',
@@ -54,7 +55,13 @@ INSTALLED_APPS = [
     'social_django',
     'geocoder',
     'captcha',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -93,6 +100,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
 
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 WSGI_APPLICATION = 'petHelper.wsgi.application'
@@ -159,6 +167,8 @@ LOGIN_URL = 'bases:login'
 LOGIN_REDIRECT_URL = 'bases:home'
 
 LOGOUT_REDIRECT_URL = '/login/'
+
+LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = "usuario.Usuario"
 
