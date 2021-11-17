@@ -49,6 +49,15 @@
                         {{form.telefono}}<br>
                         {{form.telefono.help_text}}
                     </div><br>
+
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <small class="text-danger">
+                            {{form.direccion.errors}}
+                        </small>
+                        <label class="text-gray-900">{{form.direccion.label}}</label>
+                        {{form.direccion}}
+                        {{form.direccion.help_text}}
+                    </div><br>
         
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <small class="text-danger">

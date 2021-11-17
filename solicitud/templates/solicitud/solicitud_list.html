@@ -60,6 +60,8 @@
                         {% else %}
                         <label >{{ solicitud_insumo.uc.username}}</label>
                         {% endif %}
+                        <br><label class="text-gray-900"> Direccion de recepción:</label>
+                        <br><label> {{solicitud_insumo.uc.direccion}}</label>
                         {% if solicitud_insumo.uc.telefono %}
                         <br><label class="text-gray-900"> Telefono:  </label>
                         <label >{{ solicitud_insumo.uc.telefono }}</label>

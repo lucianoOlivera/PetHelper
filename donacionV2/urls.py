@@ -9,7 +9,6 @@ from .views import (
 
 urlpatterns = [
     path('donacion_insumo/new/<int:pk>', login_required(DonacionInsumoNew.as_view()), name='donacion_insumo_new'),
-
     path('donacion_monetaria/new/<int:pk>', login_required(DonacionmonetariaNew.as_view()), name='donacion_monetaria_new'),
 
     path('medioPago/', login_required(MedioPagoView.as_view()), name='medioPago_list'),
