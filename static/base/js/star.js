@@ -88,7 +88,7 @@ if(one){
             }, 
             success: function(response){
                 console.log(response)
-                confirmBox.innerHTML = `<div class="alert alert-success"><i class="fas fa-check-circle"></i> Veterinario calificado satisfactoriamente con ${val_num} estrellas 
+                confirmBox.innerHTML = `<div class="alert alert-success"><i class="fas fa-check-circle"></i> Ha calificado satisfactoriamente con ${val_num} estrellas 
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button></div>`

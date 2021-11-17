@@ -86,6 +86,24 @@ class ClinicaDetail(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        if self.request.method == 'GET':
+            id = context.get('object').id
+            obj = 0
+            obj = Veterinario.objects.get(id=id)
+            # tengo que tener una lista de calificaciones y acumularlas
+            suma = Veterinario.objects.filter(id=obj.id).aggregate(Avg('calificacion'))
+            val = self.request.GET.get('val')
+            print(val)
+            print(suma)
+            obj.calificacion = val
+            for key,value in suma.items():
+                obj.calificacion_total = value
+                context['calificacion_total'] = obj.calificacion_total
+            obj.save()
+            context['response'] = JsonResponse({'success': 'true', 'calificacion': val}, safe=False)
+            return context
+
         context['coordenadas'] = Direccion.objects.get(direccion=self.object.direccion)
         return context
 

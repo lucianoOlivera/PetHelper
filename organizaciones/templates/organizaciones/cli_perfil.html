@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %} {% block page_content %}
 {% load static %}
 <div class="container text-center" style="text-align: center;margin-bottom: 20px;">
+    <div id="confirm-box"></div>
             {% if obj.logo %}
             <img class="img-profile rounded-circle" src="{{ obj.logo.url }}" style="width:200px; margin-bottom: 20px;">
             {% else %}
@@ -15,6 +16,17 @@
                         <img src="http://s2.accesoperu.com/logos/btn_whatsapp.png" alt="" style="width:50px;">
                     </a>
                 </div>
+            </div>
+            <div>
+                <fom class="rate-form" action="" method="POST" id="{{obj.id}}">
+                    {% csrf_token %}
+                    <button type="submit" class="my-btn fa fa-star fa-2x" id="first"></button>
+                    <button type="submit" class="my-btn fa fa-star fa-2x" id="second"></button>
+                    <button type="submit" class="my-btn fa fa-star fa-2x"  id="third"></button>
+                    <button type="submit" class="my-btn fa fa-star fa-2x" id="fourth"></button>
+                    <button type="submit" class="my-btn fa fa-star fa-2x" id="fifth"></button>
+                </fom>
+                <div>Puntaje: {{calificacion_total}} / 5 </div>
             </div>
     <h5>{{obj.descripcion}}</h5>
     <h6 class="m-0 font-weight-bold text-primary">Clínica</h6>
