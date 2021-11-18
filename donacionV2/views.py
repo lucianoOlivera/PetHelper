@@ -28,7 +28,7 @@ class DonacionInsumoNew(SuccessMessageMixin, generic.CreateView):
         context = super().get_context_data(**kwargs)
         context['captcha'] = ReCaptcha
         context['idSolicitud_insumo'] = self.kwargs['pk'] 
-        context['Solicitud_insumo_obj'] = Solicitud_Donacion_Monetaria.objects.get(id=self.kwargs['pk'])
+        context['Solicitud_insumo_obj'] = Solicitud_Donacion_Insumo.objects.get(id=self.kwargs['pk'])
         objs = Solicitud_Donacion_Insumo.objects.all()
         for obj in objs:
             if obj.id == self.kwargs['pk']:

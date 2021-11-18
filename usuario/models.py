@@ -42,6 +42,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     DNI = models.CharField(max_length=8, default="", validators=[dni_regex])
     foto = models.ImageField(upload_to="usuario",blank=True, null=True)
     telefono = models.CharField(max_length=10, null=True, default="", help_text="Ejemplo: 2614247398")
+    direccion = models.CharField(max_length=100, blank=True, null=True, help_text="Ejemplo: Maipu 123, Godoy Cruz, Mendoza")
     objects = UserManager()
     is_active = models.BooleanField('active', default=True)
     is_staff = models.BooleanField(default=True)

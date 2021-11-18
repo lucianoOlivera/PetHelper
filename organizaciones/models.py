@@ -1,5 +1,5 @@
 from datetime import time
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MaxValueValidator, MinValueValidator
 from django.db import models
 from bases.models import ClaseModelo
 from django.utils import timezone
@@ -48,6 +48,11 @@ class Clinica(ClaseModelo):
     dia_hasta = models.PositiveSmallIntegerField(choices=DIAS, default="5")
     hora_desde = models.PositiveSmallIntegerField(choices=HORAS_DE_DIA_24, default="9")
     hora_hasta = models.PositiveSmallIntegerField(choices=HORAS_DE_DIA_24, default="18")
+    calificacion = models.PositiveIntegerField(null=True, blank=True,default=0, 
+        validators=[ MinValueValidator(0),
+                    MaxValueValidator(5)
+        ])
+    calificacion_total = models.PositiveSmallIntegerField(null= True, blank=True,default=0)
 
     def save(self):
         super(Clinica, self).save()
@@ -69,6 +74,11 @@ class Veterinario(ClaseModelo):
     dia_hasta = models.PositiveSmallIntegerField(choices=DIAS, default="5")
     hora_desde = models.PositiveSmallIntegerField(choices=HORAS_DE_DIA_24, default="9")
     hora_hasta = models.PositiveSmallIntegerField(choices=HORAS_DE_DIA_24, default="18")
+    calificacion = models.PositiveIntegerField(null=True, blank=True,default=0, 
+        validators=[ MinValueValidator(0),
+                    MaxValueValidator(5)
+        ])
+    calificacion_total = models.PositiveSmallIntegerField(null= True, blank=True,default=0)
 
     def save(self):
         super(Veterinario, self).save()

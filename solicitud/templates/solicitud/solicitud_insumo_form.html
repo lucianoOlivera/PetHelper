@@ -13,13 +13,16 @@
                         <div class="row no-gutters align-items-center">
                             <div class="row">
                                 <h6 class="text-gray-900"><strong>Dirección de recepción de la donación</strong></h6>
-                                    <!-- <small class="text-danger">
-                                        {{form.email.errors}}
-                                    </small> -->
-                                    <div class="form-group">
-                                        <label > Calle y número </label>
-                                        <input name="" >   
+                                    {% if not user.direccion %}
+                                    <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Ingrese los datos de su direccion para poder mostrarla en la solicitud.
+                                     <br><a href="{% url 'usuario:usuario_edit' user.id %}"><i class="fas fa-external-link-alt"></i> Completar datos</a>
                                     </div>
+                                    {% else %}
+                                    <div class="form-group">
+                                        <label> Calle y número: </label>
+                                            {{user.direccion}} 
+                                    </div>
+                                    {% endif %}
                                     <h6 class="text-gray-900"><strong>Datos de la donación</strong></h6>
                                     <div class="form-control-user">
                                         {{ form.titulo.label }}
