@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'mercadopago'
 ]
 
 SITE_ID = 1
@@ -213,3 +214,5 @@ EASY_MAPS_GOOGLE_KEY = 'AIzaSyADpYBTwpzczBSJa28xgSILCfNwLBkHfRk'
 RECAPTCHA_PUBLIC_KEY = '6LcejBUdAAAAAIVU8UZFxGChhOOdn4Wu7niMhi9Z'
 RECAPTCHA_PRIVATE_KEY = '6LcejBUdAAAAAPEieTcmoWLvFK9wv7A66i-xd_xj'
 RECAPTCHA_REQUIRED_SCORE = 0.85
+
+PUBLIC_KEY = 'TEST-e67cc838-dc71-4d4d-a6e9-8b33375a378f'

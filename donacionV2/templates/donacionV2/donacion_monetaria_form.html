@@ -41,8 +41,22 @@
                             {% endif %}
                             <h6 class="text-gray-900"><strong>Cantidad a donar</strong></h6>
                                 {{form.monto.label}} $
-                                {{ form.monto }} <br>
+                                {{ form.monto }} <br><br>
                             <h6 class="text-gray-900"><strong>Seleccione el método de pago</strong></h6>
+                            <div>
+                                {% for medio_pago in medios_pago %}
+                                {% if medio_pago.nombre_pago == "Mercado Pago" %}
+                                <a href="{% url 'donacionV2:medioPago_mercadopago' %}">
+                                {% else %}
+                                <a href="{% url 'donacionV2:medioPago_transferencia' %}">
+                                {% endif %}
+                                    {% if medio_pago.imagen%}
+                                    <img class="img-profile rounded-circle" src="{{ medio_pago.imagen.url }}" style="width:100px">
+                                    {% endif %}
+                                    {{ medio_pago.nombre_pago }}
+                                </a>
+                                {% endfor %}
+                            </div>
                             {{captcha}}
                         </div>    
                     </div><br>
@@ -68,7 +82,7 @@
 </div>
 
 
-<!-- Modal exito-->
+<!-- Modal exito
 <div class="modal fade" id="exitoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -90,7 +104,6 @@
             </div>
         </div>
     </div>
-</div>
-
+</div> -->
 
 {% endblock %}
