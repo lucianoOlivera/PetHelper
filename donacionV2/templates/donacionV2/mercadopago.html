@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %} {% block page_content %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Redirección a Mercado Pago</h1>
+    <div class="alert alert-info text-center" role="alert">Haz click en "Pagar" para ser redirigido al checkout de Mercado Pago</div>
+    <div class="cho-container text-center" id="cho-container"></div>
+</div>    
+    
+
+
+<script>
+    // Agrega credenciales de SDK
+      const mp = new MercadoPago('TEST-3f790011-e337-4774-b0ce-96697e7b2b3f', {
+            locale: 'es-AR'
+      });
+    
+      // Inicializa el checkout
+      mp.checkout({
+          preference: {
+              id: '{{preference.id}}'
+          },
+          render: {
+                container: '.cho-container', // Indica el nombre de la clase donde se mostrará el botón de pago
+                label: 'Pagar', // Cambia el texto del botón de pago (opcional)
+          }
+    });
+</script>
+{% endblock %}
+    

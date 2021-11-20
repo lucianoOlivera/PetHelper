@@ -41,7 +41,7 @@ class Donacion_monetaria(ClaseModelo):
 
 class Medio_Pago(ClaseModelo):
     nombre_pago = models.CharField(max_length=100)
-    imagen = models.ImageField(upload_to='pothos', null=True, blank=True)
+    imagen = models.ImageField(upload_to="pagos", null=True, blank=True)
 
     def save(self):
         super(Medio_Pago, self).save()

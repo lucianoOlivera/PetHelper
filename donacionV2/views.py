@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.shortcuts import render
 from .forms import DonacionMonetariaForm, FormaDePagoForm, EstadoDonacionInsumoForm, EstadoDonacionMonetariaForm
 from .forms import ReCaptcha
+import mercadopago
+sdk = mercadopago.SDK("TEST-3842048582306113-112022-c422c5bc8b41c494c1342837e941c719-1023214274")
 
 # Create your views here.
 DonacionFormset = inlineformset_factory(
@@ -78,6 +80,7 @@ class DonacionmonetariaNew(SuccessMessageMixin, generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['captcha'] = ReCaptcha
+        context['medios_pago'] = Medio_Pago.objects.all()
         context['Solicitud_monetaria_obj'] = Solicitud_Donacion_Monetaria.objects.get(id=self.kwargs['pk'])
         objs = Solicitud_Donacion_Monetaria.objects.all()
         for obj in objs:
@@ -122,7 +125,7 @@ class MedioPagoDel(SuccessMessageMixin, generic.DeleteView):
     template_name = 'donacionV2/medioPago_del.html'
     context_object_name = 'obj'
     success_url = reverse_lazy("donacionV2:medioPago_list")
-    success_message = "Medio de pago sastifactoriamente"
+    success_message = "Medio de pago eliminado sastifactoriamente"
 
 
 class EstadosMonetariosListView(generic.ListView):
@@ -179,3 +182,30 @@ class EstadosInsumosDel(SuccessMessageMixin, generic.DeleteView):
     context_object_name = 'obj'
     success_url = reverse_lazy('donacionV2:donacion_estado_insumo_list')
     success_message = "Estado eliminado sastifactoriamente"
+
+
+class MercadoPagoView(generic.TemplateView):
+    template_name = 'donacionV2/mercadopago.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Crea un ítem en la preferencia
+        preference_data = {
+            "items": [
+                {
+                    "title": "Donacion Monetaria",
+                    "quantity": 1,
+                    "unit_price": 1000,
+                }
+            ]
+        }
+        preference_response = sdk.preference().create(preference_data)
+        preference = preference_response["response"]
+        context['preference'] = preference
+        print(context)
+        return context
+
+
+class TransferenciaView(generic.TemplateView):
+    template_name = 'donacionV2/transferencia.html'
