@@ -1,0 +1,150 @@
+{% extends 'base/base.html' %} {% block page_content %}
+
+<div class="container-fluid">
+    <div class="col-xl-10 col-lg-10 col-md-9 items-align-center">
+        <h1 class="h3 mb-4 text-gray-800">Mi Actividad</h1>
+    </div>
+
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Solicitudes realizadas</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            {% if not solicitudes_insumos and not solicitudes_monetarias %}
+            <div class="alert alert-warning" role="alert"><i class="fas fa-info-circle"></i> No ha creado solicitudes</div>
+            {% else %}
+                {% if solicitudes_monetarias %}
+                <div class="text-center"><strong>Solicitudes Monetarias</strong></div>
+                <table class="table table-striped table-hover mb-4" id="solicitudes">
+                    <thead>
+                        <th>Id</th>
+                        <th>Titulo</th>
+                        <th>Monto</th>
+                        <th>F.Creación</th>
+                        <th>Estado</th>
+                    </thead>
+                    <tbody>
+                        {% for solicitud_monetaria in solicitudes_monetarias %}
+                        <tr>
+                            <td>{{ solicitud_monetaria.id }}</td>
+                            <td>{{ solicitud_monetaria.titulo }}</td>
+                            <td>{{ solicitud_monetaria.monto }}</td>
+                            <td>{{ solicitud_monetaria.fc|date:"d/m/Y H:i:s" }}</td>
+                            <td>Creada</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table><br>
+                {% else %}
+                <div class="alert alert-warning text-center" role="alert"><i class="fas fa-info-circle"></i> No ha creado solicitudes de este tipo</div>
+                {% endif %}
+
+                <div class="text-center"><strong>Solicitudes de Insumos</strong></div>
+                {% if solicitudes_insumos %}
+                <table class="table table-striped table-hover" id="solicitudes">
+                    <thead>
+                        <th>Id</th>
+                        <th>Titulo</th>
+                        <th>Insumos</th>
+                        <th>F. Creación</th>
+                        <th>Estado</th>
+                    </thead>
+                    <tbody>
+                        {% for solicitud_insumo in solicitudes_insumos %}
+                        <tr>
+                            <td>{{ solicitud_insumo.id }}</td>
+                            <td>{{ solicitud_insumo.titulo }}</td>
+                            {%  for cantidad_insumo in cantidades_insumos %}
+                                {% if solicitud_insumo.id == cantidad_insumo.solicitud_insumo.id %}
+                                <td>
+                                    <ul>
+                                        <li>{{ cantidad_insumo.cantidad }} {{ cantidad_insumo.insumo.nombre }}</li>
+                                    </ul>
+                                </td>
+                                {% endif %}
+                            {% endfor %}
+                            <td>{{ solicitud_insumo.fc|date:"d/m/Y H:i:s" }}</td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="alert alert-warning text-center" role="alert"><i class="fas fa-info-circle"></i> No ha creado solicitudes de este tipo</div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Donaciones realizadas</h6>
+        </div>
+    
+        <div class="card-body">
+            {% if not donaciones_insumos and not donaciones_monetarias %}
+            <div class="alert alert-warning text-center" role="alert"><i class="fas fa-info-circle"></i> No ha creado donaciones</div>
+            {% else %}
+                {% if donaciones_monetarias %}
+                <div class="text-center"><strong>Donaciones Monetarias</strong></div>
+                <table class="table table-striped table-hover mb-4" id="solicitudes">
+                    <thead>
+                        <th>Id</th>
+                        <th>Monto</th>
+                        <th>F.Creación</th>
+                        <th>Estado</th>
+                    </thead>
+                    <tbody>
+                        {% for donacion_monetaria in donaciones_monetarias %}
+                        <tr>
+                            <td>{{ donacion_monetaria.id }}</td>
+                            <td>{{ donacion_monetaria.monto }}</td>
+                            <td>{{ donacion_monetaria.fc|date:"d/m/Y H:i:s" }}</td>
+                            <td>Creada</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table><br>
+                {% else %}
+                <div class="alert alert-warning text-center" role="alert"><i class="fas fa-info-circle"></i> No ha creado donaciones de este tipo</div>
+                {% endif %}
+    
+                <div class="text-center"><strong>Donaciones de Insumos</strong></div>
+                {% if donaciones_insumos %}
+                <table class="table table-striped table-hover" id="solicitudes">
+                    <thead>
+                        <th>Id</th>
+                        <th>Insumos</th>
+                        <th>F. Creación</th>
+                        <th>Estado</th>
+                    </thead>
+                    <tbody>
+                        {% for donacion_insumo in donaciones_insumos %}
+                        <tr>
+                            <td>{{ donacion_insumo.id }}</td>
+                            {%  for cantidad_insumo_donacion in cantidades_insumos_donaciones %}
+                                {% if donacion_insumo.id == cantidad_insumo_donacion.donacion_isumo.id %}
+                                <td>
+                                    <ul>
+                                        <li>{{ cantidad_insumo_donacion.cantidad }} {{ cantidad_insumo_donacion.insumo.nombre }}</li>
+                                    </ul>
+                                </td>
+                                {% endif %}
+                            {% endfor %}
+                            <td>{{ donacion_insumo.fc|date:"d/m/Y H:i:s" }}</td>
+                            <td>Creada</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="alert alert-warning text-center" role="alert"><i class="fas fa-info-circle"></i> No ha creado donaciones de este tipo</div>
+                {% endif %}
+            {% endif %}
+        </div>    
+    </div>
+</div>
+
+{% endblock %}

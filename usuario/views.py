@@ -1,6 +1,9 @@
 from django.contrib.auth.models import Group
 from django.contrib.auth.views import PasswordChangeView, PasswordResetCompleteView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetView
 from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, SetPasswordForm
+
+from donacionV2.models import Cantidad_Insumo_Donacion
+from insumo.models import Cantidad_Insumo, Insumo
 from .models import Usuario
 from django.views.generic.edit import FormView
 from django.views import generic
@@ -8,6 +11,8 @@ from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from verify_email.email_handler import send_verification_email
 from .forms import  UserRegisterForm, UserEditForm
+from solicitud.models import Solicitud_Donacion_Insumo, Solicitud_Donacion_Monetaria
+from donacionV2.models import Donacion_Insumo, Donacion_monetaria
 
 
 class RegistroUsuario(FormView):
@@ -92,3 +97,22 @@ class UsuarioPasswordResetConfirm(SuccessMessageMixin, PasswordResetConfirmView)
 
 class UsuarioPasswordResetComplete(SuccessMessageMixin, PasswordResetCompleteView):
     template_name = 'bases/resetear_contraseña_complete.html'
+
+
+class MiActividad(generic.DetailView):
+    model = Usuario
+    template_name = "bases/usuario_actividad.html"
+    context_object_name = 'usuario'
+    login_url = 'bases/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['solicitudes_insumos'] = Solicitud_Donacion_Insumo.objects.filter(uc_id=user.id)
+        context['solicitudes_monetarias'] = Solicitud_Donacion_Monetaria.objects.filter(uc_id=user.id)
+        context['donaciones_insumos'] = Donacion_Insumo.objects.filter(uc_id=user.id)
+        context['donaciones_monetarias'] = Donacion_monetaria.objects.filter(uc_id=user.id)
+        context['cantidades_insumos'] = Cantidad_Insumo.objects.select_related('solicitud_insumo')
+        context['insumos'] = Insumo.objects.all()
+        context['cantidades_insumos_donaciones'] = Cantidad_Insumo_Donacion.objects.all()
+        return context
