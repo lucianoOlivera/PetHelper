@@ -21,7 +21,7 @@ class SolicitudDonacionInsumoForm(forms.ModelForm):
 class SolicitudDonacionMonetariaForm(forms.ModelForm):
     class Meta:
         model = Solicitud_Donacion_Monetaria
-        fields = ['titulo', 'monto', 'pedido', 'veterinario']
+        fields = ['titulo', 'monto', 'pedido', 'veterinario', 'cbu', 'nombre_titular', 'alias', 'nombre_banco']
 
         def __init__(self, *arg, **kwargs):
             super().__init__(*arg, **kwargs)

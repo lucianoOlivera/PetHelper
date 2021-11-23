@@ -31,6 +31,7 @@ class Cantidad_Insumo_Donacion(models.Model):
 class Donacion_monetaria(ClaseModelo):
     solicitud_monetaria = models.ForeignKey(Solicitud_Donacion_Monetaria, on_delete=models.CASCADE, null=True)
     monto = models.FloatField(max_length=100, null=False, blank=False)
+    comprobante = models.FileField(upload_to="comprobante", null=True, blank=True)
 
     def save(self):
         super(Donacion_monetaria, self).save()

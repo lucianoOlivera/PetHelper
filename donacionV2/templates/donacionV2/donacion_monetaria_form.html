@@ -48,20 +48,21 @@
                                 {% if medio_pago.nombre_pago == "Mercado Pago" %}
                                 <a href="{% url 'donacionV2:medioPago_mercadopago' %}">
                                 {% else %}
-                                <a href="{% url 'donacionV2:medioPago_transferencia' %}">
+                                <a href="{% url 'donacionV2:medioPago_transferencia' Solicitud_monetaria.id %}">
                                 {% endif %}
                                     {% if medio_pago.imagen%}
-                                    <img class="img-profile rounded-circle" src="{{ medio_pago.imagen.url }}" style="width:100px">
+                                    <img class="img-profile rounded-circle" src="{{ medio_pago.imagen.url }}" style="width:50px">
                                     {% endif %}
                                     {{ medio_pago.nombre_pago }}
                                 </a>
                                 {% endfor %}
-                            </div>
+                            </div><br>
+                            <h6 class="text-gray-900"><strong>Suba el comprobante de pago</strong></h6>
+                                {{form.comprobante.label}}
+                                {{ form.comprobante }} <br><br>
                             {{captcha}}
                         </div>    
                     </div><br>
-                    <div class="alert alert-info text-center" role="alert"> Una vez hecha la donación se descontará de la cantidad pedida.
-                    </div>
 
                     
                     <div class="border-top pt-3 text-right">

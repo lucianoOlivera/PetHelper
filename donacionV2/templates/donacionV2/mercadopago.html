@@ -5,7 +5,12 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Redirección a Mercado Pago</h1>
     <div class="alert alert-info text-center" role="alert">Haz click en "Pagar" para ser redirigido al checkout de Mercado Pago</div>
-    <div class="cho-container text-center" id="cho-container"></div>
+    
+    <div class="pt-3 text-center">
+        <div class="cho-container mb-3" id="cho-container"></div>
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>
+            Volver</a>
+    </div>
 </div>    
     
 

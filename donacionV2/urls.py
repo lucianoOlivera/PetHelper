@@ -15,7 +15,7 @@ urlpatterns = [
     path('medioPago/new', login_required(MedioPagoNew.as_view()), name='medioPago_new'),
     path('medioPago/delete/<int:pk>', login_required(MedioPagoDel.as_view()), name='medioPago_del'),
     path('medioPago/mercadopago', login_required(MercadoPagoView.as_view()), name='medioPago_mercadopago'),
-    path('medioPago/transferencia', login_required(TransferenciaView.as_view()), name='medioPago_transferencia'),
+    path('medioPago/transferencia/<int:pk>', login_required(TransferenciaView.as_view()), name='medioPago_transferencia'),
 
     path('EstadosDonacionMonetaria/', login_required(EstadosMonetariosListView.as_view()), name='donacion_estado_monetaria_list'),
     path('EstadosDonacionMonetaria/new', login_required(EstadosMonetariosNew.as_view()), name='donacion_estado_monetaria_new'),

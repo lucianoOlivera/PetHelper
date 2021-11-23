@@ -4,7 +4,6 @@
 *.pyc
 __pycache__
 db.sqlite3
-media
  
 # Backup files #
 *.bak
@@ -103,3 +102,9 @@ Control.ca-list
 Control.ca-bundle
 Control.system-ca-bundle
 GitHub.sublime-settings
+
+#Images and files
+*.jpeg
+*.jpg
+*.png
+*.pdf
