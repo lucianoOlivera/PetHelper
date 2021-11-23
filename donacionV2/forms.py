@@ -22,7 +22,7 @@ class DonacionInsumoForm(forms.ModelForm):
 class DonacionMonetariaForm(forms.ModelForm):
     class Meta:
         model = Donacion_monetaria
-        fields = ['monto']
+        fields = ['monto', 'comprobante']
 
         def __init__(self, *arg, **kwargs):
             super().__init__(*arg, **kwargs)

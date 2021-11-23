@@ -209,3 +209,11 @@ class MercadoPagoView(generic.TemplateView):
 
 class TransferenciaView(generic.TemplateView):
     template_name = 'donacionV2/transferencia.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        objs = Solicitud_Donacion_Monetaria.objects.all()
+        for obj in objs:
+            if obj.id == self.kwargs['pk']:
+                context['Solicitud_monetaria'] = obj
+        return context

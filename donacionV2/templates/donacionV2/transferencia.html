@@ -1,9 +1,29 @@
 {% extends 'base/base.html' %} {% block page_content %}
 
 <div class="container-fluid">
+    <div class="container">
+        <div class="col-xl-10 col-lg-12 col-md-9 items-align-center">
+            <h4 class="h3 mb-4 text-gray-800">Datos para transferencia</h4>
+            <div class="alert alert-info text-center" role="alert">Realice la transferencia a los siguientes datos y luego cargue el comprobante </div>
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="p-5">
+                    <label class="text-gray-900">CBU: </label>
+                    {{Solicitud_monetaria.cbu}}<br>
+                    <label class="text-gray-900">Alias: </label>
+                    {{Solicitud_monetaria.alias}}<br>
+                    <label class="text-gray-900">Titular: </label>
+                    {{Solicitud_monetaria.nombre_titular}}<br>
+                    <label class="text-gray-900">Banco: </label>
+                    {{Solicitud_monetaria.get_nombre_banco_display}}
+                </div>
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Datos para transferencia</h1>
+                <div class="text-center mb-3">
+                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary"><span class="fa fa-undo"></span>
+                        Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

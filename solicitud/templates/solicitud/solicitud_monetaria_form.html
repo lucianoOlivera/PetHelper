@@ -18,6 +18,23 @@
                                 {{ form.monto.label }}
                                 ${{form.monto}}
                             </div><br>
+                            <h6 class="text-gray-900"><strong>Datos para el pago por transferencia</strong></h6>
+                            <div class="form-control-user mb-2">
+                                {{ form.cbu.label }}
+                                {{form.cbu}}
+                            </div>
+                            <div class="form-control-user mb-2">
+                                {{ form.nombre_titular.label }}
+                                {{form.nombre_titular}}
+                            </div>
+                            <div class="form-control-user mb-2">
+                                {{ form.alias.label }}
+                                {{form.alias}}
+                            </div>
+                            <div class="form-control-user mb-2">
+                                {{ form.nombre_banco.label }}
+                                {{form.nombre_banco}}
+                            </div><br>
                             <h6 class="text-gray-900"><strong>Datos del archivo</strong></h6>
                             <div class="form-control-user">
                                 {{ form.pedido.label }}

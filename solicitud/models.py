@@ -3,7 +3,16 @@ from bases.models import ClaseModelo
 from organizaciones.models import Clinica, Veterinario
 
 # Create your models here.
-
+BANCOS = [
+  (1, "Patagonia"),
+  (2, "Supervielle"),
+  (3, "ICBC"),
+  (4, "Banco de la Nación Argentina"),
+  (5, "Credicoop"),
+  (6, "Comafi"),
+  (7, "Santander"),
+  (8, "HSBC")
+]
 
 class Solicitud_Donacion_Insumo(ClaseModelo):
     titulo = models.TextField(max_length=100, null=False, blank=False)
@@ -22,6 +31,10 @@ class Solicitud_Donacion_Monetaria(ClaseModelo):
     pedido = models.ImageField(upload_to="solicitud",blank=True, null=True)
     monto = models.FloatField(max_length=100, null=False, blank=False)
     veterinario = models.ForeignKey(Veterinario, on_delete=models.CASCADE, null=True)
+    cbu = models.PositiveBigIntegerField(blank=True, null=True)
+    alias = models.CharField(max_length=100, blank=True, null=True)
+    nombre_titular = models.CharField(max_length=100, blank=True, null=True)
+    nombre_banco = models.PositiveSmallIntegerField(choices=BANCOS, default="1")
      
     def save(self):
         super(Solicitud_Donacion_Monetaria, self).save()

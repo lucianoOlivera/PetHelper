@@ -13,11 +13,11 @@
         <!-- Card Body -->
         <div class="card-body">
             {% if not solicitudes_insumos and not solicitudes_monetarias %}
-            <div class="alert alert-warning" role="alert"><i class="fas fa-info-circle"></i> No ha creado solicitudes</div>
+            <div class="alert alert-warning text-center" role="alert"><i class="fas fa-info-circle"></i> No ha creado solicitudes</div>
             {% else %}
                 {% if solicitudes_monetarias %}
                 <div class="text-center"><strong>Solicitudes Monetarias</strong></div>
-                <table class="table table-striped table-hover mb-4" id="solicitudes">
+                <table class="table table-striped table-hover mb-4 text-center" id="solicitudes">
                     <thead>
                         <th>Id</th>
                         <th>Titulo</th>
@@ -32,7 +32,12 @@
                             <td>{{ solicitud_monetaria.titulo }}</td>
                             <td>{{ solicitud_monetaria.monto }}</td>
                             <td>{{ solicitud_monetaria.fc|date:"d/m/Y H:i:s" }}</td>
-                            <td>Creada</td>
+                            <td>{% if solicitud_monetaria.monto == 0 %}
+                                <small class="text-gray-900"><strong><i class="fas fa-check-circle"></i> Recaudación completa</strong></small>
+                                {% else %}
+                                <small class="text-gray-900"><strong><i class="fas fa-spinner"></i> En proceso de recaudación</strong></small>
+                                {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -43,7 +48,7 @@
 
                 <div class="text-center"><strong>Solicitudes de Insumos</strong></div>
                 {% if solicitudes_insumos %}
-                <table class="table table-striped table-hover" id="solicitudes">
+                <table class="table table-striped table-hover text-center" id="solicitudes">
                     <thead>
                         <th>Id</th>
                         <th>Titulo</th>
@@ -66,7 +71,17 @@
                                 {% endif %}
                             {% endfor %}
                             <td>{{ solicitud_insumo.fc|date:"d/m/Y H:i:s" }}</td>
-                            <td></td>
+                            <td>{%  for cantidad_insumo in cantidades_insumos %}
+                                {% if solicitud_insumo.id == cantidad_insumo.solicitud_insumo.id %}
+                                    {% if cantidad_insumo.cantidad == 0 %}
+                                    <small class="text-gray-900"><strong><i class="fas fa-check-circle"></i> Recaudación completa</strong></small>
+                                    {% else %}
+                                    <small class="text-gray-900"><strong><i class="fas fa-spinner"></i> En proceso de recaudación</strong></small>
+                                    <a href="{% url 'donacionV2:donacion_insumo_new' solicitud_insumo.id %}" type="button" class="btn btn-primary btn-user bg-gradient-primary text-gray-100" style="float: right;">Donar</a>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -89,11 +104,12 @@
             {% else %}
                 {% if donaciones_monetarias %}
                 <div class="text-center"><strong>Donaciones Monetarias</strong></div>
-                <table class="table table-striped table-hover mb-4" id="solicitudes">
+                <table class="table table-striped table-hover mb-4 text-center" id="solicitudes">
                     <thead>
                         <th>Id</th>
                         <th>Monto</th>
                         <th>F.Creación</th>
+                        <th>Comprobante de pago</th>
                         <th>Estado</th>
                     </thead>
                     <tbody>
@@ -102,6 +118,11 @@
                             <td>{{ donacion_monetaria.id }}</td>
                             <td>{{ donacion_monetaria.monto }}</td>
                             <td>{{ donacion_monetaria.fc|date:"d/m/Y H:i:s" }}</td>
+                            <td>
+                                <a href="{{donacion_monetaria.comprobante.url}}">
+                                    <i class="fas fa-file-contract"></i> Ver comprobante 
+                                </a>
+                            </td>
                             <td>Creada</td>
                         </tr>
                         {% endfor %}
@@ -113,7 +134,7 @@
     
                 <div class="text-center"><strong>Donaciones de Insumos</strong></div>
                 {% if donaciones_insumos %}
-                <table class="table table-striped table-hover" id="solicitudes">
+                <table class="table table-striped table-hover text-center" id="solicitudes">
                     <thead>
                         <th>Id</th>
                         <th>Insumos</th>
