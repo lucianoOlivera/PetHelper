@@ -9,4 +9,4 @@ urlpatterns = [
     path('insumo/delete/<int:pk>', login_required(InsumoDel.as_view()), name='insumo_del'),
     path('cantidad_insumo/new', login_required(CantidadInsumoNew.as_view()), name='cantidad_insumo_new'),
     path('cantidad_insumo/', login_required(CantdadIsumoList.as_view()), name='cantidad_insumo_list')
-    ]
+]
