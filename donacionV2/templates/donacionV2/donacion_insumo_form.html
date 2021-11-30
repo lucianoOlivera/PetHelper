@@ -23,8 +23,8 @@
                 <form method="POST" class="user" >
                     {% csrf_token %}
                     <h6 class="text-gray-700 text-center">Donación de Insumos</h6>  
-                    <div class="row" id="donacion">
-                        <div clas="column">
+                    <div id="donacion">
+                        <div>
                             <small class="text-danger">
                                 {% if form.errors %}
                                      {% for field in form %}
@@ -60,11 +60,11 @@
                             <h6 class="text-gray-900"><strong>Elementos a donar</strong></h6>
                                 {{ Donacion.as_p }}
                         </div><br>
-                        <div class="col" style="float: right;">
+                        <div class="">
                             {{captcha}} 
                         </div>
                           
-                    </div>
+                    </div><br>
                     
                     <div class="alert alert-info" role="alert"> Tienes 10 días para concretar la donación, caso contrario no se agregará
                         a la cantidad recaudada.

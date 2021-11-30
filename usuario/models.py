@@ -10,7 +10,7 @@ from django.utils import timezone
 dni_regex = RegexValidator(regex=r"^[\d]{1,3}\.?[\d]{3,3}\.?[\d]{3,3}$", message="El formato de DNI debe tener 8 caracteres numericos")
 
 PERMISOS = [
-  (1, "Usuario"),
+  (1, "Helper"),
   (2, "Veterinario"),
   (3, "Organizacion"),
   (4, "Clinica")

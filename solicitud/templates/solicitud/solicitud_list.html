@@ -45,14 +45,14 @@
                     <h5 class="m-0 font-weight-bold text-gray-800">{{solicitud_insumo.titulo}}</h5>
                     <h6 class="card-subtitle">Donación de Insumos</h6>
                 </div>
-                <div class="card-body row">
+                <div class="card-body row" style="column-gap: 10px;">
                     <div class="column" id="Foto">
-                        {% if solicitud_monetaria.pedido %}
-                        <a href="{{ solicitud_monetaria.pedido.url }}">
-                            <img class="img-profile" src="{{ solicitud_monetaria.pedido.url }}" style="width:100px">
+                        {% if solicitud_insumo.pedido %}
+                        <a href="{{ solicitud_insumo.pedido.url }}">
+                            <img class="img-profile" src="{{ solicitud_insumo.pedido.url }}" style="width:100px">
                         </a>
                         {% endif %}
-                    </div>
+                    </div> 
                     <div id="Destinatario">
                         <label class="text-gray-900"> Destinatario:  </label>
                         {% if solicitud_insumo.uc.username and solicitud_insumo.uc.apellido %}
@@ -112,7 +112,7 @@
                     <h5 class="m-0 font-weight-bold text-gray-800">{{solicitud_monetaria.titulo}}</h5>
                     <h6 class="card-subtitle">Donación Monetaria</h6>
                 </div>
-                <div class="row card-body">
+                <div class="row card-body" style="column-gap: 10px;">
                     <div class="column" id="Foto">
                         {% if solicitud_monetaria.pedido %}
                         <a href="{{ solicitud_monetaria.pedido.url }}">

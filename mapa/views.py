@@ -36,7 +36,7 @@ class MapaVeterinariosList(generic.ListView):
             for veterinario in veterinarios:
                 if coordenada.direccion == veterinario.direccion:
                     context['coordenadas'].append(coordenada)
-                    # context['veterinario'].append(veterinario)
+                    context['veterinario'] = veterinario
                     return context
 
 
@@ -54,7 +54,7 @@ class MapaClinicasList(generic.ListView):
             for clinica in clinicas:
                 if coordenada.direccion == clinica.direccion:
                     context['coordenadas'].append(coordenada)
-                    # context['veterinario'].append(veterinario)
+                    context['clinica'] = clinica
                     return context
 
 
@@ -72,5 +72,5 @@ class MapaOrganizacionesList(generic.ListView):
             for organizacion in organizaciones:
                 if coordenada.direccion == organizacion.direccion:
                     context['coordenadas'].append(coordenada)
-                    # context['veterinario'].append(veterinario)
+                    context['organizacion'] = organizacion
                     return context
