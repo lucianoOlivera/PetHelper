@@ -104,7 +104,7 @@ Control.system-ca-bundle
 GitHub.sublime-settings
 
 #Images and files
-*.jpeg
-*.jpg
-*.png
-*.pdf
+# *.jpeg
+# *.jpg
+# *.png
+# *.pdf

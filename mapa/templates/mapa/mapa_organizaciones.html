@@ -43,7 +43,7 @@
     // Create a new marker.
     var direccion = new mapboxgl.Marker()
         .setLngLat(['{{ coordenada.longitud }}', '{{ coordenada.latitud }}'])
-        .setPopup(new mapboxgl.Popup().setHTML("<p>{{veterinario.nombre}}<p><br><p>{{coordenada.direccion}}</p>"))
+        .setPopup(new mapboxgl.Popup().setHTML("<div class='text-center'>{{organizacion.nombre}}<div><p>{{coordenada.direccion}}</p><a class='text-center' href='{% url 'organizaciones:organizaciones_profile' organizacion.id %}'>Ver perfil</a>"))
         .addTo(map);
     </script>
     {% endfor %}
