@@ -57,19 +57,19 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'mercadopago',
-    'records',
-    'dbbackup',
-    'django_crontab'
+    'mercadopago'
 ]
 
 SITE_ID = 1
+<<<<<<< HEAD
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup'}
 
 CRONJOBS = [
     ('*/45 * * * *', 'petelper.cron.backup')
 ]
+=======
+>>>>>>> parent of c8cb425 (backup)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
