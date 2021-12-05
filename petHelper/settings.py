@@ -83,6 +83,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'petHelper.urls'
@@ -234,3 +235,5 @@ RECAPTCHA_PRIVATE_KEY = '6LcejBUdAAAAAPEieTcmoWLvFK9wv7A66i-xd_xj'
 RECAPTCHA_REQUIRED_SCORE = 0.85
 
 PUBLIC_KEY = 'TEST-e67cc838-dc71-4d4d-a6e9-8b33375a378f'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
