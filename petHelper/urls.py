@@ -32,5 +32,9 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 ]
 
+
+# Añadir
+admin.site.site_header = 'Administración de PetHelper'
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

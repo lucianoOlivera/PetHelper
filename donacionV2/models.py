@@ -3,7 +3,7 @@ from bases.models import ClaseModelo
 from insumo.models import Insumo
 from solicitud.models import Solicitud_Donacion_Monetaria, Solicitud_Donacion_Insumo
 
-
+# clase DonacionInsumo con sus respectivos atributos
 class Donacion_Insumo(ClaseModelo):
     fechaCreacion = models.DateField(auto_now_add=True)
     solicitud_insumo = models.ForeignKey(Solicitud_Donacion_Insumo, on_delete=models.CASCADE, null=True)
@@ -14,7 +14,7 @@ class Donacion_Insumo(ClaseModelo):
     class Meta:
         verbose_name_plural = 'donaciones_insumos'
 
-
+# clase CantidadInsumo con sus respectivos atributos
 class Cantidad_Insumo_Donacion(models.Model):
     donacion_isumo = models.ForeignKey(Donacion_Insumo, on_delete=models.CASCADE, null=True)
     insumo = models.ForeignKey(Insumo, on_delete=models.CASCADE, null=True)
@@ -27,7 +27,7 @@ class Cantidad_Insumo_Donacion(models.Model):
     class Meta:
         verbose_name_plural = 'cantidad_insumos_donacion'
 
-
+# clase DonacionMonetaria con sus respectivos atributos
 class Donacion_monetaria(ClaseModelo):
     solicitud_monetaria = models.ForeignKey(Solicitud_Donacion_Monetaria, on_delete=models.CASCADE, null=True)
     monto = models.FloatField(max_length=100, null=False, blank=False)
@@ -39,7 +39,7 @@ class Donacion_monetaria(ClaseModelo):
     class Meta:
         verbose_name_plural = 'donaciones_monetaria'
 
-
+# clase MedioPago con sus respectivos atributos
 class Medio_Pago(ClaseModelo):
     nombre_pago = models.CharField(max_length=100)
     imagen = models.ImageField(upload_to="pagos", null=True, blank=True)

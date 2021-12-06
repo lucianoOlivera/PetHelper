@@ -6,7 +6,7 @@ from .views import (
     EstadosMonetariosListView, EstadosMonetariosDel, EstadosMonetariosNew, MercadoPagoView, TransferenciaView
     )
 
-
+#urls asociadas a las vistas
 urlpatterns = [
     path('donacion_insumo/new/<int:pk>', login_required(DonacionInsumoNew.as_view()), name='donacion_insumo_new'),
     path('donacion_monetaria/new/<int:pk>', login_required(DonacionmonetariaNew.as_view()), name='donacion_monetaria_new'),

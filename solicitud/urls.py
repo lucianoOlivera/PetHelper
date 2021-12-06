@@ -1,6 +1,8 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 from .views import SolicitudesListView, SolicitudDonacionInsumoNew, SolicitudDonacionMonetariaNew, EstadosMonetariosListView, EstadosMonetariosNew, EstadosMonetariosDel, EstadosInsumosDel, EstadosInsumosListView, EstadosInsumosNew
+
+#urls asociadas a las vistas
 urlpatterns = [
     path('solicitudes/', login_required(SolicitudesListView.as_view()), name='solicitud_list'),
     path('solicitud_insumo/new', login_required(SolicitudDonacionInsumoNew.as_view()), name='solicitud_insumo_new'),
@@ -13,4 +15,4 @@ urlpatterns = [
     path('EstadosSolicitudInsumos/', login_required(EstadosInsumosListView.as_view()), name='solicitud_estado_insumo_list'),
     path('EstadosSolicitudInsumos/new', login_required(EstadosInsumosNew.as_view()), name='solicitud_estado_insumo_new'),
     path('EstadosSolicitudInsumos/delete/<int:pk>', login_required(EstadosInsumosDel.as_view()), name='solicitud_estado_insumo_del'),
-    ]
+]
