@@ -70,7 +70,7 @@ DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup'}
 
 CRONJOBS = [
-    ('*/1 * * * *', 'petelper.cron.backup')
+    ('*/45 * * * *', 'petelper.cron.backup')
 ]
 
 MIDDLEWARE = [
