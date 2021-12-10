@@ -1,0 +1,21 @@
+
+
+{% block content %}
+  <div id="content-main">
+
+    {% include 'mantenimiento/_backup_forms.html' %}
+<br/><hr/>
+  <h3> Formato de Backups <h3>
+  <ul>
+    <li>Base de Datos: (nombre-base-de-datos)-(nombre-equipo)-(MM-DD-AAAA-HHMMSS).tar.gz</li>
+    <li>Media: (nombre-equipo)-(MM-DD-AAAA-HHMMSS).tar.gz</li>
+  </ul> 
+    <a href="" target="_blank"> Ver PDF Instructivo </a>
+    <br>
+
+      <hr>
+    <br>
+    <a href="{% url 'mantenimiento:restore' %}">Ir a Recuperación </a>
+  </div>
+  
+{% endblock %}

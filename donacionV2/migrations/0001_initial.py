@@ -12,96 +12,116 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Estado_Solicitud_Insumo',
+            name='Cantidad_Insumo_Donacion',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('estado', models.BooleanField(default=False)),
+                ('cantidad', models.PositiveIntegerField()),
                 ('fc', models.DateTimeField(auto_now_add=True)),
-                ('fm', models.DateTimeField(auto_now=True)),
-                ('um', models.IntegerField(blank=True, null=True)),
-                ('nombre', models.CharField(max_length=100)),
             ],
             options={
-                'verbose_name_plural': 'estados_solicitudes_insumos',
+                'verbose_name_plural': 'cantidad_insumos_donacion',
             },
         ),
         migrations.CreateModel(
-            name='Estado_Solicitud_Insumo_Detalle',
+            name='Donacion_Insumo',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('estado', models.BooleanField(default=False)),
                 ('fc', models.DateTimeField(auto_now_add=True)),
                 ('fm', models.DateTimeField(auto_now=True)),
                 ('um', models.IntegerField(blank=True, null=True)),
-                ('fecha_desde', models.DateField()),
-                ('fecha_hasta', models.DateField()),
+                ('fechaCreacion', models.DateField(auto_now_add=True)),
             ],
             options={
-                'verbose_name_plural': 'estados_solicitudes_monetarias_detalle',
+                'verbose_name_plural': 'donaciones_insumos',
             },
         ),
         migrations.CreateModel(
-            name='Estado_Solicitud_Monetaria',
+            name='Donacion_monetaria',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('estado', models.BooleanField(default=False)),
                 ('fc', models.DateTimeField(auto_now_add=True)),
                 ('fm', models.DateTimeField(auto_now=True)),
                 ('um', models.IntegerField(blank=True, null=True)),
-                ('nombre', models.CharField(max_length=100)),
-            ],
-            options={
-                'verbose_name_plural': 'estados_solicitudes_monetarias',
-            },
-        ),
-        migrations.CreateModel(
-            name='Estado_Solicitud_Monetaria_Detalle',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('estado', models.BooleanField(default=False)),
-                ('fc', models.DateTimeField(auto_now_add=True)),
-                ('fm', models.DateTimeField(auto_now=True)),
-                ('um', models.IntegerField(blank=True, null=True)),
-                ('fecha_desde', models.DateField()),
-                ('fecha_hasta', models.DateField()),
-            ],
-            options={
-                'verbose_name_plural': 'estados_solicitudes_monetarias_detalle',
-            },
-        ),
-        migrations.CreateModel(
-            name='Solicitud_Donacion_Insumo',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('estado', models.BooleanField(default=False)),
-                ('fc', models.DateTimeField(auto_now_add=True)),
-                ('fm', models.DateTimeField(auto_now=True)),
-                ('um', models.IntegerField(blank=True, null=True)),
-                ('titulo', models.TextField(max_length=100)),
-                ('pedido', models.ImageField(blank=True, null=True, upload_to='solicitud')),
-            ],
-            options={
-                'verbose_name_plural': 'solicitudes_insumos',
-            },
-        ),
-        migrations.CreateModel(
-            name='Solicitud_Donacion_Monetaria',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('estado', models.BooleanField(default=False)),
-                ('fc', models.DateTimeField(auto_now_add=True)),
-                ('fm', models.DateTimeField(auto_now=True)),
-                ('um', models.IntegerField(blank=True, null=True)),
-                ('titulo', models.TextField(max_length=100)),
-                ('pedido', models.ImageField(blank=True, null=True, upload_to='solicitud')),
                 ('monto', models.FloatField(max_length=100)),
-                ('cbu', models.PositiveBigIntegerField(blank=True, null=True)),
-                ('alias', models.CharField(blank=True, max_length=100, null=True)),
-                ('nombre_titular', models.CharField(blank=True, max_length=100, null=True)),
-                ('nombre_banco', models.PositiveSmallIntegerField(choices=[(1, 'Patagonia'), (2, 'Supervielle'), (3, 'ICBC'), (4, 'Banco de la Nación Argentina'), (5, 'Credicoop'), (6, 'Comafi'), (7, 'Santander'), (8, 'HSBC')], default='1')),
+                ('comprobante', models.FileField(blank=True, null=True, upload_to='comprobante')),
             ],
             options={
-                'verbose_name_plural': 'solicitudes_monetarias',
+                'verbose_name_plural': 'donaciones_monetaria',
+            },
+        ),
+        migrations.CreateModel(
+            name='Estado_Donacion_Insumo',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('estado', models.BooleanField(default=False)),
+                ('fc', models.DateTimeField(auto_now_add=True)),
+                ('fm', models.DateTimeField(auto_now=True)),
+                ('um', models.IntegerField(blank=True, null=True)),
+                ('nombre', models.CharField(max_length=100)),
+            ],
+            options={
+                'verbose_name_plural': 'estados_Donaciones_insumos',
+            },
+        ),
+        migrations.CreateModel(
+            name='Estado_Donacion_Insumo_Detalle',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('estado', models.BooleanField(default=False)),
+                ('fc', models.DateTimeField(auto_now_add=True)),
+                ('fm', models.DateTimeField(auto_now=True)),
+                ('um', models.IntegerField(blank=True, null=True)),
+                ('fecha_desde', models.DateField()),
+                ('fecha_hasta', models.DateField()),
+            ],
+            options={
+                'verbose_name_plural': 'estados_Donaciones_monetarias_detalle',
+            },
+        ),
+        migrations.CreateModel(
+            name='Estado_Donacion_Monetaria',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('estado', models.BooleanField(default=False)),
+                ('fc', models.DateTimeField(auto_now_add=True)),
+                ('fm', models.DateTimeField(auto_now=True)),
+                ('um', models.IntegerField(blank=True, null=True)),
+                ('nombre', models.CharField(max_length=100)),
+            ],
+            options={
+                'verbose_name_plural': 'estados_Donaciones_monetarias',
+            },
+        ),
+        migrations.CreateModel(
+            name='Estado_Donacion_Monetaria_Detalle',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('estado', models.BooleanField(default=False)),
+                ('fc', models.DateTimeField(auto_now_add=True)),
+                ('fm', models.DateTimeField(auto_now=True)),
+                ('um', models.IntegerField(blank=True, null=True)),
+                ('fecha_desde', models.DateField()),
+                ('fecha_hasta', models.DateField()),
+            ],
+            options={
+                'verbose_name_plural': 'estados_Donaciones_monetarias_detalle',
+            },
+        ),
+        migrations.CreateModel(
+            name='Medio_Pago',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('estado', models.BooleanField(default=False)),
+                ('fc', models.DateTimeField(auto_now_add=True)),
+                ('fm', models.DateTimeField(auto_now=True)),
+                ('um', models.IntegerField(blank=True, null=True)),
+                ('nombre_pago', models.CharField(max_length=100)),
+                ('imagen', models.ImageField(blank=True, null=True, upload_to='pagos')),
+            ],
+            options={
+                'verbose_name_plural': 'medios_pagos',
             },
         ),
     ]

@@ -27,6 +27,7 @@ urlpatterns = [
     path('', include(('donacionV2.urls', 'donacion'), namespace='donacionV2')),
     path('', include(('mapa.urls', 'mapa'), namespace='mapa')),
     path('', include(('reportes.urls', 'reportes'), namespace='reportes')),
+    path('', include(('mantenimiento.urls', 'mantenimiento'), namespace='mantenimiento')),
     path('chaining/', include('smart_selects.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
