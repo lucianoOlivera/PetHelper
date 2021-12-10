@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,19 +56,11 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'mercadopago'
+    'mercadopago',
+    'mantenimiento'
 ]
 
 SITE_ID = 1
-<<<<<<< HEAD
-DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
-DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup'}
-
-CRONJOBS = [
-    ('*/45 * * * *', 'petelper.cron.backup')
-]
-=======
->>>>>>> parent of c8cb425 (backup)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -106,7 +97,6 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.github.GithubOAuth2',
-
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
@@ -168,8 +158,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 LOGIN_URL = 'bases:login'
 
 LOGIN_REDIRECT_URL = 'bases:home'
@@ -181,9 +169,6 @@ LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = "usuario.Usuario"
 
 LOGOUT_URL = 'logout'
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 SOCIAL_AUTH_FACEBOOK_KEY = '603112644018191'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '59bff6660482a1f84b71bcdb051d1606'  # App Secret
@@ -227,4 +212,6 @@ RECAPTCHA_REQUIRED_SCORE = 0.85
 
 PUBLIC_KEY = 'TEST-e67cc838-dc71-4d4d-a6e9-8b33375a378f'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
