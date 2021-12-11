@@ -1,5 +1,4 @@
-
-
+{% extends 'base/base.html' %} {% block page_content %}
 {% block content %}
   <div id="content-main">
 
@@ -10,12 +9,8 @@
     <li>Base de Datos: (nombre-base-de-datos)-(nombre-equipo)-(MM-DD-AAAA-HHMMSS).tar.gz</li>
     <li>Media: (nombre-equipo)-(MM-DD-AAAA-HHMMSS).tar.gz</li>
   </ul> 
-    <a href="" target="_blank"> Ver PDF Instructivo </a>
-    <br>
-
-      <hr>
-    <br>
-    <a href="{% url 'mantenimiento:restore' %}">Ir a Recuperación </a>
+    <a href="" target="_blank"> Ver PDF Instructivo para Backups Y Rrecuperacion </a>
   </div>
   
+{% endblock %}
 {% endblock %}
