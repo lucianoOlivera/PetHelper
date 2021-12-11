@@ -91,6 +91,7 @@
                 <div class="card-footer">
                     <small class="text-muted">Fecha de publicación: {{solicitud_insumo.fc|date:"d/m/Y"}}</small><br>
                     {%  for cantidad_insumo in cantidades_insumos %}
+                    <!-- puede ser que esto este mal -->
                             {% if solicitud_insumo.id == cantidad_insumo.solicitud_insumo.id %}
                                 {% if cantidad_insumo.cantidad == 0 %}
                                 <small class="text-gray-900"><strong>Estado: Recaudación completa</strong></small>

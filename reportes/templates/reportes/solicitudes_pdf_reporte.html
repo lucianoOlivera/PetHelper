@@ -41,11 +41,14 @@
     <div class="container-fluid">
         <div class="text-center">
             <h1>PetHelper</h1>
+        </div>
+        {% if solicitudes_insumos %}        
+        <div class="text-center">
             <h5>Cantidad de solicitudes de insumos mensuales</h5>
         </div>
         <table class="table table-striped table-hover">
             <thead>
-                {% for mes in meses %}
+                {% for mes in meses1 %}
                 <th>{{mes}}</th>
                 {% endfor %}
             </thead>
@@ -59,13 +62,14 @@
                 
             </tbody>
         </table>
-
+        {% endif %}
+        {% if solicitudes_monetarias %}  
         <div class="text-center">
             <h5>Cantidad de solicitudes monetarias mensuales</h5>
         </div>
         <table class="table table-striped table-hover">
             <thead>
-                {% for mes in meses %}
+                {% for mes in meses1 %}
                 <th>{{mes}}</th>
                 {% endfor %}
             </thead>
@@ -79,7 +83,7 @@
                 
             </tbody>
         </table>
-
+        {% endif %}
         <h5>Reporte generado el {{ fecha|date:"d/m/Y" }}</h5>
     </div>
 
