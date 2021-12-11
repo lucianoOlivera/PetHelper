@@ -15,8 +15,8 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Donaciones Monetarias</div>
-                            {% if donaciones_monetarias > 0 %}
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">${{donaciones_monetarias}}</div>
+                            {% if acumulador_monetarias > 0 %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">${{acumulador_monetarias}}</div>
                             {% else %}
                             <div class="h5 mb-0 font-weight-bold text-gray-800">$0</div>
                             {% endif %}
@@ -36,8 +36,8 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Cantidad de insumos donados</div>
-                            {% if donaciones_insumos > 0 %}
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{donaciones_insumos}}</div>
+                            {% if acumulador_insumos > 0 %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{acumulador_insumos}}</div>
                             {% else %}
                             <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
                             {% endif %}
@@ -58,15 +58,39 @@
                         <div class="row">
                             <div class="col">
                                 <h5 class="m-0 font-weight-bold text-gray-800"><i class="fas fa-scroll"></i> {{titulo1}} </h5>
+                                <br><form class="text-center" method="get">
+                                    <div class="form-group row">
+                                        <div>
+                                            <label class="mr-2">Filtrar por fecha:  </label>
+                                            <input type="date" name="fromDate1">
+                                            <label> - </label>
+                                            <input type="date" name="toDate1">
+                                        </div>
+                                        <div class="row">
+                                            <label class="mr-2">Filtrar por solicitud:  </label>
+                                            <div class="col">
+                                                <div class="row btn-group-toggle" data-toggle="buttons">
+                                                    <label class="col btn btn-outline-primary btn-sm active mr-2">
+                                                      <input type="checkbox" name="solicitud_monetaria"> Monetaria
+                                                    </label>
+                                                    <label class="col btn btn-outline-primary btn-sm active">
+                                                        <input type="checkbox" name="solicitud_insumos"> Insumos
+                                                      </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary"> Buscar </button>
+                                </form>
                             </div>
                             <div class="col">
-                                <a href="{% url 'reportes:reporte_solicitudes_pdf' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="float: right;"><i
+                                <a href="{% url 'reportes:reporte_solicitudes_pdf' %}?fromDate1={{fromDate1}}&toDate1={{toDate1}}&monetaria={{solicitud_monetaria}}&insumos={{solicitud_insumos}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="float: right;"><i
                                     class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body">                                                                          
                     <div id="container1"></div>
                 </div>
             </div>
@@ -79,9 +103,33 @@
                         <div class="row">
                             <div class="col">
                                 <h5 class="m-0 font-weight-bold text-gray-800"><i class="fas fa-hand-holding-usd"></i> {{titulo3}} </h5>
+                                <br><form class="text-center" method="get">
+                                    <div class="form-group row">
+                                        <div>
+                                            <label class="mr-2">Filtrar por fecha:  </label>
+                                            <input type="date" name="fromDate2">
+                                            <label> - </label>
+                                            <input type="date" name="toDate2">
+                                        </div>
+                                        <div class="row">
+                                            <label class="mr-2">Filtrar por donacion:  </label>
+                                            <div class="col">
+                                                <div class="row btn-group-toggle" data-toggle="buttons">
+                                                    <label class="col btn btn-outline-primary btn-sm active mr-2">
+                                                      <input type="checkbox" name="donacion_monetaria"> Monetaria
+                                                    </label>
+                                                    <label class="col btn btn-outline-primary btn-sm active">
+                                                        <input type="checkbox" name="donacion_insumos"> Insumos
+                                                      </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary"> Buscar </button>
+                                </form>
                             </div>
                             <div class="col">
-                                <a href="{% url 'reportes:reporte_donaciones_pdf' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="float: right;"><i
+                                <a href="{% url 'reportes:reporte_donaciones_pdf' %}?fromDate2={{fromDate2}}&toDate2={{toDate2}}&monetaria={{donacion_monetaria}}&insumos={{donacion_insumos}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="float: right;"><i
                                     class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
                             </div>
                         </div>
@@ -114,33 +162,15 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <script type="application/javascript">
-    Highcharts.chart('container1', {
-    chart: {
-        type: 'column'
-    },
+const chart = Highcharts.chart('container1', {
     title: {
         text: 'Cantidad de solicitudes mensuales'
     },
     xAxis: {
-        categories: [
-            'Ene',
-            'Feb',
-            'Mar',
-            'Abr',
-            'May',
-            'Jun',
-            'Jul',
-            'Ago',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dic'
-        ],
-        crosshair: true
+        categories: {{ meses1 |safe}}
     },
     yAxis: {
         min: 0,
@@ -148,85 +178,50 @@
             text: 'Cant. solicitudes '
         }
     },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
     series: [{
+        type: 'column',
         name: 'Solicitud monetaria',
-        data: {{ solicitudes_monetarias|safe }}
-
-    }, {
+        colorByPoint: false,
+        data: {{ solicitudes_monetarias |safe}},
+        showInLegend: true
+    },
+    {
+        type: 'column',
         name: 'Solicitud de insumos',
-        data: {{ solicitudes_insumos|safe }}
-
+        colorByPoint: false,
+        data: {{ solicitudes_insumos |safe}},
+        showInLegend: true
     }]
 });
 </script>
 
 <script type="application/javascript">
-    Highcharts.chart('container3', {
-    chart: {
-        type: 'column'
-    },
+const chart2 = Highcharts.chart('container3', {
     title: {
         text: 'Cantidad de donaciones mensuales'
     },
     xAxis: {
-        categories: [
-            'Ene',
-            'Feb',
-            'Mar',
-            'Abr',
-            'May',
-            'Jun',
-            'Jul',
-            'Ago',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dic'
-        ],
-        crosshair: true
+        categories: {{ meses2 |safe}}
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Cant. donaciones '
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0,
+            text: 'Cant. donaciones'
         }
     },
     series: [{
-        name: 'Donación monetaria',
-        data: {{ donaciones_monetarias_mes|safe }}
-
-    }, {
-        name: 'Donación de insumos',
-        data: {{ donaciones_insumos_mes|safe }}
-
+        type: 'column',
+        name: 'Donacion monetaria',
+        colorByPoint: false,
+        data: {{ donaciones_monetarias |safe}},
+        showInLegend: true
+    },
+    {
+        type: 'column',
+        name: 'Donacion de insumos',
+        colorByPoint: false,
+        data: {{ donaciones_insumos |safe}},
+        showInLegend: true
     }]
 });
 </script>
