@@ -2,7 +2,7 @@ from organizaciones.models import Veterinario
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 
-from .views import ClinicaFilterView, OrganizacionView, OrganizacionNew, OrganizacionDel, OrganizacionEdit, ClinicaView, ClinicaNew, ClinicaDel, ClinicaEdit, VeterinarioFilterView, VeterinarioView, VeterinarioNew, VeterinarioDel, VeterinarioEdit, VeterinarioClinicaView, OrganizacionListView, OrganizacionDetail, ClinicaDetail, VeterinarioDetail
+from .views import ClinicaFilterView, OrganizacionView, OrganizacionNew, OrganizacionDel, OrganizacionEdit, ClinicaView, ClinicaNew, ClinicaDel, ClinicaEdit, VeterinarioFilterView, VeterinarioView, VeterinarioNew, VeterinarioDel, VeterinarioEdit, VeterinarioClinicaView, OrganizacionListView, OrganizacionDetail, ClinicaDetail, VeterinarioDetail,VeterinarioListSolicitudes, rejectedSolicitudInsumo, rejectedSolicitudMonetaria, acceptarSolicitudInsumo, acceptarSolicitudMonetaria, rejectedGeneric, acceptGenereric
 
 urlpatterns = [
     path('organizaciones/', login_required(OrganizacionView.as_view()), name='organizaciones_list'),
@@ -27,4 +27,13 @@ urlpatterns = [
     path('profesionales/veterinarios', login_required(VeterinarioFilterView.as_view()), name='filter_veterinarios'),
     path('profesionales/clinicas', login_required(ClinicaFilterView.as_view()), name='filter_clinicas'),
     path('listar_organizaciones/', login_required(OrganizacionListView.as_view()), name='listar_organizaciones'),
+
+    path('checkin/<str:email>', login_required(VeterinarioListSolicitudes.as_view()), name='checkin'),
+    path('rejectedMonetaria/<int:pk>', login_required(rejectedSolicitudMonetaria.as_view()), name='rejectedMonetaria'),
+    path('rejectedIsumo/<int:pk>', login_required(rejectedSolicitudInsumo.as_view()), name='rejectedInsumo'),
+    path('acceptMonetaria/<int:pk>', login_required(acceptarSolicitudMonetaria.as_view()), name='acceptMonetaria'),
+    path('acceptinsumo/<int:pk>', login_required(acceptarSolicitudInsumo.as_view()), name='acceptInsumo'),
+
+    path('rejectedGeneric/<int:pk>', login_required(rejectedGeneric.as_view()), name='rejectedGeneric'),
+    path('acceptGeneric/<int:pk>', login_required(acceptGenereric.as_view()), name='acceptGenereric'),
 ]

@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %} 
+{% block page_content %}
+
+<div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Listado de solicudes por mirar</h6>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Acciones</div>
+                <a type="button" class="dropdown-item" href="{}"><i class="far fa-calendar-plus"></i> Nuevo</a>
+            </div>
+        </div>
+    </div>
+    <!-- primero tiene que iterar por los dos tipos de solicitud depues si el veterinario.id es el mismo que le de la solicitud luego para cada tipo de 
+        solicitud tiene 2 acciones diferentes rejected,accept para insumo y monetaria, simpre mostrar solo los que tiene estado 0 
+        buscar una forma demostrar otro nombre y no mostrar 0:sin verificar,2:verificado,1:rechazado 
+    -->
+    <!-- Card Body -->
+    <div class="card-body">
+        {% if not Solicitud_monetaria  %}
+        <div class="alert alert-warning" role="alert">No hay solicitudes</div>
+        {% else %}
+            <table class="table table-striped table-hover">
+                <thead>
+                    <th>Id</th>
+                    <th>Estado</th>
+                            <th class="all">Acciones</th>
+                    </thead>
+                    <tbody>
+                        {% for SolicitudM in Solicitud_monetaria %}
+                            {% if SolicitudM.veterinario_id == veterinario.id %}
+                                <tr>
+                                    <td>{{ SolicitudM.id }}</td>
+                                    <td>{{ SolicitudM.EstadoSolicitudMonetaria }}</td>
+                                    <td>
+                                        <button onclick="abrir_modal_edicion('{% url 'organizaciones:rejectedMonetaria' SolicitudM.id %}')" class="btn btn-warning btn-circle" role="button" data-toggle="modal" data-target="#edicion"><i class="far fa-edit"></i></button>
+                                        <button onclick="abrir_modal_eliminar('{% url 'organizaciones:acceptMonetaria' SolicitudM.id %}')" class="btn btn-danger btn-circle" role="button" data-toggle="modal" data-target="#eliminar"><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+        {% endif %}
+    </div>
+</div>
+<!-- Modal editar -->
+<div class="modal fade" id="edicion" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
+   
+</div> 
+
+<!-- Modal eliminar-->
+<div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
+   
+</div> 
+
+{% endblock %}
+
+{% block js_page %} 
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    function abrir_modal_edicion(url){
+        $('#edicion').load(url, function(){
+            $(this).modal('show');
+        });
+    }
+
+    function abrir_modal_eliminar(url){
+        $('#eliminar').load(url, function(){
+            $(this).modal('show');
+        });
+    }   
+
+</script>
+{% endblock %}
+
