@@ -182,8 +182,6 @@ class ReporteSolicitudesView(generic.TemplateView):
             toDate1 = self.request.GET.get('toDate1')
             fromDate2 = self.request.GET.get('fromDate2')
             toDate2 = self.request.GET.get('toDate2')
-            fromDate3 = self.request.GET.get('fromDate3')
-            toDate3 = self.request.GET.get('toDate3')
             solicitud_monetaria = self.request.GET.get('solicitud_monetaria')
             solicitud_insumos = self.request.GET.get('solicitud_insumos')
             donacion_monetaria = self.request.GET.get('donacion_monetaria')

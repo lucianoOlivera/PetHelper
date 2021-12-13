@@ -58,6 +58,9 @@
                         {% if solicitud_insumo.EstadoSolicitudInsumo == 1 %}
                         <label class="mt-2 text-success"><i class="fas fa-check"></i> Pedido validado</label>
                         {% endif%}
+                        {% if solicitud_insumo.EstadoSolicitudInsumo == 2 %}
+                        <label class="mt-2 text-danger"><i class="fas fa-exclamation-triangle"></i> Pedido rechazado</label>
+                        {% endif%}
                     </div> 
                     <div id="Destinatario">
                         <label class="text-gray-900"> Destinatario:  </label>
