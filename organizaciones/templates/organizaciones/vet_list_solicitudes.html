@@ -1,10 +1,13 @@
 {% extends 'base/base.html' %} 
 {% block page_content %}
 
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Verificación de pedidos</h1>
+</div>
 <div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Listado de solicudes por mirar</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Listado de pedidos</h6>
         <div class="dropdown no-arrow">
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -15,33 +18,82 @@
             </div>
         </div>
     </div>
+
     <!-- primero tiene que iterar por los dos tipos de solicitud depues si el veterinario.id es el mismo que le de la solicitud luego para cada tipo de 
         solicitud tiene 2 acciones diferentes rejected,accept para insumo y monetaria, simpre mostrar solo los que tiene estado 0 
-        buscar una forma demostrar otro nombre y no mostrar 0:sin verificar,2:verificado,1:rechazado 
+        buscar una forma demostrar otro nombre y no mostrar 0:sin verificar,2:verificado,1:rechazado.
     -->
     <!-- Card Body -->
-    <div class="card-body">
+    <div class="card-body text-center">
         {% if not Solicitud_monetaria  %}
         <div class="alert alert-warning" role="alert">No hay solicitudes</div>
         {% else %}
+        <caption><strong>Solicitudes Monetarias</strong></caption>
             <table class="table table-striped table-hover">
                 <thead>
                     <th>Id</th>
+                    <th>Pedido</th>
+                    <th>Titulo</th>
+                    <th>Estado</th>
+                    <th class="all">Acciones</th>
+                </thead>
+                    <tbody>
+                        {% for SolicitudM in Solicitud_monetaria %}
+                        {% if SolicitudM.EstadoSolicitudMonetaria == 0 %}
+                            {% if SolicitudM.veterinario_id == veterinario.id %}
+                                <tr>
+                                    <td>{{ SolicitudM.id }}</td>
+                                    <td>
+                                        <a href="{{SolicitudM.pedido.url}}">
+                                            <i class="fas fa-file-contract"></i> Ver pedido 
+                                        </a>
+                                    </td>
+                                    <td>{{SolicitudM.titulo}}</td>                                  
+                                    <td>{{ SolicitudM.get_EstadoSolicitudMonetaria_display }}</td>
+                                    <td>
+                                        <button onclick="abrir_modal_rejected('{% url 'organizaciones:rejectedMonetaria' SolicitudM.id %}')" class="btn btn-danger btn-circle" role="button" data-toggle="modal" data-target="#edicion"><i class="far fa-times-circle"></i></button>
+                                        <button onclick="abrir_modal_accept('{% url 'organizaciones:acceptMonetaria' SolicitudM.id %}')" class="btn btn-success btn-circle" role="button" data-toggle="modal" data-target="#eliminar"><i class="far fa-check-square"></i></button>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+            </table>
+        {% endif %}
+
+        {% if not Solicitud_insumo  %}
+        <div class="alert alert-warning" role="alert">No hay solicitudes</div>
+        {% else %}
+        <br><caption><strong>Solicitudes de Insumos</strong></caption>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <th>Id</th>
+                    <th>Pedido</th>
+                    <th>Titulo</th>
                     <th>Estado</th>
                             <th class="all">Acciones</th>
                     </thead>
                     <tbody>
-                        {% for SolicitudM in Solicitud_monetaria %}
-                            {% if SolicitudM.veterinario_id == veterinario.id %}
+                        {% for SolicitudI in Solicitud_insumo %}
+                        {% if SolicitudI.EstadoSolicitudInsumo == 0 %}
+                            {% if SolicitudI.veterinario_id == veterinario.id %}
                                 <tr>
-                                    <td>{{ SolicitudM.id }}</td>
-                                    <td>{{ SolicitudM.EstadoSolicitudMonetaria }}</td>
+                                    <td>{{ SolicitudI.id }}</td>
                                     <td>
-                                        <button onclick="abrir_modal_edicion('{% url 'organizaciones:rejectedMonetaria' SolicitudM.id %}')" class="btn btn-warning btn-circle" role="button" data-toggle="modal" data-target="#edicion"><i class="far fa-edit"></i></button>
-                                        <button onclick="abrir_modal_eliminar('{% url 'organizaciones:acceptMonetaria' SolicitudM.id %}')" class="btn btn-danger btn-circle" role="button" data-toggle="modal" data-target="#eliminar"><i class="far fa-trash-alt"></i></button>
+                                        <a href="{{SolicitudI.pedido.url}}">
+                                            <i class="fas fa-file-contract"></i> Ver pedido 
+                                        </a>
+                                    </td>  
+                                    <td>{{SolicitudI.titulo}}</td>                                 
+                                    <td>{{ SolicitudI.get_EstadoSolicitudInsumo_display }}</td>
+                                    <td>
+                                        <button onclick="abrir_modal_rejected('{% url 'organizaciones:rejectedInsumo' SolicitudI.id %}')" class="btn btn-danger btn-circle" role="button" data-toggle="modal" data-target="#edicion"><i class="far fa-times-circle"></i></button>
+                                        <button onclick="abrir_modal_accept('{% url 'organizaciones:acceptInsumo' SolicitudI.id %}')" class="btn btn-success btn-circle" role="button" data-toggle="modal" data-target="#eliminar"><i class="far fa-check-square"></i></button>
                                     </td>
                                 </tr>
                             {% endif %}
+                        {% endif %}
                         {% endfor %}
                         </tbody>
                     </table>
@@ -63,13 +115,13 @@
 {% block js_page %} 
 <script type="text/javascript">
     var $ = jQuery.noConflict();
-    function abrir_modal_edicion(url){
+    function abrir_modal_rejected(url){
         $('#edicion').load(url, function(){
             $(this).modal('show');
         });
     }
 
-    function abrir_modal_eliminar(url){
+    function abrir_modal_accept(url){
         $('#eliminar').load(url, function(){
             $(this).modal('show');
         });

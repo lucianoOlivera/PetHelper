@@ -1,16 +1,21 @@
 {% extends 'base/base.html' %} {% block page_content %}
 {% block content %}
+
   <div id="content-main">
 
     {% include 'mantenimiento/_backup_forms.html' %}
 <br/><hr/>
-  <h3> Formato de Backups <h3>
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">Formato de Backups</h1>
+  
   <ul>
     <li>Base de Datos: (nombre-base-de-datos)-(nombre-equipo)-(MM-DD-AAAA-HHMMSS).tar.gz</li>
     <li>Media: (nombre-equipo)-(MM-DD-AAAA-HHMMSS).tar.gz</li>
   </ul> 
-    <a href="" target="_blank"> Ver PDF Instructivo para Backups Y Rrecuperacion </a>
+    <a href="https://docs.google.com/document/d/1w1i8g1sy9f6t2wL-n1Rnxjcj24D-OS_YUeWqIXzOyjI/edit?usp=sharing" target="_blank"> Ver PDF Instructivo para Backups Y Rrecuperacion </a>
   </div>
-  
+</div> 
 {% endblock %}
 {% endblock %}
