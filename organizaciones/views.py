@@ -333,7 +333,7 @@ class acceptarSolicitudMonetaria(TemplateView):
 
 class acceptarSolicitudInsumo(TemplateView):
     login_url = 'bases/login.html'
-    template_name = "organizaciones/solicitudInsumoRejected.html"
+    template_name = "organizaciones/solicitudInsumoAccept.html"
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -350,11 +350,11 @@ class rejectedGeneric(TemplateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs['pk']
         try:
-            Solicitud_Donacion_Monetaria.objects.filter(id=pk).update(EstadoSolicitudMonetaria=1)
+            Solicitud_Donacion_Monetaria.objects.filter(id=pk).update(EstadoSolicitudMonetaria=2)
         except Exception:
             pass
         try:
-            Solicitud_Donacion_Insumo.objects.filter(id=pk).update(EstadoSolicitudMonetaria=1)
+            Solicitud_Donacion_Insumo.objects.filter(id=pk).update(EstadoSolicitudInsumo=2)
         except Exception:
             pass
         email = self.request.user.email
@@ -373,11 +373,11 @@ class acceptGenereric(TemplateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs['pk']
         try:
-            Solicitud_Donacion_Monetaria.objects.filter(id=pk).update(EstadoSolicitudMonetaria=2)
+            Solicitud_Donacion_Monetaria.objects.filter(id=pk).update(EstadoSolicitudMonetaria=1)
         except Exception:
             pass
         try:
-            Solicitud_Donacion_Insumo.objects.filter(id=pk).update(EstadoSolicitudMonetaria=2)
+            Solicitud_Donacion_Insumo.objects.filter(id=pk).update(EstadoSolicitudInsumo=1)
         except Exception:
             pass
         email = self.request.user.email

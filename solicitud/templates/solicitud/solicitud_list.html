@@ -50,8 +50,14 @@
                         {% if solicitud_insumo.pedido %}
                         <a href="{{ solicitud_insumo.pedido.url }}">
                             <img class="img-profile" src="{{ solicitud_insumo.pedido.url }}" style="width:100px">
-                        </a>
+                        </a><br>
                         {% endif %}
+                        {% if solicitud_insumo.EstadoSolicitudInsumo == 0 %}
+                        <label class="mt-2 text-danger"><i class="fas fa-times"></i> Pedido sin validar</label>
+                        {% endif%}
+                        {% if solicitud_insumo.EstadoSolicitudInsumo == 1 %}
+                        <label class="mt-2 text-success"><i class="fas fa-check"></i> Pedido validado</label>
+                        {% endif%}
                     </div> 
                     <div id="Destinatario">
                         <label class="text-gray-900"> Destinatario:  </label>
@@ -118,8 +124,17 @@
                         {% if solicitud_monetaria.pedido %}
                         <a href="{{ solicitud_monetaria.pedido.url }}">
                             <img class="img-profile" src="{{ solicitud_monetaria.pedido.url }}" style="width:100px">
-                        </a>
+                        </a><br>
                         {% endif %}
+                        {% if solicitud_monetaria.EstadoSolicitudMonetaria == 0 %}
+                        <label class="mt-2 text-danger"><i class="fas fa-times"></i> Pedido sin validar</label>
+                        {% endif%}
+                        {% if solicitud_monetaria.EstadoSolicitudMonetaria == 1 %}
+                        <label class="mt-2 text-success"><i class="fas fa-check"></i> Pedido validado</label>
+                        {% endif%}
+                        {% if solicitud_monetaria.EstadoSolicitudMonetaria == 2 %}
+                        <label class="mt-2 text-danger"><i class="fas fa-exclamation-triangle"></i> Pedido rechazado</label>
+                        {% endif%}
                     </div>
 
                     <div id="Destinatario">
